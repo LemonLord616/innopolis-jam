@@ -13,10 +13,12 @@ static var item_info: Dictionary[Item, ItemInfo] = {
 
 static var item_image: Dictionary[Item, Texture2D] = {
 	Item.NOITEM: preload("res://icon.svg") as Texture2D,
-	Item.PLACEHOLDER: preload("res://icon.svg") as Texture2D
+	Item.PLACEHOLDER: preload("res://assets/placeholder_preview.png") as Texture2D
 }
 
-static var item_meshes: Dictionary[Item, Mesh] = {}
+static var item_mesh: Dictionary[Item, Mesh] = {
+	Item.PLACEHOLDER: preload("res://assets/placeholder.tres") as Mesh
+}
 
 static func item_name(item: ItemManager.Item) -> String:
 	var info = item_info.get(item)

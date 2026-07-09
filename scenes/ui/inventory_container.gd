@@ -5,7 +5,7 @@ class_name InventoryContainer
 
 var _slots: Array[InventorySlotUi] = []
 
-func _build_slots(data: PlayerInventoryResource) -> void:
+func _build_slots(inventory: PlayerInventoryResource) -> void:
 	for slot in _slots:
 		remove_child(slot)
 		slot.queue_free()
@@ -13,20 +13,23 @@ func _build_slots(data: PlayerInventoryResource) -> void:
 	for slot in get_children():
 		remove_child(slot)
 		slot.queue_free()
-	for i in data.max_slots:
+	for i in inventory.slots.size():
 		var slot: InventorySlotUi = slot_scene.instantiate()
 		add_child(slot)
 		_slots.append(slot)
-		var item = data.get_item(i)
+		var item = inventory.get_item(i)
 		Logging.debug(self, "add item: " + ItemManager.item_name(item))
 		slot.update_image(item)
 		slot.update_number(i)
 
-func _update_selected(selected: int) -> void:
+func _update_selected(selector: PlayerInventorySelectorComponent) -> void:
+	var i = selector.get_selected_slot()
+	if i >= _slots.size() or i < 0:
+		return
 	for slot in _slots:
 		slot.update_selected(false)
-	var slot = _slots.get(selected)
+	var slot = _slots.get(i)
 	if slot == null:
-		Logging.warning(self, "selected slot not in slots array")
+		Logging.warning(self, "selector slot not in slots array")
 		return
 	slot.update_selected(true)

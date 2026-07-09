@@ -2,7 +2,36 @@
 
 [ext_resource type="Script" uid="uid://tq56h2bja56v" path="res://scenes/world/main.gd" id="1_mli2r"]
 [ext_resource type="PackedScene" uid="uid://d3la4yysvpove" path="res://scenes/objects/player/player.tscn" id="2_f8fyy"]
+[ext_resource type="Texture2D" uid="uid://oabsp23lnemy" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_albedo.png" id="2_j0vxu"]
 [ext_resource type="PackedScene" uid="uid://d2w4gwu5h6h5y" path="res://scenes/ui/ui.tscn" id="3_f8fyy"]
+[ext_resource type="Texture2D" uid="uid://6sxwdkqrphes" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_ao.png" id="3_ggrwn"]
+[ext_resource type="Texture2D" uid="uid://buiraao5j0yao" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_height.png" id="4_85j56"]
+[ext_resource type="Texture2D" uid="uid://cu4ndb84npkqd" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_metallic.png" id="5_qip8x"]
+[ext_resource type="Texture2D" uid="uid://5f12gg3h1sxj" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_normal-ogl.png" id="6_oaya2"]
+[ext_resource type="Texture2D" uid="uid://cng3sm4p8wgv7" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_roughness.png" id="7_wcbaq"]
+[ext_resource type="Texture2D" uid="uid://d4gpjmga8bjfd" path="res://assets/skybox/blue_nebulae_1.png" id="10_ggrwn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12dqu"]
+albedo_texture = ExtResource("2_j0vxu")
+metallic = 1.0
+metallic_texture = ExtResource("5_qip8x")
+roughness_texture = ExtResource("7_wcbaq")
+normal_enabled = true
+normal_texture = ExtResource("6_oaya2")
+ao_enabled = true
+ao_texture = ExtResource("3_ggrwn")
+heightmap_enabled = true
+heightmap_texture = ExtResource("4_85j56")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ujsen"]
+panorama = ExtResource("10_ggrwn")
+
+[sub_resource type="Sky" id="Sky_d7akv"]
+sky_material = SubResource("PanoramaSkyMaterial_ujsen")
+
+[sub_resource type="Environment" id="Environment_lsyt0"]
+background_mode = 2
+sky = SubResource("Sky_d7akv")
 
 [node name="Main" type="Node3D" unique_id=184698508]
 script = ExtResource("1_mli2r")
@@ -10,19 +39,55 @@ script = ExtResource("1_mli2r")
 [node name="CSG" type="Node3D" parent="." unique_id=1476449746]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSG" unique_id=1888085229]
+transform = Transform3D(1, -0.000100756486, -8.663358e-05, 0.00010079803, 0.9999999, 0.00045843725, 8.658524e-05, -0.0004584464, 0.9999999, 0, 0, 0)
 use_collision = true
+collision_mask = 7
 size = Vector3(20, 1, 20)
+material = SubResource("StandardMaterial3D_12dqu")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSG" unique_id=900821589]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.222757, 1.4544873, 0)
 use_collision = true
+collision_mask = 7
 size = Vector3(1, 3, 10)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSG" unique_id=516117530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1620908, 1.6410336, -5.3480377)
+use_collision = true
+collision_mask = 7
+size = Vector3(3, 1, 3)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSG" unique_id=2132922585]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1094146, 3.1028888, -1.1862316)
+use_collision = true
+collision_mask = 7
+size = Vector3(3, 1, 3)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSG" unique_id=798379553]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.572279, 4.22244, 3.8564038)
+use_collision = true
+collision_mask = 7
+size = Vector3(3, 1, 3)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSG" unique_id=2084038319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3454571, 5.1155562, 2.883778)
+use_collision = true
+collision_mask = 7
+size = Vector3(3, 1, 3)
 
 [node name="Player" parent="." unique_id=1673226940 instance=ExtResource("2_f8fyy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7362862, 0)
+mass = 70.0
+jump_impulse = 500.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=101324596]
 transform = Transform3D(0.6738191, 0.45151806, -0.5848925, 0, 0.79157585, 0.61107093, 0.73889637, -0.4117513, 0.53337896, -6.169284, 4.6100206, 5.748512)
 
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1641065410]
+transform = Transform3D(-0.119725674, -0.60667545, 0.78588194, 2.2020826e-08, 0.79157573, 0.61107093, -0.992807, 0.073161095, -0.09477213, 7.4876423, 4.6100206, 5.748512)
+
 [node name="Ui" parent="." unique_id=1605863267 node_paths=PackedStringArray("player") instance=ExtResource("3_f8fyy")]
 player = NodePath("../Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2005247673]
+environment = SubResource("Environment_lsyt0")

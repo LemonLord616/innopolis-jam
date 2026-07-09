@@ -6,6 +6,7 @@ class_name PlayerController
 
 signal hotbar(slot: int)
 signal run(flag: bool)
+signal jump
 
 @onready var player_id := player.player_id
 @onready var device_id := player.device_id
@@ -16,12 +17,13 @@ func _ready() -> void:
 	_setup_controls()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(prefix + "run"):
-		Logging.debug(self, "run pressed")
-		run.emit(true)
-	if event.is_action_released(prefix + "run"):
-		Logging.debug(self, "run released")
-		run.emit(false)
+	if event.is_action(prefix + "run"):
+		var flag = event.is_pressed()
+		Logging.debug(self, "run " + "pressed" if flag else "release")
+		run.emit(flag)
+	if event.is_action_pressed(prefix + "jump"):
+		Logging.debug(self, "jump pressed")
+		jump.emit()
 	for i in range(player.hotbar_keys):
 		if event.is_action_pressed(prefix + "hotbar_" + str(i)):
 			hotbar.emit(i)
