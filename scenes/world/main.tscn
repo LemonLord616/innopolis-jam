@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://tq56h2bja56v" path="res://scenes/world/main.gd" id="1_mli2r"]
 [ext_resource type="PackedScene" uid="uid://d3la4yysvpove" path="res://scenes/objects/player/player.tscn" id="2_f8fyy"]
+[ext_resource type="PackedScene" uid="uid://d2w4gwu5h6h5y" path="res://scenes/ui/ui.tscn" id="3_f8fyy"]
 
 [node name="Main" type="Node3D" unique_id=184698508]
 script = ExtResource("1_mli2r")
@@ -22,3 +23,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7362862, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=101324596]
 transform = Transform3D(0.6738191, 0.45151806, -0.5848925, 0, 0.79157585, 0.61107093, 0.73889637, -0.4117513, 0.53337896, -6.169284, 4.6100206, 5.748512)
+
+[node name="Ui" parent="." unique_id=1605863267 node_paths=PackedStringArray("player") instance=ExtResource("3_f8fyy")]
+player = NodePath("../Player")

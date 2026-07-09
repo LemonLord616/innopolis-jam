@@ -1,5 +1,7 @@
 extends Resource
-class_name PlayerResource
+class_name PlayerInventoryResource
+
+signal inventory_change(data: PlayerInventoryResource)
 
 @export var items: Array[ItemManager.Item]
 @export var max_slots := 4
@@ -7,6 +9,7 @@ class_name PlayerResource
 
 func _init() -> void:
 	items.resize(max_slots)
+	inventory_change.emit.call_deferred(self)
 
 func set_item(slot: int, item: ItemManager.Item, soft: bool = true) -> bool:
 	if slot < 0 or slot >= max_slots:
@@ -14,6 +17,7 @@ func set_item(slot: int, item: ItemManager.Item, soft: bool = true) -> bool:
 	if items.get(slot) != null and soft:
 		return false
 	items.set(slot, item)
+	inventory_change.emit(self)
 	return true
 
 func get_item(slot: int) -> ItemManager.Item:

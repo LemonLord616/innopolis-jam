@@ -11,6 +11,6 @@ func _process(delta: float) -> void:
 		apply_camera_movement(camera_delta)
 
 func apply_camera_movement(input_delta: Vector2) -> void:
-	rotation_cmp.rotate_y(-input_delta.x * player.sensitivity)
-	rotate_x(-input_delta.y * player.sensitivity)
+	rotation_cmp.rotate_y(-input_delta.x * player.horizontal_sensitivity)
+	rotate_x(-input_delta.y * player.vertical_sensitivity)
 	rotation.x = clamp(rotation.x, deg_to_rad(-90) ,deg_to_rad(90))
