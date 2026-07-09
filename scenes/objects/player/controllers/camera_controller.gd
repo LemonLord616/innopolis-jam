@@ -1,9 +1,9 @@
 extends Camera3D
 class_name CameraController
 
-@export var rotation_cmp: RotaitonComponent
+@export var player: Player
+@export var rotation_cmp: PlayerRotaitonComponent
 @export var controller: PlayerController
-@export_range(0.0001, 0.1, 0.0001) var sensitivity: float = 0.005
 
 func _process(delta: float) -> void:
 	var camera_delta = controller.camera_delta()
@@ -11,6 +11,6 @@ func _process(delta: float) -> void:
 		apply_camera_movement(camera_delta)
 
 func apply_camera_movement(input_delta: Vector2) -> void:
-	rotation_cmp.rotate_y(-input_delta.x * sensitivity)
-	rotate_x(-input_delta.y * sensitivity)
+	rotation_cmp.rotate_y(-input_delta.x * player.sensitivity)
+	rotate_x(-input_delta.y * player.sensitivity)
 	rotation.x = clamp(rotation.x, deg_to_rad(-90) ,deg_to_rad(90))

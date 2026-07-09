@@ -2,34 +2,34 @@
 
 [ext_resource type="Script" uid="uid://cwbmnaof8v2gt" path="res://scenes/objects/player/player.gd" id="1_1bf4k"]
 [ext_resource type="Shape3D" uid="uid://b70rmhjyg6ejj" path="res://scenes/objects/player/resources/player_collision_shape.tres" id="2_0a575"]
-[ext_resource type="Script" uid="uid://cnywwym2cxh62" path="res://scenes/objects/player/player_kb_controller.gd" id="2_g10m2"]
-[ext_resource type="Script" uid="uid://bqjdjw4y3wb8" path="res://scenes/objects/player/camera_controller.gd" id="3_n7m3p"]
-[ext_resource type="Script" uid="uid://cb1qombw1kukt" path="res://scenes/objects/player/rotation_component.gd" id="4_wim6f"]
+[ext_resource type="Script" uid="uid://cnywwym2cxh62" path="res://scenes/objects/player/controllers/player_kb_controller.gd" id="2_g10m2"]
+[ext_resource type="Script" uid="uid://bqjdjw4y3wb8" path="res://scenes/objects/player/controllers/camera_controller.gd" id="3_n7m3p"]
+[ext_resource type="Script" uid="uid://cb1qombw1kukt" path="res://scenes/objects/player/components/rotation_component.gd" id="4_wim6f"]
+[ext_resource type="Script" uid="uid://bq8d58j5ubfn8" path="res://scripts/state_machine.gd" id="6_io36v"]
+[ext_resource type="Script" uid="uid://dmxojd6xfy0tf" path="res://scenes/objects/player/states/move_state.gd" id="7_bdcal"]
+[ext_resource type="Script" uid="uid://bf5mj412yqfpl" path="res://scenes/objects/player/states/run_state.gd" id="8_bdcal"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_25vxo"]
 
 [node name="Player" type="RigidBody3D" unique_id=1673226940]
 mass = 15.013
 script = ExtResource("1_1bf4k")
-power = 880.0
-max_force = 825.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1646473181]
 shape = ExtResource("2_0a575")
 
-[node name="PlayerKbController" type="Node" parent="." unique_id=1154131632 node_paths=PackedStringArray("player", "rotation_cmp", "debug_raycast")]
+[node name="PlayerKbController" type="Node" parent="." unique_id=1154131632 node_paths=PackedStringArray("player")]
 script = ExtResource("2_g10m2")
 player = NodePath("..")
-rotation_cmp = NodePath("../RotaitonComponent")
-debug_raycast = NodePath("../RotaitonComponent/Debug")
 metadata/_custom_type_script = "uid://cnywwym2cxh62"
 
 [node name="RotaitonComponent" type="Node3D" parent="." unique_id=1418686236]
 script = ExtResource("4_wim6f")
 metadata/_custom_type_script = "uid://cb1qombw1kukt"
 
-[node name="CameraController" type="Camera3D" parent="RotaitonComponent" unique_id=1439506908 node_paths=PackedStringArray("rotation_cmp", "controller")]
+[node name="CameraController" type="Camera3D" parent="RotaitonComponent" unique_id=1439506908 node_paths=PackedStringArray("player", "rotation_cmp", "controller")]
 script = ExtResource("3_n7m3p")
+player = NodePath("../..")
 rotation_cmp = NodePath("..")
 controller = NodePath("../../PlayerKbController")
 metadata/_custom_type_script = "uid://bqjdjw4y3wb8"
@@ -39,3 +39,26 @@ layers = 2
 mesh = SubResource("BoxMesh_25vxo")
 
 [node name="Debug" type="RayCast3D" parent="RotaitonComponent" unique_id=848836440]
+
+[node name="StateMachine" type="Node" parent="." unique_id=678572023 node_paths=PackedStringArray("initial_states")]
+script = ExtResource("6_io36v")
+initial_states = [NodePath("PlayerMoveState")]
+metadata/_custom_type_script = "uid://bq8d58j5ubfn8"
+
+[node name="PlayerMoveState" type="Node" parent="StateMachine" unique_id=1563979999 node_paths=PackedStringArray("player", "controller", "rotation_cmp", "debug_raycast", "run_state")]
+script = ExtResource("7_bdcal")
+player = NodePath("../..")
+controller = NodePath("../../PlayerKbController")
+rotation_cmp = NodePath("../../RotaitonComponent")
+debug_raycast = NodePath("../../RotaitonComponent/Debug")
+run_state = NodePath("../PlayerRunState")
+metadata/_custom_type_script = "uid://dmxojd6xfy0tf"
+
+[node name="PlayerRunState" type="Node" parent="StateMachine" unique_id=828942972 node_paths=PackedStringArray("player", "controller", "rotation_cmp", "debug_raycast", "move_state")]
+script = ExtResource("8_bdcal")
+player = NodePath("../..")
+controller = NodePath("../../PlayerKbController")
+rotation_cmp = NodePath("../../RotaitonComponent")
+debug_raycast = NodePath("../../RotaitonComponent/Debug")
+move_state = NodePath("../PlayerMoveState")
+metadata/_custom_type_script = "uid://bf5mj412yqfpl"

@@ -7,12 +7,13 @@ func _setup_controls() -> void:
 	InputManager.setup_player_actions(player_id, "kb")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _get_input_vector() -> Vector2:
+func input_vector() -> Vector2:
 	return Input.get_vector(
 		prefix + "move_left", prefix + "move_right", prefix + "move_up", prefix + "move_down"
 	)
 
 func _input(event: InputEvent) -> void:
+	super._input(event)
 	if event is InputEventMouseMotion:
 		_mouse_delta += event.relative
 

@@ -9,7 +9,7 @@ func _setup_controls() -> void:
 	InputManager.setup_player_actions(player_id, "gp")
 	InputManager.bind_player_actions_to_device(player_id, device_id)
 
-func _get_input_vector() -> Vector2:
+func input_vector() -> Vector2:
 	var stick_vec := InputManager.get_gamepad_left_stick(device_id)
 	if stick_vec.length() < left_stick_dead_zone:
 		return Vector2.ZERO
