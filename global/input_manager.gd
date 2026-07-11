@@ -1,7 +1,6 @@
 extends Node
 class_name InputManager
 
-
 ## ref_prefix - ["kb", "gp"]
 static func setup_player_actions(player_id: int, ref_prefix: String) -> void:
 	var prefix := "p" + str(player_id) + "_"

@@ -1,19 +1,19 @@
-extends PlayerController
-class_name PlayerKbController
+extends PlayerControllerDeviceSpecific
+class_name PlayerControllerKbSpecific
 
 var _mouse_delta := Vector2.ZERO
 
-func _setup_controls() -> void:
-	InputManager.setup_player_actions(player_id, "kb")
+func setup_controls() -> void:
+	InputManager.setup_player_actions(player.player_id, "kb")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func input_vector() -> Vector2:
+	var prefix := controller.prefix
 	return Input.get_vector(
 		prefix + "move_left", prefix + "move_right", prefix + "move_up", prefix + "move_down"
 	)
 
-func _input(event: InputEvent) -> void:
-	super._input(event)
+func input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_mouse_delta += event.relative
 

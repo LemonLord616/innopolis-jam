@@ -1,8 +1,12 @@
-@abstract
 extends Node
 class_name PlayerController
 
 @export var player: Player
+@export var device_specific: PlayerControllerDeviceSpecific : set = _on_device_specific_change
+func _on_device_specific_change(res: PlayerControllerDeviceSpecific) -> void:
+	device_specific = res
+	_setup_device.call_deferred()
+
 
 signal hotbar(slot: int)
 signal run(flag: bool)
@@ -14,9 +18,15 @@ signal jump
 
 
 func _ready() -> void:
-	_setup_controls()
+	_setup_device()
+
+func _setup_device() -> void:
+	device_specific.player = player
+	device_specific.controller = self
+	device_specific.setup_controls()
 
 func _input(event: InputEvent) -> void:
+	Logging.debug(self, "input event")
 	if event.is_action(prefix + "run"):
 		var flag = event.is_pressed()
 		Logging.debug(self, "run " + "pressed" if flag else "release")
@@ -24,15 +34,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(prefix + "jump"):
 		Logging.debug(self, "jump pressed")
 		jump.emit()
-	for i in range(player.hotbar_keys):
+	for i in range(player.inventory.slots.size()):
 		if event.is_action_pressed(prefix + "hotbar_" + str(i)):
 			hotbar.emit(i)
+	device_specific.input(event)
 
-@abstract
-func _setup_controls() -> void
+func input_vector() -> Vector2:
+	return device_specific.input_vector()
 
-@abstract
-func input_vector() -> Vector2
-
-@abstract
-func camera_delta() -> Vector2
+func camera_delta() -> Vector2:
+	return device_specific.camera_delta()

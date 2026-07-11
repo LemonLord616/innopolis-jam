@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 		switch_to_state.emit(self, ground_state)
 		return
 
-	var vel = player.linear_velocity
-	if vel.is_zero_approx():
-		return
-	player.apply_force(-vel * player.air_damp)
+	# var vel = player.linear_velocity
+	# if vel.is_zero_approx():
+	# 	return
+	# player.apply_force(-vel * player.air_damp)

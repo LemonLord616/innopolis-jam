@@ -5,7 +5,6 @@ class_name Player
 @export var player_id := 0
 @export var device_id := 0
 
-@export var hotbar_keys := 4
 @export_range(0.0001, 0.1, 0.0001) var vertical_sensitivity: float = 0.005
 @export_range(0.0001, 0.1, 0.0001) var horizontal_sensitivity: float = 0.005
 
@@ -21,7 +20,7 @@ class_name Player
 @export_range(0.0, 10000.0, 1.0, "Newton") var run_max_force := 6400.0
 @export_range(0.0, 1000.0, 1.0, "Newton") var jump_impulse := 100.0
 
-@export_range(0.0, 100.0, 1.0, "Coefficient") var air_damp := 40.0
+# @export_range(0.0, 100.0, 1.0, "Coefficient") var air_damp := 40.0
 @export_range(0.0, 1.0, 0.1, "Coefficient") var floor_friction := 1.0
 # @export_range(0.0, 1000.0, 1.0, "Coefficient") var damp := 50.0
 
@@ -30,3 +29,7 @@ class_name Player
 
 func _ready() -> void:
 	lock_rotation = true
+
+# func _physics_process(delta: float) -> void:
+# 	Logging.logging_level = Logging.LoggingLevel.WARNING
+# 	Logging.warning(self, str(global_position))
