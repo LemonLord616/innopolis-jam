@@ -1,10 +1,8 @@
 extends Component3D
 class_name PlayerRotaitonComponent
 
-func _ready() -> void:
-	set_process(false)
-	set_physics_process(false)
-	set_process_input(false)
-	set_process_shortcut_input(false)
-	set_process_unhandled_input(false)
-	set_process_unhandled_key_input(false)
+func facing_dir() -> Vector3:
+	return -global_basis.z
+
+func rotated_vec(vec: Vector3) -> Vector3:
+	return vec.rotated(Vector3.UP, global_rotation.y)

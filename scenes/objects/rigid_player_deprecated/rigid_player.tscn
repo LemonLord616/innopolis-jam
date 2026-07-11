@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://d3la4yysvpove"]
+
+[ext_resource type="Script" uid="uid://cwbmnaof8v2gt" path="res://scenes/objects/rigid_player_deprecated/rigid_player.gd" id="1_1bf4k"]
+[ext_resource type="Script" uid="uid://cnywwym2cxh62" path="res://scenes/objects/player/controller/kb_specific.gd" id="2_g10m2"]
+[ext_resource type="Script" uid="uid://dolmbbocisaab" path="res://scenes/objects/player/controller/player_controller.gd" id="3_rp72t"]
+[ext_resource type="Script" uid="uid://dii3qq1bn6x2r" path="res://scenes/objects/rigid_player_deprecated/rigid_move_component.gd" id="4_gmdvr"]
+[ext_resource type="Script" uid="uid://cb1qombw1kukt" path="res://scenes/objects/player/components/rotation_component.gd" id="4_wim6f"]
+[ext_resource type="Script" uid="uid://b7a3bpm51wa2j" path="res://scenes/objects/player/inventory.gd" id="5_dvfu2"]
+[ext_resource type="Script" uid="uid://d33gxe2vm0lda" path="res://scenes/objects/player/components/inventory_selector_component.gd" id="6_ejlqc"]
+[ext_resource type="Script" uid="uid://bq8d58j5ubfn8" path="res://scripts/state_machine.gd" id="6_io36v"]
+[ext_resource type="Script" uid="uid://dmxojd6xfy0tf" path="res://scenes/objects/player/states/move_state.gd" id="7_bdcal"]
+[ext_resource type="Script" uid="uid://bf5mj412yqfpl" path="res://scenes/objects/player/states/dash_state.gd" id="8_bdcal"]
+[ext_resource type="PackedScene" uid="uid://tic75g7lusl6" path="res://scenes/objects/player/view/player_view.tscn" id="8_ejlqc"]
+[ext_resource type="Script" uid="uid://cirvuditml3jn" path="res://scenes/objects/player/states/ground_state.gd" id="13_rp72t"]
+[ext_resource type="Script" uid="uid://dgrdmsbprboc4" path="res://scenes/objects/player/states/air_state.gd" id="14_g65c7"]
+[ext_resource type="Script" uid="uid://4brg3h5eu1qi" path="res://scenes/objects/player/components/stun_component.gd" id="14_rp72t"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rp72t"]
+friction = 0.0
+
+[sub_resource type="Resource" id="Resource_ejlqc"]
+script = ExtResource("5_dvfu2")
+slots = Array[int]([1, 1, 0, 0, 1])
+metadata/_custom_type_script = "uid://b7a3bpm51wa2j"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g65c7"]
+
+[sub_resource type="Resource" id="Resource_25vxo"]
+script = ExtResource("2_g10m2")
+metadata/_custom_type_script = "uid://cnywwym2cxh62"
+
+[sub_resource type="BoxMesh" id="BoxMesh_25vxo"]
+size = Vector3(0.3, 1, 0.3)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rp72t"]
+height = 0.5
+radius = 0.4
+
+[node name="Player" type="RigidBody3D" unique_id=1673226940 node_paths=PackedStringArray("selector")]
+collision_layer = 2
+collision_mask = 7
+mass = 15.013
+physics_material_override = SubResource("PhysicsMaterial_rp72t")
+script = ExtResource("1_1bf4k")
+inventory = SubResource("Resource_ejlqc")
+selector = NodePath("SelectorComponent")
+power = 3200.0
+max_force = 3200.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1646473181]
+shape = SubResource("CylinderShape3D_g65c7")
+
+[node name="PlayerController" type="Node" parent="." unique_id=2078326820 node_paths=PackedStringArray("player")]
+script = ExtResource("3_rp72t")
+player = NodePath("..")
+device_specific = SubResource("Resource_25vxo")
+metadata/_custom_type_script = "uid://dolmbbocisaab"
+
+[node name="MoveComponent" type="Node" parent="." unique_id=100719132 node_paths=PackedStringArray("player", "rotation_cmp")]
+script = ExtResource("4_gmdvr")
+player = NodePath("..")
+rotation_cmp = NodePath("../RotaitonComponent")
+metadata/_custom_type_script = "uid://dii3qq1bn6x2r"
+
+[node name="SelectorComponent" type="Node" parent="." unique_id=1866400925 node_paths=PackedStringArray("player", "controller", "player_view")]
+script = ExtResource("6_ejlqc")
+player = NodePath("..")
+controller = NodePath("../PlayerController")
+player_view = NodePath("../RotaitonComponent/PlayerView")
+metadata/_custom_type_script = "uid://d33gxe2vm0lda"
+
+[node name="RotaitonComponent" type="Node3D" parent="." unique_id=1418686236]
+script = ExtResource("4_wim6f")
+metadata/_custom_type_script = "uid://cb1qombw1kukt"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotaitonComponent" unique_id=403124480]
+layers = 2
+mesh = SubResource("BoxMesh_25vxo")
+
+[node name="Debug" type="RayCast3D" parent="RotaitonComponent" unique_id=848836440]
+
+[node name="PlayerView" parent="RotaitonComponent" unique_id=1539719401 node_paths=PackedStringArray("player", "rotation_cmp", "controller") instance=ExtResource("8_ejlqc")]
+disabled = false
+player = NodePath("../..")
+rotation_cmp = NodePath("..")
+controller = NodePath("../../PlayerController")
+
+[node name="StateMachine" type="Node" parent="." unique_id=678572023 node_paths=PackedStringArray("initial_states")]
+script = ExtResource("6_io36v")
+initial_states = [NodePath("PlayerRunState"), NodePath("PlayerOnGroundState")]
+metadata/_custom_type_script = "uid://bq8d58j5ubfn8"
+
+[node name="PlayerMoveState" type="Node" parent="StateMachine" unique_id=1563979999 node_paths=PackedStringArray("player", "controller", "move_cmp", "run_state")]
+script = ExtResource("7_bdcal")
+player = NodePath("../..")
+controller = NodePath("../../PlayerController")
+move_cmp = NodePath("../../MoveComponent")
+run_state = NodePath("../PlayerRunState")
+metadata/_custom_type_script = "uid://dmxojd6xfy0tf"
+
+[node name="PlayerRunState" type="Node" parent="StateMachine" unique_id=828942972 node_paths=PackedStringArray("player", "controller", "move_cmp", "move_state")]
+script = ExtResource("8_bdcal")
+player = NodePath("../..")
+controller = NodePath("../../PlayerController")
+move_cmp = NodePath("../../MoveComponent")
+move_state = NodePath("../PlayerMoveState")
+metadata/_custom_type_script = "uid://bf5mj412yqfpl"
+
+[node name="PlayerOnGroundState" type="Node" parent="StateMachine" unique_id=1367945790 node_paths=PackedStringArray("player", "controller", "air_state", "floor_cast", "debug_cast")]
+script = ExtResource("13_rp72t")
+player = NodePath("../..")
+controller = NodePath("../../PlayerController")
+air_state = NodePath("../PlayerInAirState")
+floor_cast = NodePath("../../FloorCast")
+debug_cast = NodePath("../../RotaitonComponent/Debug")
+metadata/_custom_type_script = "uid://cirvuditml3jn"
+
+[node name="PlayerInAirState" type="Node" parent="StateMachine" unique_id=1989404322 node_paths=PackedStringArray("player", "ground_state", "floor_cast")]
+script = ExtResource("14_g65c7")
+player = NodePath("../..")
+ground_state = NodePath("../PlayerOnGroundState")
+floor_cast = NodePath("../../FloorCast")
+metadata/_custom_type_script = "uid://dgrdmsbprboc4"
+
+[node name="FloorCast" type="ShapeCast3D" parent="." unique_id=750584705]
+shape = SubResource("CylinderShape3D_rp72t")
+target_position = Vector3(0, -0.8, 0)
+
+[node name="StunComponent" type="Node" parent="." unique_id=417568375 node_paths=PackedStringArray("move_state")]
+script = ExtResource("14_rp72t")
+move_state = NodePath("../StateMachine/PlayerMoveState")
+metadata/_custom_type_script = "uid://4brg3h5eu1qi"

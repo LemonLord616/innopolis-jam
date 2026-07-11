@@ -27,7 +27,7 @@ func _on_enter_states(states: Array[State]) -> void:
 		_on_enter_state(state)
 
 func _on_state_entered(state: State) -> void:
-	Logging.debug(self, "entered: " + state.name)
+	# Logging.debug(self, "entered: " + state.name)
 	state.switch_to_state.connect(_on_switch_to_state)
 	state.switch_to_states.connect(_on_switch_to_states)
 	state.enter_state.connect(_on_enter_state)
@@ -46,7 +46,7 @@ func _on_exit_states(states: Array[State]) -> void:
 		_on_exit_state(state)
 
 func _on_state_exited(state: State) -> void:
-	Logging.debug(self, "exited: " + state.name)
+	# Logging.debug(self, "exited: " + state.name)
 	state.switch_to_state.disconnect(_on_switch_to_state)
 	state.switch_to_states.disconnect(_on_switch_to_states)
 	state.enter_state.disconnect(_on_enter_state)

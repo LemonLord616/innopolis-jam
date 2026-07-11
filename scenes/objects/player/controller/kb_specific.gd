@@ -1,5 +1,5 @@
-extends PlayerControllerDeviceSpecific
-class_name PlayerControllerKbSpecific
+extends DeviceSpecific
+class_name KbSpecific
 
 var _mouse_delta := Vector2.ZERO
 

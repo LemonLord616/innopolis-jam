@@ -1,5 +1,5 @@
-extends PlayerControllerDeviceSpecific
-class_name PlayerControllerGpSpecific
+extends DeviceSpecific
+class_name GpSpecific
 
 
 func setup_controls() -> void:

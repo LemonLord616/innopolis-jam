@@ -2,20 +2,17 @@ extends Node
 class_name PlayerController
 
 @export var player: Player
-@export var device_specific: PlayerControllerDeviceSpecific : set = _on_device_specific_change
-func _on_device_specific_change(res: PlayerControllerDeviceSpecific) -> void:
+@export var device_specific: DeviceSpecific # : set = _on_device_specific_change
+func _on_device_specific_change(res: DeviceSpecific) -> void:
 	device_specific = res
 	_setup_device.call_deferred()
 
 
 signal hotbar(slot: int)
-signal run(flag: bool)
+signal dash
 signal jump
 
-@onready var player_id := player.player_id
-@onready var device_id := player.device_id
-@onready var prefix := "p" + str(player_id) + "_"
-
+@onready var prefix := "p" + str(player.player_id) + "_"
 
 func _ready() -> void:
 	_setup_device()
@@ -26,11 +23,10 @@ func _setup_device() -> void:
 	device_specific.setup_controls()
 
 func _input(event: InputEvent) -> void:
-	Logging.debug(self, "input event")
-	if event.is_action(prefix + "run"):
-		var flag = event.is_pressed()
-		Logging.debug(self, "run " + "pressed" if flag else "release")
-		run.emit(flag)
+	# Logging.debug(self, "input event")
+	if event.is_action_pressed(prefix + "dash"):
+		Logging.debug(self, "dash pressed")
+		dash.emit()
 	if event.is_action_pressed(prefix + "jump"):
 		Logging.debug(self, "jump pressed")
 		jump.emit()

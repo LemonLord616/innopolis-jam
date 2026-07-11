@@ -1,8 +1,8 @@
 extends Component
-class_name PlayerMoveComponent
+class_name PlayerRigidMoveComponent
 
 
-@export var player: Player
+@export var player: RigidPlayer
 @export var rotation_cmp: PlayerRotaitonComponent
 # @export var debug_raycast: RayCast3D
 

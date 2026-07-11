@@ -1,5 +1,4 @@
 extends InterruptiveState
-class_name PlayerRunState
 
 
 @export var player: Player

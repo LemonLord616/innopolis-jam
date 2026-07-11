@@ -1,6 +1,6 @@
 @abstract
 extends Resource
-class_name PlayerControllerDeviceSpecific
+class_name DeviceSpecific
 
 
 var player: Player

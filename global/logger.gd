@@ -12,24 +12,24 @@ static func _caller_name(from: Node) -> String:
 		return "null"
 	return from.name
 
-static func debug(from: Node, msg: String):
+static func debug(from: Node, msg: Variant):
 	if logging_level > LoggingLevel.DEBUG:
 		return
 	print("[DEBUG][%s] %s" % [_caller_name(from), msg])
 
-static func info(from: Node, msg: String):
+static func info(from: Node, msg: Variant):
 	if logging_level > LoggingLevel.INFO:
 		return
 	print("[INFO][%s] %s" % [_caller_name(from), msg])
 
-static func warning(from: Node, msg: String):
+static func warning(from: Node, msg: Variant):
 	if logging_level > LoggingLevel.WARNING:
 		return
 	var message := "[WARNING][%s] %s" % [_caller_name(from), msg]
 	print(message)
 	push_warning(message)
 
-static func error(from: Node, msg: String):
+static func error(from: Node, msg: Variant):
 	if logging_level > LoggingLevel.ERROR:
 		return
 	var message := "[ERROR][%s] %s" % [_caller_name(from), msg]
