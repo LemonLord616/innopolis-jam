@@ -1,30 +1,56 @@
 extends CharacterBody3D
 class_name Player
 
+
+@export_category("Resources")
+@export var inventory: PlayerInventoryResource
+
+@export_category("Internal Nodes")
+@export var selector: PlayerInventorySelectorComponent
+@export var dash_cooldown_timer: Timer
+
+@export_category("Controller")
 @export var player_id := 0
 @export var device_id := 0
-
 @export_range(0.0001, 0.1, 0.0001) var vertical_sensitivity: float = 0.005
 @export_range(0.0001, 0.1, 0.0001) var horizontal_sensitivity: float = 0.005
-
 @export_range(0.0, 10.0, 0.1) var left_stick_dead_zone := 0.0
 @export_range(0.0, 10.0, 0.1) var right_stick_dead_zone := 0.0
 
-@export var inventory: PlayerInventoryResource
-@export var selector: PlayerInventorySelectorComponent
+@export_category("Effects")
+@export var disabled_jump := false
+@export var disabled_dash := false
+@export var disabled_move := false
+@export var disabled_move_camera := false
+@export var disabled_change_slot := false
 
-@export_range(0.0, 100.0, 1.0) var speed := 5.0
-@export_range(0.0, 100.0, 1.0) var jump_speed := 5.0
-@export_range(0.0, 100.0, 1.0) var dash_speed := 5.0
+@export_category("Batte")
+@export_range(1.0, 1000.0, 1.0) var max_hp := 100.0
+
+@export_category("Movement")
+@export_range(0.0, 100.0, 1.0) var speed := 10.0
+@export_range(0.0, 100.0, 1.0) var jump_speed := 30.0
+@export_range(0.0, 100.0, 1.0) var dash_speed := 30.0
 enum DashDirection {
 	FACE, MOVE
-}
+} 
 @export var dash_direction: DashDirection
-@export_range(0.0, 5.0, 0.1) var dash_cooldown := 2.0
+@export_range(0.0, 5.0, 0.1) var dash_cooldown_duration := 0.5
 ## Time while dash comes to regular move spee
-@export_range(0.0, 5.0, 0.1) var dash_duration := 1.0
+@export_range(0.0, 5.0, 0.1) var dash_duration := 0.5
 @export var dash_fadeout_curve: Curve
-@export_range(0.0, 10.0, 0.1) var gravity_multiplier := 1.0
+## 1 means double jump, 2 is triple, 0 is jump only from ground
+@export var jumps_in_air := 1
+@export_range(0.0, 10.0, 0.1) var gravity_multiplier := 5.0
+
+
+# states
+# var on_ground := false
+# var in_air := false
+# var move := false
+var dash_active := false
+
+@onready var hp := max_hp
 
 
 func _physics_process(delta: float) -> void:

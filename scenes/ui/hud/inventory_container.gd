@@ -1,7 +1,7 @@
 extends HBoxContainer
 class_name InventoryContainer
 
-@onready var slot_scene := preload("res://scenes/ui/inventory_slot.tscn")
+@onready var slot_scene := preload("res://scenes/ui/hud/inventory_slot.tscn")
 
 var _slots: Array[InventorySlotUi] = []
 

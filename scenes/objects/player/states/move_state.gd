@@ -1,4 +1,4 @@
-extends InterruptiveState
+extends State
 class_name PlayerMoveState
 
 
@@ -6,9 +6,7 @@ class_name PlayerMoveState
 @export var controller: PlayerController
 @export var rotation_cmp: PlayerRotaitonComponent
 @export var dash_state: PlayerDashState
-@export var dash_cooldown: Timer
-
-signal gonna_dash(state: InterruptiveState)
+@export var dash_cooldown: Timer 
 
 func enter() -> void:
 	controller.dash.connect(_on_controller_dash)
@@ -16,6 +14,8 @@ func exit() -> void:
 	controller.dash.disconnect(_on_controller_dash)
 
 func _physics_process(_delta: float) -> void:
+	if player.disabled_move:
+		return
 	var input_vec = controller.input_vector()
 	if input_vec.is_zero_approx():
 		player.velocity.x = 0
@@ -28,9 +28,8 @@ func _physics_process(_delta: float) -> void:
 	player.velocity.z = move_vel.z
 
 func _on_controller_dash() -> void:
-	if !dash_cooldown.is_stopped():
+	if not dash_cooldown.is_stopped():
 		return
-	_interrupted = false
-	gonna_dash.emit(self)
-	if !_interrupted:
-		switch_to_state.emit(self, dash_state)
+	if player.disabled_dash:
+		return
+	switch_to_state.emit(self, dash_state)

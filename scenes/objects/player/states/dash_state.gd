@@ -1,4 +1,4 @@
-extends InterruptiveState
+extends State
 class_name PlayerDashState
 
 @export var player: Player
@@ -21,16 +21,20 @@ func enter() -> void:
 	player.velocity.x = dash_vel.x
 	player.velocity.z = dash_vel.z
 	_timer = player.dash_duration
+	player.dash_active = true
 
 func exit() -> void:
-	dash_cooldown.wait_time = player.dash_cooldown
+	dash_cooldown.wait_time = player.dash_cooldown_duration
 	dash_cooldown.start()
+	player.dash_active = false
 
 func _physics_process(delta: float) -> void:
 	if _timer <= 0.0:
 		switch_to_state.emit(self, move_state)
 	_timer -= delta
 
+	if player.disabled_move:
+		return
 	var input_vec := controller.input_vector()
 	var target := Vector3.ZERO
 	if not input_vec.is_zero_approx():

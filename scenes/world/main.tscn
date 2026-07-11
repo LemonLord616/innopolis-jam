@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://tq56h2bja56v" path="res://scenes/world/main.gd" id="1_mli2r"]
 [ext_resource type="Texture2D" uid="uid://oabsp23lnemy" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_albedo.png" id="2_j0vxu"]
-[ext_resource type="PackedScene" uid="uid://d2w4gwu5h6h5y" path="res://scenes/ui/ui.tscn" id="3_f8fyy"]
+[ext_resource type="PackedScene" uid="uid://d2w4gwu5h6h5y" path="res://scenes/ui/hud/hud.tscn" id="3_f8fyy"]
 [ext_resource type="Texture2D" uid="uid://6sxwdkqrphes" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_ao.png" id="3_ggrwn"]
 [ext_resource type="Texture2D" uid="uid://buiraao5j0yao" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_height.png" id="4_85j56"]
 [ext_resource type="Texture2D" uid="uid://cu4ndb84npkqd" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_metallic.png" id="5_qip8x"]
@@ -85,7 +85,7 @@ transform = Transform3D(-0.119725674, -0.60667545, 0.78588194, 2.2020826e-08, 0.
 [node name="Player" parent="." unique_id=1694024088 instance=ExtResource("11_85j56")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6978006, 0)
 
-[node name="Ui" parent="." unique_id=1605863267 node_paths=PackedStringArray("player") instance=ExtResource("3_f8fyy")]
+[node name="Hud" parent="." unique_id=1605863267 node_paths=PackedStringArray("player") instance=ExtResource("3_f8fyy")]
 player = NodePath("../Player")
 
 [node name="WindowMonologue" parent="." unique_id=764239337 instance=ExtResource("10_85j56")]

@@ -15,6 +15,8 @@ func _ready() -> void:
 		set_physics_process(false)
 
 func _process(delta: float) -> void:
+	if player.disabled_move_camera:
+		return
 	var camera_delta = controller.camera_delta()
 	if !camera_delta.is_zero_approx():
 		apply_camera_movement(camera_delta)

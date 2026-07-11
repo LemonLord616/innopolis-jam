@@ -2,18 +2,26 @@ extends State
 class_name PlayerInAirState
 
 @export var player: Player
+@export var controller: PlayerController
 @export var ground_state: PlayerOnGroundState
 
+var _jump_count := 0
+
 func enter() -> void:
-	pass
+	controller.jump.connect(_on_controller_jump)
+	_jump_count = 0
 func exit() -> void:
-	pass
+	controller.jump.disconnect(_on_controller_jump)
 
 func _physics_process(_delta: float) -> void:
 	if player.is_on_floor():
 		switch_to_state.emit(self, ground_state)
 
-	# var vel = player.linear_velocity
-	# if vel.is_zero_approx():
-	# 	return
-	# player.apply_force(-vel * player.air_damp)
+func _on_controller_jump() -> void:
+	if player.disabled_jump:
+		return
+	if _jump_count >= player.jumps_in_air:
+		return
+	_jump_count += 1
+	Logging.debug(self, "player jumped")
+	player.velocity.y = player.jump_speed

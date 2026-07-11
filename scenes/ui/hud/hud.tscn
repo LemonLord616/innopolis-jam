@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://d2w4gwu5h6h5y"]
 
-[ext_resource type="Script" uid="uid://b5ym3h6ygptdd" path="res://scenes/ui/ui.gd" id="1_f5cxw"]
-[ext_resource type="Script" uid="uid://cykhyp4gqs48d" path="res://scenes/ui/inventory_container.gd" id="2_f5cxw"]
-[ext_resource type="PackedScene" uid="uid://e0w1xkfh6s1a" path="res://scenes/ui/inventory_slot.tscn" id="3_aac20"]
+[ext_resource type="Script" uid="uid://b5ym3h6ygptdd" path="res://scenes/ui/hud/hud.gd" id="1_f5cxw"]
+[ext_resource type="Script" uid="uid://cykhyp4gqs48d" path="res://scenes/ui/hud/inventory_container.gd" id="2_f5cxw"]
+[ext_resource type="PackedScene" uid="uid://e0w1xkfh6s1a" path="res://scenes/ui/hud/inventory_slot.tscn" id="3_aac20"]
 
-[node name="Ui" type="Control" unique_id=1605863267 node_paths=PackedStringArray("inventory_cntr")]
+[node name="HUD" type="Control" unique_id=1605863267 node_paths=PackedStringArray("inventory_cntr", "hp_bar", "dash_cooldown_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f5cxw")
 inventory_cntr = NodePath("InventoryContainer")
+hp_bar = NodePath("PlayerStateContainer/HPBar")
+dash_cooldown_bar = NodePath("PlayerStateContainer/DashCooldownBar")
 
 [node name="InventoryContainer" type="HBoxContainer" parent="." unique_id=338730495]
 layout_mode = 1
@@ -38,4 +40,16 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="InventorySlot4" parent="InventoryContainer" unique_id=713259248 instance=ExtResource("3_aac20")]
+layout_mode = 2
+
+[node name="PlayerStateContainer" type="VBoxContainer" parent="." unique_id=1054012655]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HPBar" type="ProgressBar" parent="PlayerStateContainer" unique_id=533272887]
+layout_mode = 2
+
+[node name="DashCooldownBar" type="ProgressBar" parent="PlayerStateContainer" unique_id=1873667886]
 layout_mode = 2
