@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MonologueData" format=3 uid="uid://b7jsp3pcux0e6"]
+
+[ext_resource type="Script" uid="uid://040ggxyeajgj" path="res://resources/Monologue/MonologueData.cs" id="1_rwvqx"]
+
+[resource]
+script = ExtResource("1_rwvqx")
+Name = "Фонарь"
+phrases = PackedStringArray("Чтобы я не сказал, книжный ходок топ!", "Хочу быть таким же крутым как книжный ходок.")
+metadata/_custom_type_script = "uid://040ggxyeajgj"
