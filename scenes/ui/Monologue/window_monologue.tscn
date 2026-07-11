@@ -25,12 +25,19 @@ phrase = NodePath("Panel/PhraseContainer/PhraseLabel")
 
 [node name="Panel" type="NinePatchRect" parent="." unique_id=516204983]
 visible = false
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 341.0
-offset_top = 248.0
-offset_right = 777.0
-offset_bottom = 380.0
+self_modulate = Color(0, 0, 0, 0.39215687)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -218.0
+offset_top = -218.0
+offset_right = 218.0
+offset_bottom = -86.00122
+grow_horizontal = 2
+grow_vertical = 0
 texture = SubResource("CanvasTexture_ejdoq")
 
 [node name="NameContainer" type="MarginContainer" parent="Panel" unique_id=708166341]
