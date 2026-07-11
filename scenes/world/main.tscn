@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cu4ndb84npkqd" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_metallic.png" id="5_qip8x"]
 [ext_resource type="Texture2D" uid="uid://5f12gg3h1sxj" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_normal-ogl.png" id="6_oaya2"]
 [ext_resource type="Texture2D" uid="uid://cng3sm4p8wgv7" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_roughness.png" id="7_wcbaq"]
+[ext_resource type="PackedScene" uid="uid://5unniweep1wx" path="res://scenes/ui/Monologue/window_monologue.tscn" id="10_85j56"]
 [ext_resource type="Texture2D" uid="uid://d4gpjmga8bjfd" path="res://assets/skybox/blue_nebulae_1.png" id="10_ggrwn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12dqu"]
@@ -88,6 +89,8 @@ transform = Transform3D(-0.119725674, -0.60667545, 0.78588194, 2.2020826e-08, 0.
 
 [node name="Ui" parent="." unique_id=1605863267 node_paths=PackedStringArray("player") instance=ExtResource("3_f8fyy")]
 player = NodePath("../Player")
+
+[node name="WindowMonologue" parent="." unique_id=764239337 instance=ExtResource("10_85j56")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2005247673]
 environment = SubResource("Environment_lsyt0")

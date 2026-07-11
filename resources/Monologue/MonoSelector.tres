@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MonoSelectorData" format=3 uid="uid://sycmcgmhdolt"]
+
+[ext_resource type="Resource" uid="uid://dpchm12hc2a4y" path="res://resources/Monologue/BossMonologue.tres" id="1_0wqt1"]
+[ext_resource type="Script" uid="uid://prw3xiapo7hd" path="res://resources/Monologue/MonoSelectorData.cs" id="1_1tf6i"]
+[ext_resource type="Resource" uid="uid://b7jsp3pcux0e6" path="res://resources/Monologue/FlashlightMonologue.tres" id="2_0n1l4"]
+
+[resource]
+script = ExtResource("1_1tf6i")
+monologues = Array[Object]([ExtResource("1_0wqt1"), ExtResource("2_0n1l4")])
+metadata/_custom_type_script = "uid://prw3xiapo7hd"

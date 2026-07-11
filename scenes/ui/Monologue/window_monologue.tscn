@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://5unniweep1wx"]
+
+[ext_resource type="Script" uid="uid://c1vb1py6lbrmy" path="res://scenes/ui/Monologue/WindowMonologue.cs" id="1_tws23"]
+[ext_resource type="Resource" uid="uid://sycmcgmhdolt" path="res://resources/Monologue/MonoSelector.tres" id="2_tws23"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ejdoq"]
+
+[sub_resource type="Theme" id="Theme_rd4tg"]
+
+[sub_resource type="FontVariation" id="FontVariation_6gmwo"]
+
+[node name="WindowMonologue" type="Control" unique_id=764239337 node_paths=PackedStringArray("timer", "rect", "name", "phrase")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tws23")
+data = ExtResource("2_tws23")
+timer = NodePath("Timer")
+rect = NodePath("Panel")
+name = NodePath("Panel/NameContainer/NameLabel")
+phrase = NodePath("Panel/PhraseContainer/PhraseLabel")
+
+[node name="Panel" type="NinePatchRect" parent="." unique_id=516204983]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 341.0
+offset_top = 248.0
+offset_right = 777.0
+offset_bottom = 380.0
+texture = SubResource("CanvasTexture_ejdoq")
+
+[node name="NameContainer" type="MarginContainer" parent="Panel" unique_id=708166341]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLabel" type="Label" parent="Panel/NameContainer" unique_id=546835715]
+layout_mode = 2
+theme = SubResource("Theme_rd4tg")
+theme_type_variation = &"GraphFrameTitleLabel"
+theme_override_fonts/font = SubResource("FontVariation_6gmwo")
+theme_override_font_sizes/font_size = 20
+text = "Имя"
+
+[node name="PhraseContainer" type="MarginContainer" parent="Panel" unique_id=1160889173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PhraseLabel" type="Label" parent="Panel/PhraseContainer" unique_id=92029536]
+layout_mode = 2
+text = "Время слов"
+autowrap_mode = 1
+text_direction = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=1200031376]
