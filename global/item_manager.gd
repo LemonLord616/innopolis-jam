@@ -3,26 +3,22 @@ class_name ItemManager
 
 enum Item {
 	NOITEM,
-	PLACEHOLDER
+	PLACEHOLDER,
+	SWORD,
+	BOW,
+	HEALTH_POTION
 }
 
-static var item_info: Dictionary[Item, ItemResource] = {
-	Item.NOITEM: preload("res://resources/items/noitem.tres") as ItemResource,
-	Item.PLACEHOLDER: preload("res://resources/items/placeholder.tres") as ItemResource
-}
-
-static var item_image: Dictionary[Item, Texture2D] = {
-	Item.NOITEM: preload("res://icon.svg") as Texture2D,
-	Item.PLACEHOLDER: preload("res://assets/placeholder_preview.png") as Texture2D
-}
-
-static var item_mesh: Dictionary[Item, Mesh] = {
-	Item.NOITEM: null,
-	Item.PLACEHOLDER: preload("res://assets/placeholder.tres") as Mesh
+static var item_resource: Dictionary[Item, ItemResource] = {
+	Item.NOITEM: preload("res://resources/items/data/noitem.tres") as ItemResource,
+	Item.PLACEHOLDER: preload("res://resources/items/data/placeholder.tres") as ItemResource,
+	Item.SWORD: preload("res://resources/items/data/sword.tres") as ItemResource,
+	Item.BOW: preload("res://resources/items/data/bow.tres") as ItemResource,
+	Item.HEALTH_POTION: preload("res://resources/items/data/health_potion.tres") as ItemResource
 }
 
 static func item_name(item: ItemManager.Item) -> String:
-	var info = item_info.get(item)
+	var info = item_resource.get(item)
 	if info == null:
 		Logging.warning(null, "ItemManager: no available info for item " + str(item))
 		return ""

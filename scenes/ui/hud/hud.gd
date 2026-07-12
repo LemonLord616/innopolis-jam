@@ -15,7 +15,7 @@ func _ready() -> void:
 	dash_cooldown_bar.max_value = player.dash_cooldown_duration
 
 func _physics_process(delta: float) -> void:
-	hp_bar.value = player.hp
+	hp_bar.value = player.health.hp
 	var value: float
 	if player.dash_active:
 		value = 0

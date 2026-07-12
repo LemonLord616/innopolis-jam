@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://foq24mljvkvr" path="res://scenes/objects/boss/actor/boss_actor.gd" id="1_4e6rw"]
 [ext_resource type="Script" uid="uid://cb1qombw1kukt" path="res://scenes/shared/components/rotation_component.gd" id="1_adfyq"]
 [ext_resource type="Material" uid="uid://m3se5w2e7tqs" path="res://resources/boss_texture_material.tres" id="2_mar8m"]
+[ext_resource type="Script" uid="uid://cd65mtepu3u8b" path="res://scenes/objects/player/components/health_component.gd" id="3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_25vxo"]
 height = 4.0
@@ -28,11 +29,13 @@ size = Vector3(2, 3, 1)
 material = ExtResource("2_mar8m")
 size = Vector3(0.6, 0.6, 3)
 
-[node name="BossActor" type="CharacterBody3D" unique_id=1906104186 node_paths=PackedStringArray("rotation_cmp", "head")]
+[node name="BossActor" type="CharacterBody3D" unique_id=1078987563 node_paths=PackedStringArray("rotation_cmp", "head")]
+collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_4e6rw")
 rotation_cmp = NodePath("RotaitonComponent")
 head = NodePath("Head")
+metadata/_custom_type_script = "uid://foq24mljvkvr"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1318397070]
 shape = SubResource("CylinderShape3D_25vxo")
@@ -60,3 +63,6 @@ mesh = SubResource("BoxMesh_lsyt0")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="RotaitonComponent" unique_id=578970943]
 transform = Transform3D(1, 0, 0, 0, 0.88701063, 0.4617485, 0, -0.4617485, 0.88701063, 1.5, -0.29125023, -1.3411045e-07)
 mesh = SubResource("BoxMesh_lsyt0")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=203]
+script = ExtResource("3")

@@ -1,19 +1,30 @@
 extends Component
-class_name PlayerHealthComponent
+class_name HealthComponent
 
+signal hp_changed(float)
+signal died
+signal recovered
 
 @export var player: Player
 
-@onready var hp := player.max_hp : set = _hp_change
-func _hp_change(value: float) -> void:
-	if player.immortal:
+var _dead := false : set = _on_dead_change
+func _on_dead_change(value: bool) -> void:
+	if value == _dead:
 		return
-	hp = value
-	player.hp_changed.emit(player)
+	_dead = value
+	if _dead: died.emit()
+	else: recovered.emit()
 
-func reduce(value: float) -> void:
-	hp -= value
+@onready var hp := player.max_hp : set = _on_hp_change
+func _on_hp_change(value: float) -> void:
+	if value == hp:
+		return
+	hp = clampf(value, 0.0, player.max_hp)
+	hp_changed.emit(hp)
+	_dead = hp <= 0.0
 
-func increase(value: float) -> void:
-	hp += value
+func reduce(amount: float) -> void:
+	hp -= amount
 
+func increase(amount: float) -> void:
+	hp += amount

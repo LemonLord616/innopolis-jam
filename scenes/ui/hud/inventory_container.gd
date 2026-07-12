@@ -13,7 +13,7 @@ func _build_slots(inventory: PlayerInventoryResource) -> void:
 	for slot in get_children():
 		remove_child(slot)
 		slot.queue_free()
-	for i in inventory.slots.size():
+	for i in inventory.stacks.size():
 		var slot: InventorySlotUi = slot_scene.instantiate()
 		add_child(slot)
 		_slots.append(slot)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MeleeItem" format=3 uid="uid://csword"]
+
+[ext_resource type="Script" uid="uid://c015v44s54rw1" path="res://resources/items/scripts/melee_item.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c0meleehitbox" path="res://scenes/objects/weapons/melee_hitbox.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+name = "Sword"
+damage = 25.0
+duration = 0.3
+swing_trace = ExtResource("2")

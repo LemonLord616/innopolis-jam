@@ -14,7 +14,10 @@ func _ready() -> void:
 	outline.visible = false
 	
 func update_image(item: ItemManager.Item) -> void:
-	var texture = ItemManager.item_image.get(item)
+	var item_res: ItemResource = ItemManager.item_resource.get(item)
+	if item_res == null:
+		return
+	var texture: Texture2D = item_res.image_texture
 	if texture == null:
 		Logging.warning(self, "texture is null")
 		return

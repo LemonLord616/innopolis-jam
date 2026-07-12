@@ -2,7 +2,7 @@ extends CharacterBody3D
 class_name BossActor
 
 
-@export var rotation_cmp: RotaitonComponent
+@export var rotation_cmp: RotationComponent
 @export var head: MeshInstance3D
 
 func head_look_at(target: Vector3) -> void:

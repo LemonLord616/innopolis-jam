@@ -8,9 +8,11 @@ func _on_device_specific_change(res: DeviceSpecific) -> void:
 	_setup_device.call_deferred()
 
 
-signal hotbar(slot: int)
+signal hotbar(int)
 signal dash
 signal jump
+signal item_primary(bool)
+signal item_secondary(bool)
 
 @onready var prefix := "p" + str(player.player_id) + "_"
 
@@ -24,6 +26,14 @@ func _setup_device() -> void:
 
 func _input(event: InputEvent) -> void:
 	# Logging.debug(self, "input event")
+	if event.is_action(prefix + "item_primary"):
+		var pressed = event.is_pressed()
+		Logging.debug(self, "item primary " + "pressed" if pressed else "released")
+		item_primary.emit(pressed)
+	if event.is_action(prefix + "item_secondary"):
+		var pressed = event.is_pressed()
+		Logging.debug(self, "item secondary " + "pressed" if pressed else "released")
+		item_secondary.emit(pressed)
 	if event.is_action_pressed(prefix + "dash"):
 		Logging.debug(self, "dash pressed")
 		dash.emit()
@@ -33,6 +43,7 @@ func _input(event: InputEvent) -> void:
 	for i in range(player.inventory.slots.size()):
 		if event.is_action_pressed(prefix + "hotbar_" + str(i)):
 			hotbar.emit(i)
+			return
 	device_specific.input(event)
 
 func input_vector() -> Vector2:
