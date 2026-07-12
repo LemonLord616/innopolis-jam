@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		switch_to_state.emit(self, move_state)
 	_timer -= delta
 
-	if player.disabled_move:
+	if player.disable_move:
 		return
 	var input_vec := controller.input_vector()
 	var target := Vector3.ZERO

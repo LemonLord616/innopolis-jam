@@ -10,15 +10,17 @@ var _jump_count := 0
 func enter() -> void:
 	controller.jump.connect(_on_controller_jump)
 	_jump_count = 0
+	player.in_air = true
 func exit() -> void:
 	controller.jump.disconnect(_on_controller_jump)
+	player.in_air = false
 
 func _physics_process(_delta: float) -> void:
 	if player.is_on_floor():
 		switch_to_state.emit(self, ground_state)
 
 func _on_controller_jump() -> void:
-	if player.disabled_jump:
+	if player.disable_jump:
 		return
 	if _jump_count >= player.jumps_in_air:
 		return

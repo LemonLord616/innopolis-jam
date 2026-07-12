@@ -10,11 +10,13 @@ class_name PlayerMoveState
 
 func enter() -> void:
 	controller.dash.connect(_on_controller_dash)
+	player.move = true
 func exit() -> void:
 	controller.dash.disconnect(_on_controller_dash)
+	player.move = false
 
 func _physics_process(_delta: float) -> void:
-	if player.disabled_move:
+	if player.disable_move:
 		return
 	var input_vec = controller.input_vector()
 	if input_vec.is_zero_approx():
@@ -30,6 +32,6 @@ func _physics_process(_delta: float) -> void:
 func _on_controller_dash() -> void:
 	if not dash_cooldown.is_stopped():
 		return
-	if player.disabled_dash:
+	if player.disable_dash:
 		return
 	switch_to_state.emit(self, dash_state)

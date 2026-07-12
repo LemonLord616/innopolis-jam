@@ -7,6 +7,7 @@ class_name Player
 
 @export_category("Internal Nodes")
 @export var selector: PlayerInventorySelectorComponent
+@export var health: PlayerHealthComponent
 @export var dash_cooldown_timer: Timer
 
 @export_category("Controller")
@@ -18,11 +19,12 @@ class_name Player
 @export_range(0.0, 10.0, 0.1) var right_stick_dead_zone := 0.0
 
 @export_category("Effects")
-@export var disabled_jump := false
-@export var disabled_dash := false
-@export var disabled_move := false
-@export var disabled_move_camera := false
-@export var disabled_change_slot := false
+@export var disable_jump := false
+@export var disable_dash := false
+@export var disable_move := false
+@export var disable_move_camera := false
+@export var disable_change_slot := false
+@export var immortal := false
 
 @export_category("Batte")
 @export_range(1.0, 1000.0, 1.0) var max_hp := 100.0
@@ -43,14 +45,25 @@ enum DashDirection {
 @export var jumps_in_air := 1
 @export_range(0.0, 10.0, 0.1) var gravity_multiplier := 5.0
 
+# signals
+signal hp_changed(Player)
+# signal speed_changed(Player)
+# signal jump_speed_changed(Player)
+# signal dash_speed_changed(Player)
+# signal dashed(Player)
+# signal dash_recovered(Player)
+# signal disabled_jump(Player)
+# signal disabled_dash(Player)
+# signal disabled_move(Player)
+# signal disabled_move_camera(Player)
+# signal disabled_change_slot(Player)
+signal selected_slot_changed(Player)
 
 # states
-# var on_ground := false
-# var in_air := false
-# var move := false
+var on_ground := false
+var in_air := false
+var move := false
 var dash_active := false
-
-@onready var hp := max_hp
 
 
 func _physics_process(delta: float) -> void:

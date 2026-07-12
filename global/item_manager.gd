@@ -6,9 +6,9 @@ enum Item {
 	PLACEHOLDER
 }
 
-static var item_info: Dictionary[Item, ItemInfo] = {
-	Item.NOITEM: preload("res://resources/items/noitem_info.tres") as ItemInfo,
-	Item.PLACEHOLDER: preload("res://resources/items/placeholder_info.tres") as ItemInfo
+static var item_info: Dictionary[Item, ItemResource] = {
+	Item.NOITEM: preload("res://resources/items/noitem.tres") as ItemResource,
+	Item.PLACEHOLDER: preload("res://resources/items/placeholder.tres") as ItemResource
 }
 
 static var item_image: Dictionary[Item, Texture2D] = {
@@ -17,6 +17,7 @@ static var item_image: Dictionary[Item, Texture2D] = {
 }
 
 static var item_mesh: Dictionary[Item, Mesh] = {
+	Item.NOITEM: null,
 	Item.PLACEHOLDER: preload("res://assets/placeholder.tres") as Mesh
 }
 
