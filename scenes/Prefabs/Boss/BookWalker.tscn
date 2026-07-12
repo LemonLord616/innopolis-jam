@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://h7rccr617eb"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6gmwo"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ejdoq"]
+
+[node name="BookWalker" type="CharacterBody3D" unique_id=346276284]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1617009930]
+shape = SubResource("CapsuleShape3D_6gmwo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=480009024]
+mesh = SubResource("CapsuleMesh_ejdoq")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=358847407]

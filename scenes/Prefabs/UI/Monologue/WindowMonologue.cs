@@ -29,13 +29,13 @@ public partial class WindowMonologue : Control
 			timer.Start(data.InVisibleDuration);
 			await ToSignal(timer, Timer.SignalName.Timeout);
 
-			SetPhrase();
-			rect.Visible = true;
+            SetPhrase();
+            rect.Visible = true;
 			timer.Start(data.VisibleDuration);
 
-			await ToSignal(timer, Timer.SignalName.Timeout);
-			
-			rect.Visible = false;
+            await ToSignal(timer, Timer.SignalName.Timeout);
+            
+            rect.Visible = false;
 		}
 	}
 }
