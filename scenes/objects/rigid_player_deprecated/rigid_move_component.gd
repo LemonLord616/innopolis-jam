@@ -3,7 +3,7 @@ class_name PlayerRigidMoveComponent
 
 
 @export var player: RigidPlayer
-@export var rotation_cmp: PlayerRotaitonComponent
+@export var rotation_cmp: RotaitonComponent
 # @export var debug_raycast: RayCast3D
 
 func apply_move(move_vector: Vector3, power: float, max_force: float) -> void:

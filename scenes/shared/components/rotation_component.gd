@@ -1,5 +1,5 @@
 extends Component3D
-class_name PlayerRotaitonComponent
+class_name RotaitonComponent
 
 func facing_dir() -> Vector3:
 	return -global_basis.z

@@ -4,7 +4,7 @@ class_name PlayerMoveState
 
 @export var player: Player
 @export var controller: PlayerController
-@export var rotation_cmp: PlayerRotaitonComponent
+@export var rotation_cmp: RotaitonComponent
 @export var dash_state: PlayerDashState
 @export var dash_cooldown: Timer 
 

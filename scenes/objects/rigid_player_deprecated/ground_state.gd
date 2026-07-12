@@ -37,6 +37,6 @@ func _on_controller_jump() -> void:
 	gonna_jump.emit(self)
 	if _interrupted:
 		return
-	var jump_impulse := Vector3.UP * player.jump_impulse
-	Logging.debug(self, "player jumped")
-	player.apply_impulse(jump_impulse)
+	# var jump_impulse := Vector3.UP * player.jump_impulse
+	# Logging.debug(self, "player jumped")
+	# player.apply_impulse(jump_impulse)

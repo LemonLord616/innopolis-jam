@@ -30,7 +30,7 @@ class_name Player
 @export_category("Movement")
 @export_range(0.0, 100.0, 1.0) var speed := 10.0
 @export_range(0.0, 100.0, 1.0) var jump_speed := 30.0
-@export_range(0.0, 100.0, 1.0) var dash_speed := 30.0
+@export_range(0.0, 100.0, 1.0) var dash_speed := 50.0
 enum DashDirection {
 	FACE, MOVE
 } 

@@ -4,7 +4,7 @@ class_name PlayerView
 @export var disabled := false
 
 @export var player: Player
-@export var rotation_cmp: PlayerRotaitonComponent
+@export var rotation_cmp: RotaitonComponent
 @export var controller: PlayerController
 
 @export var item_mesh: MeshInstance3D
