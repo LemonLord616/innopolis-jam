@@ -1,19 +1,26 @@
-using System.Threading.Tasks;
-using System;
+using System.Collections;
+using HCoroutines;
 using Godot;
 
 public partial class WindowMonologue : Control
 {
 	[Export] private MonoSelectorData data;
-	[Export] private Timer timer;
 	[Export] private NinePatchRect rect;
 	[Export] private Godot.Label name;
 	[Export] private Godot.Label phrase;
 
+	private Coroutine _visible;
+
 	public override void _Ready()
 	{
-		VisibleUpdate();
+		_visible = Co.Run(VisibleUpdate);
 	}
+
+    public override void _ExitTree()
+	{
+		_visible?.Kill();
+	}
+
 
 	private void SetPhrase()
 	{
@@ -22,18 +29,16 @@ public partial class WindowMonologue : Control
 		phrase.Text = monologue.GetRandomPhrase();
 	}
 
-	private async Task VisibleUpdate()
+	private IEnumerator VisibleUpdate()
 	{
 		while (true)
 		{
-			timer.Start(data.InVisibleDuration);
-			await ToSignal(timer, Timer.SignalName.Timeout);
 
+			yield return Co.Wait(data.InVisibleDuration);
             SetPhrase();
             rect.Visible = true;
-			timer.Start(data.VisibleDuration);
 
-            await ToSignal(timer, Timer.SignalName.Timeout);
+			yield return Co.Wait(data.VisibleDuration);
             
             rect.Visible = false;
 		}
