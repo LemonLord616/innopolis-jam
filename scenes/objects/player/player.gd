@@ -9,6 +9,9 @@ class_name Player
 @export_category("Internal Nodes")
 @export var selector: PlayerInventorySelectorComponent
 @export var health: HealthComponent
+@export var head: Head
+@export var item_use_ready_state: PlayerItemUseReadyState
+@export var item_using_state: PlayerItemUsingState
 @export var dash_cooldown_timer: Timer
 
 @export_category("Controller")

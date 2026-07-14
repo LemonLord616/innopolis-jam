@@ -1,7 +1,7 @@
 extends Component
 class_name HealthComponent
 
-signal hp_changed(float)
+signal hp_changed(current: float, max_hp: float)
 signal died
 signal recovered
 
@@ -12,15 +12,17 @@ func _on_dead_change(value: bool) -> void:
 	if value == _dead:
 		return
 	_dead = value
-	if _dead: died.emit()
-	else: recovered.emit()
+	if _dead:
+		died.emit()
+	else:
+		recovered.emit()
 
 @onready var hp := player.max_hp : set = _on_hp_change
 func _on_hp_change(value: float) -> void:
 	if value == hp:
 		return
 	hp = clampf(value, 0.0, player.max_hp)
-	hp_changed.emit(hp)
+	hp_changed.emit(hp, player.max_hp)
 	_dead = hp <= 0.0
 
 func reduce(amount: float) -> void:

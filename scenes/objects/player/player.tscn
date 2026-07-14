@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://dgrdmsbprboc4" path="res://scenes/objects/player/states/in_air_state.gd" id="14_g65c7"]
 [ext_resource type="Script" uid="uid://cd65mtepu3u8b" path="res://scenes/objects/player/components/health_component.gd" id="16"]
 [ext_resource type="Script" uid="uid://dm4vdqb0mkpsd" path="res://scenes/objects/player/effects.gd" id="19"]
+[ext_resource type="Script" path="res://scenes/objects/player/states/item_use_ready_state.gd" id="20"]
+[ext_resource type="Script" path="res://scenes/objects/player/states/item_using_state.gd" id="21"]
 
 [sub_resource type="Resource" id="Resource_1y3b8"]
 script = ExtResource("2_ejlqc")
@@ -31,13 +33,17 @@ point_count = 2
 script = ExtResource("2_g10m2")
 metadata/_custom_type_script = "uid://cnywwym2cxh62"
 
-[node name="Player" type="CharacterBody3D" unique_id=1694024088 node_paths=PackedStringArray("selector", "dash_cooldown_timer")]
+[node name="Player" type="CharacterBody3D" unique_id=1694024088 node_paths=PackedStringArray("selector", "dash_cooldown_timer", "health", "head", "item_use_ready_state", "item_using_state")]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_1bf4k")
 inventory = SubResource("Resource_1y3b8")
 effects = SubResource("Resource_effects")
 selector = NodePath("SelectorComponent")
+health = NodePath("HealthComponent")
+head = NodePath("Head")
+item_use_ready_state = NodePath("StateMachine/PlayerItemUseReadyState")
+item_using_state = NodePath("StateMachine/PlayerItemUsingState")
 dash_cooldown_timer = NodePath("StateMachine/DashCooldown")
 dash_direction = 1
 dash_fadeout_curve = SubResource("Curve_85j56")
@@ -63,6 +69,7 @@ device_specific = SubResource("Resource_25vxo")
 metadata/_custom_type_script = "uid://dolmbbocisaab"
 
 [node name="Head" parent="." unique_id=977084428 instance=ExtResource("8_ejlqc")]
+disabled = false
 
 [node name="StateMachine" type="Node" parent="." unique_id=324249426 node_paths=PackedStringArray("initial_states")]
 script = ExtResource("6_io36v")
@@ -99,6 +106,20 @@ player = NodePath("../..")
 controller = NodePath("../../PlayerController")
 ground_state = NodePath("../PlayerOnGroundState")
 metadata/_custom_type_script = "uid://dgrdmsbprboc4"
+
+[node name="PlayerItemUseReadyState" type="Node" parent="StateMachine" unique_id=994499001 node_paths=PackedStringArray("player", "controller", "head", "using_state")]
+script = ExtResource("20")
+player = NodePath("../..")
+controller = NodePath("../../PlayerController")
+head = NodePath("../../Head")
+using_state = NodePath("../PlayerItemUsingState")
+
+[node name="PlayerItemUsingState" type="Node" parent="StateMachine" unique_id=994499002 node_paths=PackedStringArray("player", "controller", "head", "ready_state")]
+script = ExtResource("21")
+player = NodePath("../..")
+controller = NodePath("../../PlayerController")
+head = NodePath("../../Head")
+ready_state = NodePath("../PlayerItemUseReadyState")
 
 [node name="DashCooldown" type="Timer" parent="StateMachine" unique_id=1017496806]
 process_callback = 0

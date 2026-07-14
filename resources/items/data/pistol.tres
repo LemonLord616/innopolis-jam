@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PistolItem" format=3 uid="uid://cpistol"]
+
+[ext_resource type="Script" uid="uid://cyfwxxafvs24h" path="res://resources/items/scripts/pistol_item.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cprojectile" path="res://scenes/objects/projectiles/projectile.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+name = "Pistol"
+damage = 20.0
+animation_duration = 0.2
+projectile_speed = 35.0
+projectile_scene = ExtResource("2")

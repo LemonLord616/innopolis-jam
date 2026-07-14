@@ -28,3 +28,9 @@ func has_item(item: ItemManager.Item) -> bool:
 
 func is_occupied(slot) -> bool:
 	return slots.get(slot) != null
+
+func decrement_slot(slot: int, _amount: int = 1) -> void:
+	if slot < 0 or slot >= slots.size():
+		return
+	slots.set(slot, ItemManager.Item.NOITEM)
+	change.emit(self)

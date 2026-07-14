@@ -15,6 +15,10 @@ run/main_scene="uid://dgcbnplm1mekj"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalSettings="*res://global/global_settings.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"

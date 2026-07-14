@@ -17,6 +17,6 @@ func input_vector() -> Vector2:
 
 func camera_delta() -> Vector2:
 	var stick_vec := InputManager.get_gamepad_right_stick(player.device_id)
-	if stick_vec.length() < player.left_stick_dead_zone:
+	if stick_vec.length() < player.right_stick_dead_zone:
 		return Vector2.ZERO
 	return stick_vec

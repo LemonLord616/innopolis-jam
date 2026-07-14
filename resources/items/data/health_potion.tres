@@ -11,3 +11,4 @@ amount = 30.0
 script = ExtResource("1")
 effect = SubResource("Resource_heal")
 name = "Health Potion"
+consume_duration = 1.0
