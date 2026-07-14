@@ -83,8 +83,9 @@ public partial class BookWalker : CharacterBody3D
             MoveAndSlide();
             return;
         }
-
-        var direction = _target.GlobalPosition - GlobalPosition;
+        
+        var nextPathPosition = agent.GetNextPathPosition();
+        var direction = nextPathPosition - GlobalPosition;
         direction.Y = 0;
         direction = direction.Normalized();
 

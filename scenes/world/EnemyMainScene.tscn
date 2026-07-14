@@ -16,10 +16,11 @@
 [ext_resource type="Script" uid="uid://cct13jkoi3tof" path="res://scripts/Routes/Route.cs" id="14_jwhjk"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rd4tg"]
-vertices = PackedVector3Array(-49.504383, 0.97203827, -49.50455, -49.504383, 0.97203827, 49.49545, 49.495617, 0.97203827, 49.49545, 49.495617, 0.97203827, -49.50455)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(-23.504383, 0.97203827, -41.232555, -23.504383, 0.97203827, -48.232555, -48.004383, 0.97203827, -48.232555, -23.004383, 0.97203827, -40.232555, -21.754383, 0.97203827, -39.482555, -48.004383, 0.97203827, 48.017445, 47.995617, 0.97203827, -48.232555, -15.004383, 0.97203827, -48.232555, -15.004383, 0.97203827, -41.232555, -15.504383, 0.97203827, -40.232555, -16.754383, 0.97203827, -39.482555, 47.995617, 0.97203827, 48.017445)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 4, 2), PackedInt32Array(2, 4, 5), PackedInt32Array(8, 7, 6), PackedInt32Array(6, 9, 8), PackedInt32Array(9, 6, 10), PackedInt32Array(10, 6, 11), PackedInt32Array(10, 11, 5), PackedInt32Array(5, 4, 10)]
 sample_partition_type = 2
 geometry_collision_mask = 4294967294
+agent_radius = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rduss"]
 vertex_color_use_as_albedo = true
@@ -63,6 +64,10 @@ use_collision = true
 collision_mask = 7
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_12dqu")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSG/NavigationRegion3D" unique_id=1577180109]
+transform = Transform3D(-4.261699, 0, 0, 0, -2.3576195, 0, 0, 0, -8.863968, -19.276287, 1.6807766, -46.05057)
+use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSG" unique_id=900821589]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.222757, 1.4544873, 0)
