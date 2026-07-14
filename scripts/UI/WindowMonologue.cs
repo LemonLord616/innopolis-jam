@@ -5,6 +5,7 @@ using Godot;
 public partial class WindowMonologue : Control
 {
 	[Export] private MonoSelectorData data;
+	[Export] private Spawner spawner;
 	[Export] private NinePatchRect rect;
 	[Export] private Godot.Label name;
 	[Export] private Godot.Label phrase;
@@ -31,9 +32,15 @@ public partial class WindowMonologue : Control
 
 	private IEnumerator VisibleUpdate()
 	{
+		if (spawner == null)
+		{
+			_visible?.Kill();
+			yield return null;
+		}
+
 		while (true)
 		{
-
+			yield return Co.WaitUntil(spawner.IsInstanceBW);
 			yield return Co.Wait(data.InVisibleDuration);
             SetPhrase();
             rect.Visible = true;

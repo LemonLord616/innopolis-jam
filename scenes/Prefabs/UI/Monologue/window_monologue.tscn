@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://5unniweep1wx"]
 
-[ext_resource type="Script" uid="uid://c1vb1py6lbrmy" path="res://scenes/Prefabs/UI/Monologue/WindowMonologue.cs" id="1_tws23"]
+[ext_resource type="Script" uid="uid://c1vb1py6lbrmy" path="res://scripts/UI/WindowMonologue.cs" id="1_tws23"]
 [ext_resource type="Resource" uid="uid://sycmcgmhdolt" path="res://resources/Monologue/MonoSelector.tres" id="2_tws23"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ejdoq"]
