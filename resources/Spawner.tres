@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpawnerData" format=3 uid="uid://i3bbx68j6qio"]
+
+[ext_resource type="Resource" uid="uid://bwukaneyijkft" path="res://resources/NPC/BookWalker/BookWalkerData.tres" id="1_p45a3"]
+[ext_resource type="Script" uid="uid://bp8358ghrpt7o" path="res://scripts/ReadOnly/SpawnerData.cs" id="1_sfwhy"]
+
+[resource]
+script = ExtResource("1_sfwhy")
+BookWalkerData = ExtResource("1_p45a3")
+metadata/_custom_type_script = "uid://bp8358ghrpt7o"

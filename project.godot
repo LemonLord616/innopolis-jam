@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Slaboumie"
-run/main_scene="uid://dgcbnplm1mekj"
+run/main_scene="uid://b4xeo4fsuwutc"
 config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GlobalSettings="*res://global/global_settings.gd"
+CoroutineManager="*uid://144aykfua63p"
 
 [display]
 
@@ -30,7 +31,7 @@ project/assembly_name="Slaboumie"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_vim/plugin.cfg")
+enabled=PackedStringArray("res://addons/HCoroutines/plugin.cfg")
 
 [input]
 
@@ -143,6 +144,7 @@ gp_item_secondary={
 [layer_names]
 
 3d_physics/layer_1="World"
+3d_navigation/layer_1="ground"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="NPC"
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://5unniweep1wx"]
 
-[ext_resource type="Script" uid="uid://c1vb1py6lbrmy" path="res://scenes/ui/Monologue/WindowMonologue.cs" id="1_tws23"]
+[ext_resource type="Script" uid="uid://c1vb1py6lbrmy" path="res://scripts/UI/WindowMonologue.cs" id="1_tws23"]
 [ext_resource type="Resource" uid="uid://sycmcgmhdolt" path="res://resources/Monologue/MonoSelector.tres" id="2_tws23"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_ejdoq"]
@@ -9,7 +9,7 @@
 
 [sub_resource type="FontVariation" id="FontVariation_6gmwo"]
 
-[node name="WindowMonologue" type="Control" unique_id=764239337 node_paths=PackedStringArray("timer", "rect", "name", "phrase")]
+[node name="WindowMonologue" type="Control" unique_id=764239337 node_paths=PackedStringArray("rect", "name", "phrase")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,7 +18,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tws23")
 data = ExtResource("2_tws23")
-timer = NodePath("Timer")
 rect = NodePath("Panel")
 name = NodePath("Panel/NameContainer/NameLabel")
 phrase = NodePath("Panel/PhraseContainer/PhraseLabel")
@@ -75,5 +74,3 @@ layout_mode = 2
 text = "Время слов"
 autowrap_mode = 1
 text_direction = 1
-
-[node name="Timer" type="Timer" parent="." unique_id=1200031376]

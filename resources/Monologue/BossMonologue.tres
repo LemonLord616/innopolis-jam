@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MonologueData" format=3 uid="uid://dpchm12hc2a4y"]
 
-[ext_resource type="Script" uid="uid://040ggxyeajgj" path="res://resources/Monologue/MonologueData.cs" id="1_b8vd0"]
+[ext_resource type="Script" uid="uid://040ggxyeajgj" path="res://scripts/ReadOnly/MonologueData.cs" id="1_b8vd0"]
 
 [resource]
 script = ExtResource("1_b8vd0")
