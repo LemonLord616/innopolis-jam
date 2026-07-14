@@ -1,7 +1,8 @@
 using System;
 using Godot;
 
-public partial class Stats : Node
+[GlobalClass]
+public partial class Stats : Resource
 {
     public struct StatsConfig
     {

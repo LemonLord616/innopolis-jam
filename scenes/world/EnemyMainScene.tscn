@@ -106,7 +106,7 @@ transform = Transform3D(0.6738191, 0.45151806, -0.5848925, 0, 0.79157585, 0.6110
 transform = Transform3D(-0.119725674, -0.60667545, 0.78588194, 2.2020826e-08, 0.79157573, 0.61107093, -0.992807, 0.073161095, -0.09477213, 7.4876423, 4.6100206, 5.748512)
 
 [node name="Player" parent="." unique_id=1694024088 instance=ExtResource("8_7wh7l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6978006, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2005247673]
 environment = SubResource("Environment_lsyt0")
