@@ -9,6 +9,7 @@ public partial class Stats : Resource
         public float health;
         public float maxHealth;
         public float speed;
+        public float acceleration;
     }
 
     public event Action OnDamageEv;
@@ -19,6 +20,7 @@ public partial class Stats : Resource
     [Export] public float CurentHealth {get; private set;}
     [Export] public float MaxHealth { get; private set; }
     [Export] public float Speed { get; private set;}
+    [Export] public float Acceleration { get; private set;}
     
     public bool IsAlive => CurentHealth > 0f;
 
@@ -27,6 +29,7 @@ public partial class Stats : Resource
         CurentHealth = config.health;
         MaxHealth = config.maxHealth;
         Speed = config.speed;
+        Acceleration = config.acceleration;
     }
 
     public void SetHealt(float addHealt)

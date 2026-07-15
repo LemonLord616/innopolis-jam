@@ -42,7 +42,8 @@ public partial class Spawner : Node
         {
             health = data.BookWalkerData.CurentHealth,
             maxHealth = data.BookWalkerData.MaxHealth,
-            speed = data.BookWalkerData.Speed
+            speed = data.BookWalkerData.Speed,
+            acceleration = data.BookWalkerData.Acceleration
         },
         routes);
         GetTree().CurrentScene.AddChild(_ref);

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dw8q6o8jy4mf5" path="res://scripts/Boss/BookWalker.cs" id="1_qbcu3"]
 [ext_resource type="Script" uid="uid://dikp65783mpd6" path="res://scripts/Boss/Stats.cs" id="2_l6b24"]
+[ext_resource type="PackedScene" uid="uid://cyspfc6b56dma" path="res://scenes/Prefabs/Boss/BWMesh.tscn" id="3_xxawq"]
 
 [sub_resource type="Resource" id="Resource_ka5ck"]
 resource_local_to_scene = true
@@ -10,31 +11,24 @@ metadata/_custom_type_script = "uid://dikp65783mpd6"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6gmwo"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ejdoq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejdoq"]
-albedo_color = Color(0.9607843, 0, 0, 1)
-
-[node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "routes")]
+[node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "bWMesh", "routes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10000, -10000, -10000)
 script = ExtResource("1_qbcu3")
 agent = NodePath("NavigationAgent3D")
+bWMesh = NodePath("Mesh")
 Stats = SubResource("Resource_ka5ck")
 routes = []
 
 [node name="Scripts" type="Node" parent="." unique_id=306525816]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1617009930]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.2, 0)
 shape = SubResource("CapsuleShape3D_6gmwo")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=480009024]
-mesh = SubResource("CapsuleMesh_ejdoq")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=358847407]
 path_desired_distance = 2.0
 debug_enabled = true
 debug_path_custom_color = Color(0, 1, 0, 1)
 
-[node name="Forward" type="CSGBox3D" parent="." unique_id=1438161694]
-transform = Transform3D(0.14674294, 0, 0, 0, 0.17275071, 0, 0, 0, 1.2868491, 0, 0, 1.1012181)
-material = SubResource("StandardMaterial3D_ejdoq")
+[node name="Mesh" parent="." unique_id=1684036215 instance=ExtResource("3_xxawq")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.5, 0)
