@@ -1,6 +1,7 @@
 extends Node
+class_name GlobalSettings
 
 enum ScopeMode { HOLD, TOGGLE }
 
-var consumable_interruptible := true
-var scope_mode := ScopeMode.TOGGLE
+static var consumable_interruptible := true
+static var scope_mode := ScopeMode.TOGGLE

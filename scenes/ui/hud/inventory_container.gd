@@ -22,8 +22,8 @@ func _build_slots(inventory: PlayerInventoryResource) -> void:
 		slot.update_image(item)
 		slot.update_number(i)
 
-func _update_selected(selector: PlayerInventorySelectorComponent) -> void:
-	var i = selector.get_selected_slot()
+func _update_selected(inventory: PlayerInventoryResource) -> void:
+	var i = inventory.selected_slot
 	if i >= _slots.size() or i < 0:
 		return
 	for slot in _slots:

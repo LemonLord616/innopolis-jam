@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MeleeHands" format=3 uid="uid://c3elv0oto8fl3"]
+
+[ext_resource type="Script" uid="uid://b15lfi5lmjpxd" path="res://resources/items/weapons/hands.gd" id="1_btu07"]
+
+[resource]
+script = ExtResource("1_btu07")
+damage = 10.0
+attack_anim_name = &"attack"
+name = &"hands "
+anim_library_name = &"hands"
+idle_anim_name = &"idle"
+metadata/_custom_type_script = "uid://b15lfi5lmjpxd"

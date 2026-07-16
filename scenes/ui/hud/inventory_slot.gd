@@ -16,11 +16,9 @@ func _ready() -> void:
 func update_image(item: ItemManager.Item) -> void:
 	var item_res: ItemResource = ItemManager.item_resource.get(item)
 	if item_res == null:
+		item_image.texture = null
 		return
 	var texture: Texture2D = item_res.image_texture
-	if texture == null:
-		Logging.warning(self, "texture is null")
-		return
 	item_image.texture = texture
 
 func update_number(i: int) -> void:

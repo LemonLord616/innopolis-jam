@@ -3,22 +3,12 @@ class_name ItemManager
 
 enum Item {
 	NOITEM,
-	PLACEHOLDER,
-	SWORD,
-	BOW,
-	PISTOL,
-	MACHINEGUN,
-	HEALTH_POTION
+	INK_SCYTHE,
 }
 
 static var item_resource: Dictionary[Item, ItemResource] = {
-	Item.NOITEM: preload("res://resources/items/data/noitem.tres") as ItemResource,
-	Item.PLACEHOLDER: preload("res://resources/items/data/placeholder.tres") as ItemResource,
-	Item.SWORD: preload("res://resources/items/data/sword.tres") as ItemResource,
-	Item.BOW: preload("res://resources/items/data/bow.tres") as ItemResource,
-	Item.PISTOL: preload("res://resources/items/data/pistol.tres") as ItemResource,
-	Item.MACHINEGUN: preload("res://resources/items/data/machine_gun.tres") as ItemResource,
-	Item.HEALTH_POTION: preload("res://resources/items/data/health_potion.tres") as ItemResource
+	Item.NOITEM: preload("res://resources/items/data/hands.tres") as MeleeHands,
+	Item.INK_SCYTHE: preload("res://resources/items/data/ink_scythe.tres") as InkScythe,
 }
 
 static func item_name(item: ItemManager.Item) -> String:

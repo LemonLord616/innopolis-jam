@@ -3,8 +3,7 @@ extends Node
 class_name State
 
 
-signal entered(state: State) # self
-signal exited(state: State) # self
+var active := false
 
 signal switch_to_state(from: State, to: State)
 signal enter_state(state: State)
@@ -21,21 +20,19 @@ func _ready() -> void:
 	set_process_unhandled_input(false)
 	set_process_unhandled_key_input(false)
 
-func _enter() -> bool:
+func _enter() -> void:
+	active = true
 	set_process(true)
 	set_physics_process(true)
 	enter()
 	Logging.debug(self, "entered")
-	entered.emit(self)
-	return true
 
-func _exit() -> bool:
+func _exit() -> void:
+	active = false
 	set_process(false)
 	set_physics_process(false)
 	exit()
 	Logging.debug(self, "exited")
-	exited.emit(self)
-	return true
 
 @abstract
 func enter() -> void

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cu4ndb84npkqd" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_metallic.png" id="5_qtxrr"]
 [ext_resource type="Texture2D" uid="uid://5f12gg3h1sxj" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_normal-ogl.png" id="6_asjun"]
 [ext_resource type="Texture2D" uid="uid://cng3sm4p8wgv7" path="res://assets/eroded-layered-rockface1-bl/eroded-layered-rockface_roughness.png" id="7_q3b5m"]
-[ext_resource type="PackedScene" uid="uid://b82o044wvjc7d" path="res://scenes/objects/player/player.tscn" id="8_7wh7l"]
+[ext_resource type="PackedScene" uid="uid://b82o044wvjc7d" path="res://scenes/player/player.tscn" id="8_7wh7l"]
 [ext_resource type="PackedScene" uid="uid://d2w4gwu5h6h5y" path="res://scenes/ui/hud/hud.tscn" id="9_infyu"]
 [ext_resource type="PackedScene" uid="uid://5unniweep1wx" path="res://scenes/Prefabs/UI/Monologue/window_monologue.tscn" id="10_4ukq5"]
 [ext_resource type="Texture2D" uid="uid://d4gpjmga8bjfd" path="res://assets/skybox/blue_nebulae_1.png" id="11_nu1s8"]

@@ -18,38 +18,34 @@ func _on_switch_to_states(from: State, to: Array[State]) -> void:
 	_on_enter_states(to)
 
 func _on_enter_state(state: State) -> void:
-	state.entered.connect(_on_state_entered)
-	state._enter()
-	state.entered.disconnect(_on_state_entered)
-
-func _on_enter_states(states: Array[State]) -> void:
-	for state in states:
-		_on_enter_state(state)
-
-func _on_state_entered(state: State) -> void:
-	# Logging.debug(self, "entered: " + state.name)
+	if state.active:
+		return
 	state.switch_to_state.connect(_on_switch_to_state)
 	state.switch_to_states.connect(_on_switch_to_states)
 	state.enter_state.connect(_on_enter_state)
 	state.enter_states.connect(_on_enter_states)
 	state.exit_state.connect(_on_exit_state)
 	state.exit_states.connect(_on_exit_states)
+	state._enter()
+	# Logging.debug(self, "entered: " + state.name)
+
+func _on_enter_states(states: Array[State]) -> void:
+	for state in states:
+		_on_enter_state(state)
 
 
 func _on_exit_state(state: State) -> void:
-	state.exited.connect(_on_state_exited)
-	state._exit()
-	state.exited.disconnect(_on_state_exited)
-
-func _on_exit_states(states: Array[State]) -> void:
-	for state in states:
-		_on_exit_state(state)
-
-func _on_state_exited(state: State) -> void:
-	# Logging.debug(self, "exited: " + state.name)
+	if not state.active:
+		return
 	state.switch_to_state.disconnect(_on_switch_to_state)
 	state.switch_to_states.disconnect(_on_switch_to_states)
 	state.enter_state.disconnect(_on_enter_state)
 	state.enter_states.disconnect(_on_enter_states)
 	state.exit_state.disconnect(_on_exit_state)
 	state.exit_states.disconnect(_on_exit_states)
+	state._exit()
+	# Logging.debug(self, "exited: " + state.name)
+
+func _on_exit_states(states: Array[State]) -> void:
+	for state in states:
+		_on_exit_state(state)
