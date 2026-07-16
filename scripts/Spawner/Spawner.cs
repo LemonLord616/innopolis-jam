@@ -5,6 +5,7 @@ using Godot;
 public partial class Spawner : Node
 {
     [Export] private SpawnerData data;
+    [Export] private CharacterBody3D playerNode;
     [Export] private Marker3D spawnBWPos;
     [Export] private Route[] routes;
 
@@ -43,9 +44,9 @@ public partial class Spawner : Node
             health = data.BookWalkerData.CurentHealth,
             maxHealth = data.BookWalkerData.MaxHealth,
             speed = data.BookWalkerData.Speed,
-            acceleration = data.BookWalkerData.Acceleration
+            speedModifier = data.BookWalkerData.SpeedModifier
         },
-        routes);
+        routes, playerNode);
         GetTree().CurrentScene.AddChild(_ref);
         _ref.GlobalPosition = spawnBWPos.GlobalPosition;
     }

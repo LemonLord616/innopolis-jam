@@ -121,9 +121,10 @@ spawner = NodePath("../../Scope/Spawner")
 
 [node name="Scope" type="Node" parent="." unique_id=435654848]
 
-[node name="Spawner" type="Node" parent="Scope" unique_id=1939064433 node_paths=PackedStringArray("spawnBWPos", "routes")]
+[node name="Spawner" type="Node" parent="Scope" unique_id=1939064433 node_paths=PackedStringArray("playerNode", "spawnBWPos", "routes")]
 script = ExtResource("12_fmdjg")
 data = ExtResource("13_fmdjg")
+playerNode = NodePath("../../Player")
 spawnBWPos = NodePath("Points/BossPoints/SpawnBWMarker3D")
 routes = [NodePath("Points/BossPoints/Patrol Route")]
 

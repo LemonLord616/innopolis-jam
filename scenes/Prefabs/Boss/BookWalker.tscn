@@ -9,24 +9,51 @@ resource_local_to_scene = true
 script = ExtResource("2_l6b24")
 metadata/_custom_type_script = "uid://dikp65783mpd6"
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_xxawq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ogt05"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6gmwo"]
 
-[node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "bWMesh", "routes")]
+[node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "bWMesh", "areas", "routes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10000, -10000, -10000)
 script = ExtResource("1_qbcu3")
 agent = NodePath("NavigationAgent3D")
 bWMesh = NodePath("Mesh")
 Stats = SubResource("Resource_ka5ck")
+areas = [NodePath("Areas/Melee/Area3D"), NodePath("Areas/Range/Area3D")]
 routes = []
 
-[node name="Scripts" type="Node" parent="." unique_id=306525816]
+[node name="Areas" type="Node" parent="." unique_id=306525816]
+
+[node name="Melee" type="Node" parent="Areas" unique_id=1016385317]
+
+[node name="Area3D" type="Area3D" parent="Areas/Melee" unique_id=1932273929]
+transform = Transform3D(7.8, 0, 0, 0, 7.8, 0, 0, 0, 7.8, -10000, -10000, -10000)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/Melee/Area3D" unique_id=522470076]
+shape = SubResource("SphereShape3D_xxawq")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="Range" type="Node" parent="Areas" unique_id=158027292]
+
+[node name="Area3D" type="Area3D" parent="Areas/Range" unique_id=754894110]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -10000, -10000, -10000)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Areas/Range/Area3D" unique_id=279860985]
+shape = SubResource("SphereShape3D_ogt05")
+debug_color = Color(0, 0, 1, 0.41960785)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1617009930]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.2, 0)
 shape = SubResource("CapsuleShape3D_6gmwo")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=358847407]
-path_desired_distance = 2.0
+path_desired_distance = 0.5
 debug_enabled = true
 debug_path_custom_color = Color(0, 1, 0, 1)
 
