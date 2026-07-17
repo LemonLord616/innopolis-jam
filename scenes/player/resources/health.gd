@@ -28,9 +28,3 @@ func _on_hp_change(value: float) -> void:
 	hp = clampf(value, 0.0, max_hp)
 	hp_changed.emit(hp, max_hp)
 	_dead = hp <= 0.0
-
-func reduce(amount: float) -> void:
-	hp -= amount
-
-func increase(amount: float) -> void:
-	hp += amount

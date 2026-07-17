@@ -9,7 +9,8 @@ public partial class Damage : Node
         if (sc != null && sc.GetGlobalName().ToString().GetHashCode() == "Player".GetHashCode())
         {
             GD.Print($"damage {damage}");
-            body.Set("hp",((float)body.Get("hp")) - damage);
+            // body.Set("hp",((float)body.Get("hp")) - damage);
+            body.Call("reduce", damage);
             return;
         }else if (body is BookWalker bookWalker)
         {

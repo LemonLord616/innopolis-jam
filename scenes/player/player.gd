@@ -40,11 +40,6 @@ var on_ground := false
 var in_air := false
 var move := false
 var dash_active := false
-var item_primary_ready := false
-var item_primary_using := false
-var item_secondary_ready := false
-var item_secondary_using := false
-
 
 func _physics_process(delta: float) -> void:
 	velocity += gravity_multiplier * get_gravity() * delta
@@ -53,3 +48,13 @@ func _physics_process(delta: float) -> void:
 
 func _ready() -> void:
 	health.reset.call_deferred()
+
+
+func reduce(amount: float) -> void:
+	health.hp -= amount
+
+func increase(amount: float) -> void:
+	health.hp += amount
+
+func knockback(dir: Vector3, speed: float) -> void:
+	pass
