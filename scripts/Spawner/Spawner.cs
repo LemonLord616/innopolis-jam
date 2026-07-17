@@ -7,6 +7,7 @@ public partial class Spawner : Node
     [Export] private SpawnerData data;
     [Export] private CharacterBody3D playerNode;
     [Export] private Marker3D spawnBWPos;
+    [Export] private Damage damage;
     [Export] private Route[] routes;
 
     public BookWalker GetBookWalker => _ref;
@@ -46,7 +47,7 @@ public partial class Spawner : Node
             speed = data.BookWalkerData.Speed,
             speedModifier = data.BookWalkerData.SpeedModifier
         },
-        routes, playerNode);
+        routes, playerNode, damage);
         GetTree().CurrentScene.AddChild(_ref);
         _ref.GlobalPosition = spawnBWPos.GlobalPosition;
     }

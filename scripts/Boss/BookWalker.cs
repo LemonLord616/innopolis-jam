@@ -18,39 +18,47 @@ public partial class BookWalker : CharacterBody3D
     private Coroutine _readRoute;
 
     private StateMachine _sm;
+    private Damage _damage;
 
-    public void Init(Stats.StatsConfig config, Route[] routes, CharacterBody3D player)
+    public void Init(Stats.StatsConfig config, Route[] routes, CharacterBody3D player, Damage damage)
     {
         Stats.Init(config);
         this.routes = routes;
         _player = player;
         _target = _player;
-        //_readRoute = Co.Run(NextPoint);
+        _damage = damage;
+        bWMesh.OnHitEv += () => _damage.SetDamage(_player, 10f);
         _sm = new StateMachine();
 
         //states
-        _sm.AddState("Idle",onEnter=> PlayeAnimation(), onLogic => ActiveGravity((float)GetPhysicsProcessDeltaTime()));
-        _sm.AddState("Walk", onEnter => PlayeAnimation(), onLogic => Move((float)GetPhysicsProcessDeltaTime()));
-        _sm.AddState("Run",onEnter => PlayeAnimation(), onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier));
-        _sm.AddState("MeleeAttack", onEnter => PlayeAnimation());
-        _sm.AddState("RangeAttack",onEnter => PlayeAnimation());
-        _sm.AddState("Damage",onEnter => PlayeAnimation());
-        _sm.AddState("Spell_Anger",onEnter => PlayeAnimation());
-        _sm.AddState("Spell_FlyingProjectiles",onEnter => PlayeAnimation());
-        _sm.AddState("Spell_HailBooks",onEnter => PlayeAnimation());
-        _sm.AddState("Dead", onEnter => PlayeAnimation());
+        _sm.AddState(nameof(AnimationKeys.Idle), onEnter=> PlayAnimation(), onLogic =>
+        {
+            var fdelta = (float)GetPhysicsProcessDeltaTime();
+            if (_player != null)
+                Rotate(_player.GlobalPosition,fdelta);
+            UseGravity(fdelta);
+        });
+        _sm.AddState(nameof(AnimationKeys.Walk), onEnter => PlayAnimation(), onLogic => Move((float)GetPhysicsProcessDeltaTime()));
+        _sm.AddState(nameof(AnimationKeys.Run), onEnter => PlayAnimation(), onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier));
+        _sm.AddState(nameof(AnimationKeys.MeleeAttack), onEnter => PlayAnimation());
+        _sm.AddState(nameof(AnimationKeys.RangeAttack), onEnter => PlayAnimation());
+        _sm.AddState(nameof(AnimationKeys.Damage), onEnter => PlayAnimation());
+        _sm.AddState(nameof(AnimationKeys.Spell_Anger), onEnter => PlayAnimation());
+        _sm.AddState(nameof(AnimationKeys.Spell_FlyingProjectiles), onEnter => PlayAnimation());
+        _sm.AddState(nameof(AnimationKeys.Spell_HailBooks), onEnter => PlayAnimation());
+        _sm.AddState(nameof(AnimationKeys.Dead), onEnter => PlayAnimation());
 
         //transitions
-        _sm.AddTransitionFromAny(new Transition("","Dead", condition => !Stats.IsAlive));
-        _sm.AddTransition("Idle","MeleeAttack", condition => IsReach(_player.GlobalPosition, GetDistanceBetweenTarget(areas[0].GlobalPosition)));
-        _sm.AddTransition("MeleeAttack","MeleeAttack", condition => IsReach(_player.GlobalPosition, GetDistanceBetweenTarget(areas[0].GlobalPosition)) && IsFinishAnimation("MeleeAttack"));
-        _sm.AddTransition("MeleeAttack","Idle", condition => !IsReach(_player.GlobalPosition, GetDistanceBetweenTarget(areas[0].GlobalPosition)) && IsFinishAnimation("MeleeAttack"));
-        _sm.AddTransition("Idle","Walk", condition => _target != null && IsFinishAnimation("MelleeAttack") && !IsReach(_player.GlobalPosition,GetDistanceBetweenTarget(areas[0].GlobalPosition) * 3));
-        _sm.AddTransition("Walk","Run", condition => _target != null  && IsFinishAnimation("MelleeAttack") && !IsReach(_player.GlobalPosition,GetDistanceBetweenTarget(areas[1].GlobalPosition) * 4));
-        _sm.AddTransition("Walk","Idle", condition => _target == null || IsReach(_player.GlobalPosition,GetDistanceBetweenTarget(areas[0].GlobalPosition)));
-        _sm.AddTransition("Run","Walk", condition => _target == null || IsReach(_player.GlobalPosition,GetDistanceBetweenTarget(areas[1].GlobalPosition) * 4));
-
-        _sm.SetStartState("Idle");
+        _sm.AddTransitionFromAny(new Transition(null, nameof(AnimationKeys.Dead), condition => !Stats.IsAlive));
+        _sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.MeleeAttack), condition => IsWithinDistance(_target.GlobalPosition,areas[0].Scale.Z));
+        _sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.Walk), condition => !IsWithinDistance(_target.GlobalPosition,areas[0].Scale.Z));
+        _sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Run), condition => !IsWithinDistance(_target.GlobalPosition,areas[1].Scale.Z));
+        _sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Idle), condition => IsWithinDistance(_target.GlobalPosition,areas[0].Scale.Z));
+        _sm.AddTransition(nameof(AnimationKeys.Run), nameof(AnimationKeys.Walk), condition => IsWithinDistance(_target.GlobalPosition,areas[1].Scale.Z));
+        _sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(AnimationKeys.MeleeAttack), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)) && IsWithinDistance(_target.GlobalPosition,areas[0].Scale.Z));
+        _sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(AnimationKeys.Idle), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)) && !IsWithinDistance(_target.GlobalPosition,areas[0].Scale.Z));
+        
+        _sm.SetStartState(nameof(AnimationKeys.Idle));
         _sm.Init();
     }
 
@@ -69,48 +77,24 @@ public partial class BookWalker : CharacterBody3D
         _readRoute?.Kill();
     }
 
-    private void PlayeAnimation()
+    private bool IsWithinDistance(Vector3 target, float distance)
     {
-        bWMesh.AnimationPlayer.Play(_sm.ActiveStateName, 0f);
+        return GlobalPosition.DistanceTo(target) < distance;
     }
 
     private bool IsFinishAnimation(string name)
     {
-        return bWMesh.AnimationPlayer.CurrentAnimation.GetHashCode() != name.GetHashCode() || !bWMesh.AnimationPlayer.IsPlaying();
+        return !bWMesh.AnimationPlayer.IsPlaying() && bWMesh.AnimationPlayer.CurrentAnimation.GetHashCode() != name.GetHashCode();
     }
 
-    private bool IsCurrentState(string name)
-    {
-        return _sm.ActiveStateName.GetHashCode() == name.GetHashCode();
-    }
     private bool IsFinish()
     {
         return _target.GlobalPosition.DistanceTo(GlobalPosition) < agent.PathDesiredDistance;
     }
 
-    private bool IsReach(Vector3 target, float distance)
+    private void PlayAnimation()
     {
-        return target.DistanceTo(GlobalPosition) < distance;
-    }
-
-    private float GetDistanceBetweenTarget(Vector3 target)
-    {
-        return target.DirectionTo(GlobalPosition).Length();
-    }
-
-    private IEnumerator NextPoint()
-    {
-        while (true)
-        {
-            foreach(Marker3D point in routes[0].GetPoints())
-            {
-                _target = point;
-                agent.TargetPosition = _target.GlobalPosition;
-                yield return Co.WaitUntil(IsFinish);
-                _target = null;
-                yield return Co.Wait(5f);
-            }
-        }
+        bWMesh.AnimationPlayer.Play(_sm.ActiveStateName, 0f);
     }
 
     private void Rotate(Vector3 target, double delta)
@@ -128,13 +112,13 @@ public partial class BookWalker : CharacterBody3D
         }
     }
 
-    private void ActiveGravity(float delta)
+    private void UseGravity(float delta)
     {
         var nextVelocity = Velocity;
-
+        var direction = Stats.Speed * Stats.SpeedModifier * delta;
         nextVelocity.Y = -Gravity;
-        nextVelocity.X = Mathf.MoveToward(Velocity.X, 0.0f, Stats.Speed * Stats.SpeedModifier * delta);
-        nextVelocity.Z = Mathf.MoveToward(Velocity.Z, 0.0f, Stats.Speed * Stats.SpeedModifier * delta);
+        nextVelocity.X = Mathf.MoveToward(Velocity.X, 0.0f, direction);
+        nextVelocity.Z = Mathf.MoveToward(Velocity.Z, 0.0f, direction);
         Velocity = nextVelocity;
         MoveAndSlide();
     }
@@ -143,11 +127,12 @@ public partial class BookWalker : CharacterBody3D
     {
         if (!IsOnFloor() || agent.IsNavigationFinished())
         {
-            ActiveGravity(delta);
+            UseGravity(delta);
             return;
         }
 
         var nextVelocity = Velocity;
+        
         nextVelocity.Y = nextVelocity.Y - Gravity * delta;
         
         var nextPathPosition = agent.GetNextPathPosition();
@@ -157,8 +142,6 @@ public partial class BookWalker : CharacterBody3D
         direction = direction.Normalized();
 
         var targetVelocity = direction * (Stats.Speed * modifier);
-        // nextVelocity.X = Mathf.MoveToward(Velocity.X, targetVelocity.X, acceleration * delta);
-        // nextVelocity.Z = Mathf.MoveToward(Velocity.Z, targetVelocity.Z, acceleration * delta);
         Velocity = targetVelocity;
         MoveAndSlide();
     }

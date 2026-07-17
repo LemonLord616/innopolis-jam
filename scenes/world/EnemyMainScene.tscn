@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://pbjkr1finl12" path="res://scripts/Spawner/Spawner.cs" id="12_fmdjg"]
 [ext_resource type="Resource" uid="uid://i3bbx68j6qio" path="res://resources/Spawner.tres" id="13_fmdjg"]
 [ext_resource type="Script" uid="uid://cct13jkoi3tof" path="res://scripts/Routes/Route.cs" id="14_jwhjk"]
+[ext_resource type="Script" uid="uid://dvaibtk17ngne" path="res://scripts/Boss/Damage.cs" id="15_qtxrr"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rd4tg"]
 vertices = PackedVector3Array(-23.504383, 0.97203827, -41.232555, -23.504383, 0.97203827, -48.232555, -48.004383, 0.97203827, -48.232555, -23.004383, 0.97203827, -40.232555, -21.754383, 0.97203827, -39.482555, -48.004383, 0.97203827, 48.017445, 47.995617, 0.97203827, -48.232555, -15.004383, 0.97203827, -48.232555, -15.004383, 0.97203827, -41.232555, -15.504383, 0.97203827, -40.232555, -16.754383, 0.97203827, -39.482555, 47.995617, 0.97203827, 48.017445)
@@ -121,11 +122,12 @@ spawner = NodePath("../../Scope/Spawner")
 
 [node name="Scope" type="Node" parent="." unique_id=435654848]
 
-[node name="Spawner" type="Node" parent="Scope" unique_id=1939064433 node_paths=PackedStringArray("playerNode", "spawnBWPos", "routes")]
+[node name="Spawner" type="Node" parent="Scope" unique_id=1939064433 node_paths=PackedStringArray("playerNode", "spawnBWPos", "damage", "routes")]
 script = ExtResource("12_fmdjg")
 data = ExtResource("13_fmdjg")
 playerNode = NodePath("../../Player")
 spawnBWPos = NodePath("Points/BossPoints/SpawnBWMarker3D")
+damage = NodePath("../Damage")
 routes = [NodePath("Points/BossPoints/Patrol Route")]
 
 [node name="Points" type="Node" parent="Scope/Spawner" unique_id=1512503111]
@@ -150,3 +152,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, 45)
 
 [node name="Marker3D4" type="Marker3D" parent="Scope/Spawner/Points/BossPoints/Patrol Route" unique_id=1512783873]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, -45)
+
+[node name="Damage" type="Node" parent="Scope" unique_id=152218869]
+script = ExtResource("15_qtxrr")
