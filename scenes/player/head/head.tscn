@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxrodvk5x4n23"]
 
 [ext_resource type="Script" uid="uid://dijd83a5v35dk" path="res://scenes/player/head/head.gd" id="1_p0fbf"]
-[ext_resource type="BoxMesh" uid="uid://bp2g54i1qwu52" path="res://assets/placeholder.tres" id="2_fbu7h"]
+[ext_resource type="ArrayMesh" uid="uid://bw2idfigj6ayp" path="res://assets/ink_pen/Ink_Pen_Cylinder_005.res" id="2_fbu7h"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_yhr7m"]
 size = Vector3(0.2, 0.2, 1)
@@ -86,7 +86,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Camera3D/Item:position")
+tracks/6/path = NodePath("Camera3D/ItemMesh:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -98,7 +98,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Camera3D/Item:rotation")
+tracks/7/path = NodePath("Camera3D/ItemMesh:rotation")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -302,26 +302,26 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Camera3D/Item:position")
+tracks/4/path = NodePath("Camera3D/ItemMesh:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.7, 0.85, 1, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.110732496, -0.1923837, -0.835531), Vector3(0.29752368, -0.13976285, -0.7835825), Vector3(0.29752368, -0.13976285, -1.0593301), Vector3(-0.46374232, -0.07863334, -0.9675523), Vector3(0.110732496, -0.1923837, -0.835531)]
+"values": [Vector3(-0.8045177, -0.30550468, -0.49847108), Vector3(0.29752368, -0.13976285, -0.7835825), Vector3(0.29752368, -0.13976285, -1.0593301), Vector3(-0.46374232, -0.07863334, -0.9675523), Vector3(0.110732496, -0.1923837, -0.835531)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Camera3D/Item:rotation")
+tracks/5/path = NodePath("Camera3D/ItemMesh:rotation")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.7, 0.85, 1, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.20285176, -1.5207684, -0.208629), Vector3(0.7708261, -2.134224, -0.67685044), Vector3(0.7762958, -0.87807, 0.33710888), Vector3(0.33023986, 0.38125226, -0.014861825), Vector3(0.20285176, -1.5207684, -0.208629)]
+"values": [Vector3(-1.3929266, -1.0082921, -0.27519152), Vector3(0.7708261, -2.134224, -0.67685044), Vector3(0.7762958, -0.87807, 0.33710888), Vector3(0.33023986, 0.38125226, -0.014861825), Vector3(0.20285176, -1.5207684, -0.208629)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -402,7 +402,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Camera3D/Item:position")
+tracks/2/path = NodePath("Camera3D/ItemMesh:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -414,7 +414,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Camera3D/Item:rotation")
+tracks/3/path = NodePath("Camera3D/ItemMesh:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -434,24 +434,24 @@ _data = {
 script = ExtResource("1_p0fbf")
 disabled = true
 camera = NodePath("Camera3D")
-item_mesh = NodePath("Camera3D/Item")
+item_mesh = NodePath("Camera3D/ItemMesh")
 animation_player = NodePath("AnimationPlayer")
 metadata/_custom_type_script = "uid://dijd83a5v35dk"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1482762273]
 current = true
 
+[node name="ItemMesh" type="MeshInstance3D" parent="Camera3D" unique_id=384120647]
+transform = Transform3D(0.6675002, 0, 0.05782248, 0, 0.67, 0, -0.05782249, 0, 0.6675001, 0.20567143, -0.2639271, -0.9277909)
+mesh = ExtResource("2_fbu7h")
+
 [node name="Hand1" type="MeshInstance3D" parent="Camera3D" unique_id=407209750]
 transform = Transform3D(0.39837626, 0.89500505, 0.20065524, -0.85668725, 0.4412289, -0.2672157, -0.32769424, -0.06544638, 0.9425145, 0.38936812, -0.3480032, -0.13301289)
 mesh = SubResource("BoxMesh_yhr7m")
 
 [node name="Hand2" type="MeshInstance3D" parent="Camera3D" unique_id=1162761451]
-transform = Transform3D(0.9136632, -0.37427816, -0.15853971, 0.31764948, 0.9008163, -0.296021, 0.25360927, 0.22010346, 0.94193256, -0.12975842, -0.31717527, -0.6028769)
+transform = Transform3D(0.9136632, -0.37427813, -0.15853971, 0.31764948, 0.90081626, -0.296021, 0.25360927, 0.22010344, 0.94193256, -0.12975842, -0.31717527, -0.6028769)
 mesh = SubResource("BoxMesh_yhr7m")
-
-[node name="Item" type="MeshInstance3D" parent="Camera3D" unique_id=384120647]
-transform = Transform3D(0.9962683, 0, 0.086302206, 0, 0.99999994, 0, -0.08630217, 0, 0.99626875, 0.20567143, -0.2639271, -0.9277909)
-mesh = ExtResource("2_fbu7h")
 
 [node name="Area3D" type="Area3D" parent="Camera3D" unique_id=1665331456]
 collision_layer = 0
@@ -462,6 +462,7 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Area3D" unique_id=1057550551]
 transform = Transform3D(0.9832547, 0, 0.18223552, 0, 0.9999996, 0, -0.18223548, 0, 0.9832549, 0.38332713, -0.35199836, -0.25537667)
 shape = SubResource("BoxShape3D_xq1xr")
+debug_color = Color(0.9817372, 0, 0.37255052, 0.41960785)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1592051425]
 libraries/ = SubResource("AnimationLibrary_n5w0a")

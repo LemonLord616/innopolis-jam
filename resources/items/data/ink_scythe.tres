@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dp871q01rp8yw" path="res://resources/items/weapons/ink_scythe.gd" id="1_2msrn"]
 [ext_resource type="Texture2D" uid="uid://clse8ghxmywjt" path="res://assets/placeholder_preview.png" id="1_kn2pg"]
-[ext_resource type="BoxMesh" uid="uid://bp2g54i1qwu52" path="res://assets/placeholder.tres" id="2_iqhup"]
 
 [resource]
 script = ExtResource("1_2msrn")
@@ -10,7 +9,6 @@ damage = null
 attack_anim_name = &"attack"
 name = &"ink_scythe"
 image_texture = ExtResource("1_kn2pg")
-mesh = ExtResource("2_iqhup")
 anim_library_name = &"ink_scythe"
 idle_anim_name = &"idle"
 metadata/_custom_type_script = "uid://dp871q01rp8yw"
