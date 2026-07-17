@@ -71,11 +71,11 @@ public partial class BookWalker : CharacterBody3D
                 agent.TargetPosition = _target.GlobalPosition;
     }
 
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-        _readRoute?.Kill();
-    }
+	public override void _ExitTree()
+	{
+		base._ExitTree();
+		_readRoute?.Kill();
+	}
 
     private bool IsWithinDistance(Vector3 target, float distance)
     {
@@ -87,10 +87,11 @@ public partial class BookWalker : CharacterBody3D
         return !bWMesh.AnimationPlayer.IsPlaying() && bWMesh.AnimationPlayer.CurrentAnimation.GetHashCode() != name.GetHashCode();
     }
 
-    private bool IsFinish()
-    {
-        return _target.GlobalPosition.DistanceTo(GlobalPosition) < agent.PathDesiredDistance;
-    }
+
+	private bool IsFinish()
+	{
+		return _target.GlobalPosition.DistanceTo(GlobalPosition) < agent.PathDesiredDistance;
+	}
 
     private void PlayAnimation()
     {
@@ -101,16 +102,17 @@ public partial class BookWalker : CharacterBody3D
     {
         var direction = target - GlobalPosition;
         direction.Y = 0;
+s
 
-        if (direction != Vector3.Zero)
-        {
-            var targetAngle = Mathf.Atan2(direction.X, direction.Z);
-            var currentRotation = Rotation;
+		if (direction != Vector3.Zero)
+		{
+			var targetAngle = Mathf.Atan2(direction.X, direction.Z);
+			var currentRotation = Rotation;
 
-            currentRotation.Y = Mathf.LerpAngle(currentRotation.Y, targetAngle, Stats.Speed * (float)delta);
-            Rotation = currentRotation;
-        }
-    }
+			currentRotation.Y = Mathf.LerpAngle(currentRotation.Y, targetAngle, Stats.Speed * (float)delta);
+			Rotation = currentRotation;
+		}
+	}
 
     private void UseGravity(float delta)
     {

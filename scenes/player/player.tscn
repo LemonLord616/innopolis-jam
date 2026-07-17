@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://b82o044wvjc7d"]
+
+[ext_resource type="Script" uid="uid://b4lgb0wsbgpod" path="res://scenes/player/player.gd" id="1_1bf4k"]
+[ext_resource type="Script" uid="uid://b7a3bpm51wa2j" path="res://scenes/player/resources/inventory.gd" id="2_ejlqc"]
+[ext_resource type="Script" uid="uid://cnywwym2cxh62" path="res://scenes/player/controller/kb_specific.gd" id="2_g10m2"]
+[ext_resource type="Script" uid="uid://dolmbbocisaab" path="res://scenes/player/controller/player_controller.gd" id="3_rp72t"]
+[ext_resource type="Script" uid="uid://chpf24tkxmynh" path="res://scenes/player/resources/health.gd" id="4_fcs02"]
+[ext_resource type="Script" uid="uid://bq8d58j5ubfn8" path="res://scripts/state_machine.gd" id="6_io36v"]
+[ext_resource type="Script" uid="uid://dhlddrhj6watq" path="res://scenes/player/states/moving_state.gd" id="7_bdcal"]
+[ext_resource type="Script" uid="uid://bb2ugl8k5nl6n" path="res://scenes/player/item_component.gd" id="7_gx1jg"]
+[ext_resource type="Script" uid="uid://bf5mj412yqfpl" path="res://scenes/player/states/dashing_state.gd" id="8_bdcal"]
+[ext_resource type="PackedScene" uid="uid://cxrodvk5x4n23" path="res://scenes/player/head/head.tscn" id="8_ejlqc"]
+[ext_resource type="Script" uid="uid://cirvuditml3jn" path="res://scenes/player/states/on_ground_state.gd" id="13_rp72t"]
+[ext_resource type="Script" uid="uid://dgrdmsbprboc4" path="res://scenes/player/states/in_air_state.gd" id="14_g65c7"]
+[ext_resource type="Script" uid="uid://dm4vdqb0mkpsd" path="res://scenes/player/resources/effects.gd" id="19"]
+
+[sub_resource type="Resource" id="Resource_1y3b8"]
+script = ExtResource("2_ejlqc")
+slots = Array[int]([0, 1, 0, 0])
+metadata/_custom_type_script = "uid://b7a3bpm51wa2j"
+
+[sub_resource type="Resource" id="Resource_effects"]
+script = ExtResource("19")
+
+[sub_resource type="Resource" id="Resource_qip8x"]
+script = ExtResource("4_fcs02")
+max_hp = 100.0
+hp_at_spawn = 90.0
+metadata/_custom_type_script = "uid://chpf24tkxmynh"
+
+[sub_resource type="Curve" id="Curve_85j56"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ejlqc"]
+
+[sub_resource type="Resource" id="Resource_ugbui"]
+script = ExtResource("2_g10m2")
+metadata/_custom_type_script = "uid://cnywwym2cxh62"
+
+[node name="Player" type="CharacterBody3D" unique_id=1694024088 node_paths=PackedStringArray("head", "controller", "dash_cooldown_timer")]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_1bf4k")
+inventory = SubResource("Resource_1y3b8")
+effects = SubResource("Resource_effects")
+health = SubResource("Resource_qip8x")
+head = NodePath("Head")
+controller = NodePath("Controller")
+dash_cooldown_timer = NodePath("StateMachine/DashCooldown")
+dash_direction = 1
+dash_fadeout_curve = SubResource("Curve_85j56")
+metadata/_custom_type_script = "uid://b4lgb0wsbgpod"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1246352582]
+shape = SubResource("CylinderShape3D_ejlqc")
+
+[node name="Controller" type="Node" parent="." unique_id=107547831 node_paths=PackedStringArray("player")]
+script = ExtResource("3_rp72t")
+player = NodePath("..")
+device_specific = SubResource("Resource_ugbui")
+metadata/_custom_type_script = "uid://dolmbbocisaab"
+
+[node name="ItemComponent" type="Node" parent="." unique_id=1080650824 node_paths=PackedStringArray("player")]
+script = ExtResource("7_gx1jg")
+player = NodePath("..")
+metadata/_custom_type_script = "uid://bb2ugl8k5nl6n"
+
+[node name="Head" parent="." unique_id=977084428 node_paths=PackedStringArray("player", "controller") instance=ExtResource("8_ejlqc")]
+disabled = false
+player = NodePath("..")
+controller = NodePath("../Controller")
+
+[node name="StateMachine" type="Node" parent="." unique_id=324249426 node_paths=PackedStringArray("initial_states")]
+script = ExtResource("6_io36v")
+initial_states = [NodePath("MoveState"), NodePath("OnGroundState")]
+metadata/_custom_type_script = "uid://bq8d58j5ubfn8"
+
+[node name="MoveState" type="Node" parent="StateMachine" unique_id=981611903 node_paths=PackedStringArray("player", "dash_state", "dash_cooldown")]
+script = ExtResource("7_bdcal")
+player = NodePath("../..")
+dash_state = NodePath("../DashState")
+dash_cooldown = NodePath("../DashCooldown")
+metadata/_custom_type_script = "uid://dhlddrhj6watq"
+
+[node name="DashState" type="Node" parent="StateMachine" unique_id=196260349 node_paths=PackedStringArray("player", "head", "move_state", "dash_cooldown")]
+script = ExtResource("8_bdcal")
+player = NodePath("../..")
+head = NodePath("../../Head")
+move_state = NodePath("../MoveState")
+dash_cooldown = NodePath("../DashCooldown")
+metadata/_custom_type_script = "uid://bf5mj412yqfpl"
+
+[node name="OnGroundState" type="Node" parent="StateMachine" unique_id=2008629610 node_paths=PackedStringArray("player", "dash_state", "air_state")]
+script = ExtResource("13_rp72t")
+player = NodePath("../..")
+dash_state = NodePath("../DashState")
+air_state = NodePath("../InAirState")
+metadata/_custom_type_script = "uid://cirvuditml3jn"
+
+[node name="InAirState" type="Node" parent="StateMachine" unique_id=435614902 node_paths=PackedStringArray("player", "ground_state")]
+script = ExtResource("14_g65c7")
+player = NodePath("../..")
+ground_state = NodePath("../OnGroundState")
+metadata/_custom_type_script = "uid://dgrdmsbprboc4"
+
+[node name="DashCooldown" type="Timer" parent="StateMachine" unique_id=1017496806]
+process_callback = 0
+one_shot = true

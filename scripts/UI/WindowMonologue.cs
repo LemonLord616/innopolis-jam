@@ -17,7 +17,7 @@ public partial class WindowMonologue : Control
 		_visible = Co.Run(VisibleUpdate);
 	}
 
-    public override void _ExitTree()
+	public override void _ExitTree()
 	{
 		_visible?.Kill();
 	}
@@ -42,12 +42,12 @@ public partial class WindowMonologue : Control
 		{
 			yield return Co.WaitUntil(spawner.IsInstanceBW);
 			yield return Co.Wait(data.InVisibleDuration);
-            SetPhrase();
-            rect.Visible = true;
+			SetPhrase();
+			rect.Visible = true;
 
 			yield return Co.Wait(data.VisibleDuration);
-            
-            rect.Visible = false;
+			
+			rect.Visible = false;
 		}
 	}
 }
