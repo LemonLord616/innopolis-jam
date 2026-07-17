@@ -6,23 +6,38 @@ class_name PlayerDashingState
 @export var move_state: PlayerMovingState
 @export var dash_cooldown: Timer
 
-var _timer: float = 0.0
+var knockback := false
+var knockback_dir := Vector3.ZERO
+var knockback_speed := 0.0
+var _timer := 0.0
 
 func enter() -> void:
+	player.knockbacked.connect(dash)
 	var dir := Vector3.ZERO
-	if player.dash_direction == Player.DashDirection.FACE:
+	var speed := player.dash_speed
+	if knockback:
+		dir = knockback_dir
+		speed = knockback_speed
+	elif player.dash_direction == Player.DashDirection.FACE:
 		dir = head.facing_dir()
+		speed = player.dash_speed
 	else:
 		var input_vec := player.controller.input_vector()
 		var move_dir := Vector3(input_vec.x, 0, input_vec.y)
 		dir = head.rotated_vec(move_dir)
-	var dash_vel := dir * player.dash_speed
+		speed = player.dash_speed
+	print(knockback)
+	dash(dir, speed)
+	player.dash_active = true
+
+func dash(dir: Vector3, speed: float) -> void:
+	var dash_vel := dir * speed
 	player.velocity.x = dash_vel.x
 	player.velocity.z = dash_vel.z
 	_timer = player.dash_duration
-	player.dash_active = true
 
 func exit() -> void:
+	player.knockbacked.disconnect(dash)
 	dash_cooldown.wait_time = player.dash_cooldown_duration
 	dash_cooldown.start()
 	player.dash_active = false

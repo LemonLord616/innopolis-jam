@@ -56,5 +56,6 @@ func reduce(amount: float) -> void:
 func increase(amount: float) -> void:
 	health.hp += amount
 
-func knockback(dir: Vector3, speed: float) -> void:
-	pass
+signal knockbacked(Vector3, float)
+func knockback(dir: Vector3, knock_speed: float) -> void:
+	knockbacked.emit(dir, knock_speed)

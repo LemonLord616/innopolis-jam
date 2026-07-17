@@ -27,7 +27,7 @@ public partial class BookWalker : CharacterBody3D
 		_player = player;
 		_target = _player;
 		_damage = damage;
-		bWMesh.OnHitEv += () => _damage.SetDamage(_player, 10f);
+		bWMesh.OnHitEv += () => _damage.SetDamage(_player, 10f, new KnockbackData(GlobalTransform.Basis.Z, 50f));
 		_sm = new StateMachine();
 
 		//states
@@ -65,7 +65,7 @@ public partial class BookWalker : CharacterBody3D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		GD.Print(_sm.ActiveStateName);
+		// GD.Print(_sm.ActiveStateName);
 		_sm.OnLogic();
 		if (ReferenceEquals(_target, _player))
 				agent.TargetPosition = _target.GlobalPosition;

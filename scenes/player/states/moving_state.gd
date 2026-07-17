@@ -8,10 +8,19 @@ class_name PlayerMovingState
 
 func enter() -> void:
 	player.controller.dash.connect(_on_controller_dash)
+	player.knockbacked.connect(_on_knockback)
 	player.move = true
 func exit() -> void:
 	player.controller.dash.disconnect(_on_controller_dash)
+	player.knockbacked.disconnect(_on_knockback)
 	player.move = false
+
+func _on_knockback(dir: Vector3, speed: float) -> void:
+	dash_state.knockback = true
+	dash_state.knockback_dir = dir
+	dash_state.knockback_speed = speed
+	switch_to_state.emit(self, dash_state)
+	dash_state.knockback = false
 
 func _physics_process(_delta: float) -> void:
 	if player.effects.disable_move:
