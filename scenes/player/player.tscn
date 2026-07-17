@@ -4,7 +4,10 @@
 [ext_resource type="Script" uid="uid://b7a3bpm51wa2j" path="res://scenes/player/resources/inventory.gd" id="2_ejlqc"]
 [ext_resource type="Script" uid="uid://cnywwym2cxh62" path="res://scenes/player/controller/kb_specific.gd" id="2_g10m2"]
 [ext_resource type="Script" uid="uid://dolmbbocisaab" path="res://scenes/player/controller/player_controller.gd" id="3_rp72t"]
+[ext_resource type="Script" uid="uid://cxiubvd68tjc5" path="res://resources/items/base/item_resource.gd" id="3_ugbui"]
 [ext_resource type="Script" uid="uid://chpf24tkxmynh" path="res://scenes/player/resources/health.gd" id="4_fcs02"]
+[ext_resource type="Resource" uid="uid://c3elv0oto8fl3" path="res://resources/items/data/hands.tres" id="4_myrg7"]
+[ext_resource type="Resource" uid="uid://v18c24u40x8h" path="res://resources/items/data/ink_scythe.tres" id="5_kvlxm"]
 [ext_resource type="Script" uid="uid://bq8d58j5ubfn8" path="res://scripts/state_machine.gd" id="6_io36v"]
 [ext_resource type="Script" uid="uid://dhlddrhj6watq" path="res://scenes/player/states/moving_state.gd" id="7_bdcal"]
 [ext_resource type="Script" uid="uid://bb2ugl8k5nl6n" path="res://scenes/player/item_component.gd" id="7_gx1jg"]
@@ -16,7 +19,7 @@
 
 [sub_resource type="Resource" id="Resource_1y3b8"]
 script = ExtResource("2_ejlqc")
-slots = Array[int]([0, 1, 0, 0])
+slots = Array[ExtResource("3_ugbui")]([ExtResource("4_myrg7"), ExtResource("5_kvlxm"), ExtResource("4_myrg7"), ExtResource("5_kvlxm")])
 metadata/_custom_type_script = "uid://b7a3bpm51wa2j"
 
 [sub_resource type="Resource" id="Resource_effects"]

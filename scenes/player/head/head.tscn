@@ -371,6 +371,20 @@ tracks/9/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.93333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"item_effect_first"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_n5w0a"]
 length = 2.0
@@ -450,7 +464,7 @@ transform = Transform3D(0.39837626, 0.89500505, 0.20065524, -0.85668725, 0.44122
 mesh = SubResource("BoxMesh_yhr7m")
 
 [node name="Hand2" type="MeshInstance3D" parent="Camera3D" unique_id=1162761451]
-transform = Transform3D(0.9136632, -0.37427813, -0.15853971, 0.31764948, 0.90081626, -0.296021, 0.25360927, 0.22010344, 0.94193256, -0.12975842, -0.31717527, -0.6028769)
+transform = Transform3D(0.9136632, -0.37427807, -0.15853971, 0.31764948, 0.90081614, -0.296021, 0.25360927, 0.22010343, 0.94193256, -0.12975842, -0.31717527, -0.6028769)
 mesh = SubResource("BoxMesh_yhr7m")
 
 [node name="Area3D" type="Area3D" parent="Camera3D" unique_id=1665331456]

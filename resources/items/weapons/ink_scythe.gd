@@ -22,3 +22,8 @@ func secondary_pressed(player: Player) -> void:
 	secondary_active = false
 func secondary_released(player: Player) -> void:
 	pass
+
+func effect_first(player: Player) -> void:
+	pass
+func effect_second(player: Player) -> void:
+	pass

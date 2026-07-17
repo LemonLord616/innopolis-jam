@@ -13,12 +13,11 @@ func _on_set_selected(value: bool) -> void:
 func _ready() -> void:
 	outline.visible = false
 	
-func update_image(item: ItemManager.Item) -> void:
-	var item_res: ItemResource = ItemManager.item_resource.get(item)
-	if item_res == null:
+func update_image(item: ItemResource) -> void:
+	if item == null:
 		item_image.texture = null
 		return
-	var texture: Texture2D = item_res.image_texture
+	var texture: Texture2D = item.image_texture
 	item_image.texture = texture
 
 func update_number(i: int) -> void:

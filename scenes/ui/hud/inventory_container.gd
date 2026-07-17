@@ -17,8 +17,8 @@ func _build_slots(inventory: PlayerInventoryResource) -> void:
 		var slot: InventorySlotUi = slot_scene.instantiate()
 		add_child(slot)
 		_slots.append(slot)
-		var item = inventory.get_item(i)
-		Logging.debug(self, "add item: " + ItemManager.item_name(item))
+		var item := inventory.get_item(i)
+		Logging.debug(self, "add item: " + item.name)
 		slot.update_image(item)
 		slot.update_number(i)
 

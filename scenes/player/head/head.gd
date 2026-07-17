@@ -32,10 +32,12 @@ func apply_camera_movement(input_delta: Vector2) -> void:
 	camera.rotate_x(-input_delta.y * player.vertical_sensitivity)
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 
-func set_item_res(item_res: ItemResource) -> void:
-	item_mesh.mesh = item_res.mesh
-	_current_lib_name = item_res.anim_library_name
-	_current_idle_name = item_res.idle_anim_name
+func set_item(item: ItemResource) -> void:
+	if item == null:
+		return
+	item_mesh.mesh = item.mesh
+	_current_lib_name = item.anim_library_name
+	_current_idle_name = item.idle_anim_name
 	play_idle()
 	
 # func _on_selected_slot_change(inventory: PlayerInventoryResource) -> void:
@@ -49,3 +51,9 @@ func play_idle() -> void:
 func play(anim_name: StringName) -> void:
 	Logging.debug(self, "playing: " + _current_lib_name + "/" + anim_name)
 	animation_player.play(_current_lib_name + "/" + anim_name)
+
+func item_effect_first() -> void:
+	player.inventory.get_selected_item().effect_first(player)
+
+func item_effect_second() -> void:
+	player.inventory.get_selected_item().effect_second(player)

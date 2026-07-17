@@ -12,26 +12,28 @@ func _ready() -> void:
 	player.inventory.slot_change.connect(_on_slot_change)
 
 func _on_slot_change(inventory: PlayerInventoryResource) -> void:
-	var item := inventory.get_selected_item()
-	player.current_item_res = ItemManager.item_resource[item]
-	player.head.set_item_res(player.current_item_res)
+	player.head.set_item(player.inventory.get_selected_item())
 
 func _on_controller_hotbar(slot: int) -> void:
-	var item_res := player.current_item_res
-	if item_res.primary_active or item_res.secondary_active:
+	var item := player.inventory.get_selected_item()
+	if item.primary_active or item.secondary_active:
 		return
 	player.inventory.selected_slot = slot
 
 func _on_controller_primary(flag: bool) -> void:
-	var item_res := player.current_item_res
-	if flag and not item_res.primary_active:
-		item_res.primary_pressed(player)
-	elif not flag and item_res.primary_active:
-		item_res.primary_released(player)
+	var item := player.inventory.get_selected_item()
+	if item == null:
+		return
+	if flag and not item.primary_active:
+		item.primary_pressed(player)
+	elif not flag and item.primary_active:
+		item.primary_released(player)
 
 func _on_controller_secondary(flag: bool) -> void:
-	var item_res := player.current_item_res
-	if flag and not item_res.secondary_active:
-		item_res.secondary_pressed(player)
-	elif not flag and item_res.secondary_active:
-		item_res.secondary_released(player)
+	var item := player.inventory.get_selected_item()
+	if item == null:
+		return
+	if flag and not item.secondary_active:
+		item.secondary_pressed(player)
+	elif not flag and item.secondary_active:
+		item.secondary_released(player)

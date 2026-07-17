@@ -21,8 +21,9 @@ func _physics_process(_delta: float) -> void:
 func _on_controller_jump() -> void:
 	if player.effects.disable_jump:
 		return
-	if _jump_count >= player.jumps_in_air:
-		return
-	_jump_count += 1
+	if not player.effects.infinite_jumps:
+		if _jump_count >= player.jumps_in_air:
+			return
+		_jump_count += 1
 	Logging.debug(self, "player jumped")
 	player.velocity.y = player.jump_speed

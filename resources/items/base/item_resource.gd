@@ -22,3 +22,9 @@ func secondary_pressed(player: Player) -> void
 
 @abstract
 func secondary_released(player: Player) -> void
+
+@abstract
+func effect_first(player: Player) -> void
+
+@abstract
+func effect_second(player: Player) -> void
