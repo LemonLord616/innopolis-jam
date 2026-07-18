@@ -174,7 +174,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0.00999999, 0.17666668, 0.3, 0.5),
 "transitions": PackedFloat32Array(5.4641585, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0.38332713, -0.35199836, -0.25537667), Vector3(0.38259208, -0.35199836, -0.9129546), Vector3(0.38259208, -0.35199836, -0.9129546), Vector3(0.38332713, -0.35199836, -0.25537667)]
+"values": [Vector3(0.38332713, -0.35199836, -0.25537667), Vector3(0.383, -0.352, -1.2), Vector3(0.383, -0.352, -1.2), Vector3(0.38332713, -0.35199836, -0.25537667)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -444,12 +444,13 @@ _data = {
 &"idle": SubResource("Animation_n5w0a")
 }
 
-[node name="Head" type="Node3D" unique_id=720382681 node_paths=PackedStringArray("camera", "item_mesh", "animation_player")]
+[node name="Head" type="Node3D" unique_id=720382681 node_paths=PackedStringArray("camera", "item_mesh", "animation_player", "hitbox")]
 script = ExtResource("1_p0fbf")
 disabled = true
 camera = NodePath("Camera3D")
 item_mesh = NodePath("Camera3D/ItemMesh")
 animation_player = NodePath("AnimationPlayer")
+hitbox = NodePath("Camera3D/Area3D")
 metadata/_custom_type_script = "uid://dijd83a5v35dk"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1482762273]
