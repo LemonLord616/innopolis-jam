@@ -17,6 +17,8 @@ metadata/_custom_type_script = "uid://dikp65783mpd6"
 
 [node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "bWMesh", "areas", "routes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10000, -10000, -10000)
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_qbcu3")
 agent = NodePath("NavigationAgent3D")
 bWMesh = NodePath("Mesh")

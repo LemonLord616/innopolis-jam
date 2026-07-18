@@ -2,7 +2,7 @@ extends Melee
 class_name InkScythe
 
 
-@export var ink_scene: PackedScene
+@export var ink_projectile_scene: PackedScene
 
 var _player: Player = null
 
@@ -24,6 +24,9 @@ func secondary_released(player: Player) -> void:
 	pass
 
 func effect_first(player: Player) -> void:
-	pass
+	var ink_projectile: Projectile = ink_projectile_scene.instantiate()
+	player.get_tree().current_scene.add_child(ink_projectile)
+	ink_projectile.direction = player.head.look_dir()
+	ink_projectile.global_position = player.global_position
 func effect_second(player: Player) -> void:
 	pass

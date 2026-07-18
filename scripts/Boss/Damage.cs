@@ -1,27 +1,30 @@
 using Godot;
 
-public partial class KnockbackData(Godot.Vector3 dir, float force) : RefCounted
+public partial class KnockbackData(Vector3 dir, float force) : RefCounted
 {
-	public Vector3 dir = dir;
-	public float force = force;
+
+		public Vector3 dir = dir;
+		public float force = force;
 };
 
+[GlobalClass]
 public partial class Damage : Node
 {
-	public void SetDamage(CharacterBody3D body, float damage, KnockbackData knockbackDataRef = null)
-	{
-		var sc = body.GetScript().As<Script>();
-
-		if (sc != null && sc.GetGlobalName().ToString().GetHashCode() == "Player".GetHashCode())
+		static public void SetDamage(CharacterBody3D body, float damage, KnockbackData knockbackDataRef = null)
 		{
-			body.Call("reduce", damage);
-			if (knockbackDataRef != null)
-				body.Call("knockback", knockbackDataRef.dir, knockbackDataRef.force);
+				var sc = body.GetScript().As<Script>();
 
-			return;
-		}else if (body is BookWalker bookWalker)
-		{
-			bookWalker.Stats.SetHealt(-damage);
+				if (sc != null && sc.GetGlobalName().ToString().GetHashCode() == "Player".GetHashCode())
+				{
+						body.Call("reduce", damage);
+						if (knockbackDataRef != null)
+								body.Call("knockback", knockbackDataRef.dir, knockbackDataRef.force);
+
+						return;
+				}
+				else if (body is BookWalker bookWalker)
+				{
+						bookWalker.Stats.SetHealt(-damage);
+				}
 		}
-	}
 }
