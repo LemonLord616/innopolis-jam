@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Godot;
 
 public partial class BWMesh : Node
@@ -27,11 +26,8 @@ public partial class BWMesh : Node
 
     public void UseMeleeAttack()
     {
-        GD.Print($"USeHit, {_player == null}");
-        if (_player != null){
-            GD.Print("Hit");
+        if (_player != null)
             OnHitEv?.Invoke();
-        }
     }
     
     private void OnBodyEntered(Node3D body)
