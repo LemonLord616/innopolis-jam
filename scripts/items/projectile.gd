@@ -8,7 +8,7 @@ class_name Projectile
 @export_range(1.0, 100.0, 1.0) var speed := 30.0
 @export_range(1.0, 100.0, 1.0) var damage := 10.0
 var direction := Vector3.ZERO
-
+const BookWalkerScript: Script = preload("res://scripts/Boss/BookWalker.cs")
 @onready var _timer := lifetime
 func _physics_process(delta: float) -> void:
 	if _timer <= 0:
@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 
 	var object = collsision.get_collider()
 	var normal := Vector3.DOWN
-	if object is BookWalker:
+	if object == BookWalkerScript:
 		Damage.SetDamage(object, damage, null) # for now idw to fuck with knockbak
 		if not decal_on_boss_hit:
 			queue_free()

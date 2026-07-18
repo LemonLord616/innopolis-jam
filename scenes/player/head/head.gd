@@ -14,6 +14,7 @@ class_name Head
 
 var _current_lib_name: StringName = "hands"
 var _current_idle_name: StringName = "idle"
+const BookWalkerScript: Script = preload("res://scripts/Boss/BookWalker.cs")
 
 func _ready() -> void:
 	if disabled:
@@ -26,7 +27,7 @@ func _on_body_entered(body: Node3D) -> void:
 	var item := player.inventory.get_selected_item()
 	if item == null:
 		return
-	if body is BookWalker and item is Melee:
+	if body == BookWalkerScript and item is Melee:
 		Logging.debug(self, "attack bookwalker: " + str(item.damage))
 		Damage.SetDamage(body, item.damage, null)
 
