@@ -27,7 +27,7 @@ func _on_body_entered(body: Node3D) -> void:
 	var item := player.inventory.get_selected_item()
 	if item == null:
 		return
-	if body == BookWalkerScript and item is Melee:
+	if body.get_script() == BookWalkerScript and item is Melee:
 		Logging.debug(self, "attack bookwalker: " + str(item.damage))
 		Damage.SetDamage(body, item.damage, null)
 

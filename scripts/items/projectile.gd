@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 
 	var object = collsision.get_collider()
 	var normal := Vector3.DOWN
-	if object == BookWalkerScript:
+	if object.get_script() == BookWalkerScript:
 		Damage.SetDamage(object, damage, null) # for now idw to fuck with knockbak
 		if not decal_on_boss_hit:
 			queue_free()
