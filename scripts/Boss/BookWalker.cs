@@ -26,6 +26,10 @@ public partial class BookWalker : CharacterBody3D
 		this.routes = routes;
 		_player = player;
 		_target = _player;
+		Stats.OnDamageEv += () =>{
+			GD.PrintRich($"[color=green]Damage anim duration = {((float)bWMesh.AnimationPlayer.GetAnimation(nameof(AnimationKeys.Damage)).Length)} [/color]");
+			_sm.Trigger(nameof(AnimationKeys.Damage));
+		};
 		bWMesh.OnHitEv += () => Damage.SetDamage(_player, 10f, new KnockbackData(GlobalTransform.Basis.Z, 50f));
 		_sm = new StateMachine();
 
@@ -87,6 +91,9 @@ public partial class BookWalker : CharacterBody3D
 		_sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(StateKeys.TurnDash), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)) && IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z) && !IsForwardTarget(_target.GlobalPosition));
 		_sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(AnimationKeys.Idle), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)) && !IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.TurnDash), nameof(AnimationKeys.Idle), 1f / 4f));
+
+		_sm.AddTriggerTransitionFromAny(nameof(AnimationKeys.Damage), new Transition(null,nameof(AnimationKeys.Damage), condition => Stats.IsAlive));
+		_sm.AddTransition(new TransitionAfter(nameof(AnimationKeys.Damage),nameof(AnimationKeys.Idle), (float)bWMesh.AnimationPlayer.GetAnimation(nameof(AnimationKeys.Damage)).Length));
 
 		_sm.SetStartState(nameof(AnimationKeys.Idle));
 		_sm.Init();
