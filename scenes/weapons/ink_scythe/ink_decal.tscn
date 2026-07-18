@@ -1,10 +1,17 @@
 [gd_scene format=3 uid="uid://c7jakhrm2aqid"]
 
 [ext_resource type="Texture2D" uid="uid://pmilmkhxqv5a" path="res://assets/ink_blot.png" id="1_ghn4m"]
+[ext_resource type="Script" uid="uid://dii6auh1fbb2b" path="res://scripts/items/lifetime_decal.gd" id="2_wvt67"]
 
-[node name="InkDecal" type="Decal" unique_id=1127042513]
+[node name="InkDecal" type="Decal" unique_id=59571656]
 texture_albedo = ExtResource("1_ghn4m")
 cull_mask = 1048573
+script = ExtResource("2_wvt67")
+metadata/_custom_type_script = "uid://dii6auh1fbb2b"
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1123112641]
+visible = false
 target_position = Vector3(0, 2, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1404272734]
+visible = false

@@ -56,7 +56,7 @@ material = SubResource("StandardMaterial3D_12dqu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1620908, 1.6410336, -5.3480377)
 use_collision = true
 collision_mask = 7
-size = Vector3(3, 1, 3)
+size = Vector3(3, 3, 3)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSG" unique_id=2132922585]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1094146, 3.1028888, -1.1862316)
@@ -193,3 +193,9 @@ player = NodePath("../Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2005247673]
 environment = SubResource("Environment_lsyt0")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1727210263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1620908, 1.6410336, -15.348038)
+use_collision = true
+collision_mask = 7
+size = Vector3(0.5, 0.5, 0.5)
