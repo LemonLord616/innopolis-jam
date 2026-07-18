@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c7jakhrm2aqid"]
+
+[ext_resource type="Texture2D" uid="uid://pmilmkhxqv5a" path="res://assets/ink_blot.png" id="1_ghn4m"]
+
+[node name="InkDecal" type="Decal" unique_id=1127042513]
+texture_albedo = ExtResource("1_ghn4m")
