@@ -457,14 +457,17 @@ current = true
 
 [node name="ItemMesh" type="MeshInstance3D" parent="Camera3D" unique_id=384120647]
 transform = Transform3D(0.6675002, 0, 0.05782248, 0, 0.67, 0, -0.05782249, 0, 0.6675001, 0.20567143, -0.2639271, -0.9277909)
+layers = 2
 mesh = ExtResource("2_fbu7h")
 
 [node name="Hand1" type="MeshInstance3D" parent="Camera3D" unique_id=407209750]
 transform = Transform3D(0.39837626, 0.89500505, 0.20065524, -0.85668725, 0.4412289, -0.2672157, -0.32769424, -0.06544638, 0.9425145, 0.38936812, -0.3480032, -0.13301289)
+layers = 2
 mesh = SubResource("BoxMesh_yhr7m")
 
 [node name="Hand2" type="MeshInstance3D" parent="Camera3D" unique_id=1162761451]
 transform = Transform3D(0.9136632, -0.37427807, -0.15853971, 0.31764948, 0.90081614, -0.296021, 0.25360927, 0.22010343, 0.94193256, -0.12975842, -0.31717527, -0.6028769)
+layers = 2
 mesh = SubResource("BoxMesh_yhr7m")
 
 [node name="Area3D" type="Area3D" parent="Camera3D" unique_id=1665331456]

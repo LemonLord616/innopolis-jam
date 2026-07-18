@@ -122,12 +122,14 @@ spawner = NodePath("../../Scope/Spawner")
 
 [node name="Scope" type="Node" parent="." unique_id=435654848]
 
-[node name="Spawner" type="Node" parent="Scope" unique_id=1939064433 node_paths=PackedStringArray("playerNode", "spawnBWPos", "damage", "routes")]
+[node name="Damage" type="Node" parent="Scope" unique_id=152218869]
+script = ExtResource("15_qtxrr")
+
+[node name="Spawner" type="Node" parent="Scope" unique_id=1939064433 node_paths=PackedStringArray("playerNode", "spawnBWPos", "routes")]
 script = ExtResource("12_fmdjg")
 data = ExtResource("13_fmdjg")
 playerNode = NodePath("../../Player")
 spawnBWPos = NodePath("Points/BossPoints/SpawnBWMarker3D")
-damage = NodePath("../Damage")
 routes = [NodePath("Points/BossPoints/Patrol Route")]
 
 [node name="Points" type="Node" parent="Scope/Spawner" unique_id=1512503111]
@@ -152,6 +154,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, 45)
 
 [node name="Marker3D4" type="Marker3D" parent="Scope/Spawner/Points/BossPoints/Patrol Route" unique_id=1512783873]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, -45)
-
-[node name="Damage" type="Node" parent="Scope" unique_id=152218869]
-script = ExtResource("15_qtxrr")

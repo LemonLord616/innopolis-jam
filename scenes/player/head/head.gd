@@ -32,6 +32,9 @@ func apply_camera_movement(input_delta: Vector2) -> void:
 	camera.rotate_x(-input_delta.y * player.vertical_sensitivity)
 	camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 
+func look_dir() -> Vector3:
+	return -camera.global_basis.z
+
 func set_item(item: ItemResource) -> void:
 	if item == null:
 		return

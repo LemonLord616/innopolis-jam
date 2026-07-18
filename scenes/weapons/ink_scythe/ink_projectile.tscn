@@ -5,12 +5,23 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_25vxo"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lsyt0"]
+albedo_color = Color(0.22882906, 0.0176456, 0.3256106, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_25vxo"]
+material = SubResource("StandardMaterial3D_lsyt0")
+radius = 0.25
+height = 0.5
+
 [node name="InkProjectile" type="CharacterBody3D" unique_id=238076156]
+collision_layer = 8
+collision_mask = 5
 script = ExtResource("1_67pnx")
-decal = ExtResource("2_w20j7")
-speed = null
-damage = null
+decal_scene = ExtResource("2_w20j7")
 metadata/_custom_type_script = "uid://m6t1wrwxkkjq"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=358703541]
 shape = SubResource("SphereShape3D_25vxo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1970526213]
+mesh = SubResource("SphereMesh_25vxo")

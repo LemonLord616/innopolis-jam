@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="InkScythe" format=3 uid="uid://v18c24u40x8h"]
+
+[ext_resource type="Texture2D" uid="uid://clse8ghxmywjt" path="res://assets/placeholder_preview.png" id="1_a2rmo"]
+[ext_resource type="PackedScene" uid="uid://784m8rosibg" path="res://scenes/weapons/ink_scythe/ink_projectile.tscn" id="2_vr6vs"]
+[ext_resource type="ArrayMesh" uid="uid://bw2idfigj6ayp" path="res://assets/ink_pen/Ink_Pen_Cylinder_005.res" id="3_db3nb"]
+[ext_resource type="Script" uid="uid://dp871q01rp8yw" path="res://scripts/items/weapons/ink_scythe.gd" id="4_sehxk"]
+
+[resource]
+script = ExtResource("4_sehxk")
+ink_projectile_scene = ExtResource("2_vr6vs")
+damage = null
+attack_anim_name = &"attack"
+name = &"ink_scythe"
+image_texture = ExtResource("1_a2rmo")
+mesh = ExtResource("3_db3nb")
+anim_library_name = &"ink_scythe"
+idle_anim_name = &"idle"
+metadata/_custom_type_script = "uid://dp871q01rp8yw"

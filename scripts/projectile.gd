@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 	if object is BookWalker:
 		Damage.SetDamage(object, damage, null) # for now idw to fuck with knockbak
 		if not decal_on_boss_hit:
+			queue_free()
 			return
 	else:
 		normal = collsision.get_normal()
@@ -29,4 +30,4 @@ func _physics_process(delta: float) -> void:
 	get_tree().current_scene.add_child(decal)
 	decal.global_position = collsision.get_position()
 	decal.look_at(decal.global_position + normal)
-
+	queue_free()

@@ -928,11 +928,13 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_ejdoq")
 
 [node name="Beta_Surface" type="MeshInstance3D" parent="Skeleton3D" unique_id=45246544]
+layers = 2
 mesh = SubResource("ArrayMesh_l6b24")
 skin = SubResource("Skin_xxawq")
 skeleton = NodePath("..")
 
 [node name="Beta_Joints" type="MeshInstance3D" parent="Skeleton3D" unique_id=1181854431]
+layers = 2
 mesh = SubResource("ArrayMesh_ogt05")
 skin = SubResource("Skin_286ki")
 skeleton = NodePath("..")

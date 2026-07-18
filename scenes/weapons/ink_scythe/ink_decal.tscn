@@ -4,3 +4,7 @@
 
 [node name="InkDecal" type="Decal" unique_id=1127042513]
 texture_albedo = ExtResource("1_ghn4m")
+cull_mask = 1048573
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1123112641]
+target_position = Vector3(0, 2, 0)
