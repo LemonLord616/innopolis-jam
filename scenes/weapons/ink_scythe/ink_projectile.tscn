@@ -18,6 +18,8 @@ collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_67pnx")
 decal_scene = ExtResource("2_w20j7")
+decal_on_boss_hit = true
+damage = 30.0
 metadata/_custom_type_script = "uid://m6t1wrwxkkjq"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=358703541]

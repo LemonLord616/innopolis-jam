@@ -7,8 +7,8 @@ enum Item {
 }
 
 static var item_resource: Dictionary[Item, ItemResource] = {
-	Item.NOITEM: preload("res://resources/items/data/hands.tres") as MeleeHands,
-	Item.INK_SCYTHE: preload("res://resources/items/data/ink_scythe.tres") as InkScythe,
+	Item.NOITEM: preload("res://resources/items/hands.tres") as MeleeHands,
+	Item.INK_SCYTHE: preload("res://resources/items/ink_scythe.tres") as InkScythe,
 }
 
 static func item_name(item: ItemManager.Item) -> String:
