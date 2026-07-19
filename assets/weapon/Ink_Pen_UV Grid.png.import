@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ve0no701g52y"
-path.s3tc="res://.godot/imported/Ink_Pen_UV Grid.png-1734c16ac04c5a6d01ef3f23acd832d9.s3tc.ctex"
+uid="uid://thou21bfaydu"
+path.s3tc="res://.godot/imported/Ink_Pen_UV Grid.png-e435db9aad4a3de8ccf1a025ea552161.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/ink_pen/Ink_Pen_UV Grid.png"
-dest_files=["res://.godot/imported/Ink_Pen_UV Grid.png-1734c16ac04c5a6d01ef3f23acd832d9.s3tc.ctex"]
+source_file="res://assets/weapon/Ink_Pen_UV Grid.png"
+dest_files=["res://.godot/imported/Ink_Pen_UV Grid.png-e435db9aad4a3de8ccf1a025ea552161.s3tc.ctex"]
 
 [params]
 

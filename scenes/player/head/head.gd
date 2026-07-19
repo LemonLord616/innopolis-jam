@@ -7,9 +7,9 @@ class_name Head
 @export var controller: PlayerController
 
 @export var camera: Camera3D
-@export var item_mesh: MeshInstance3D
 @export var animation_player: AnimationPlayer
 @export var hitbox: Area3D
+@export var item_selector: HeadItemSelector
 
 var _current_lib_name: StringName = "hands"
 var _current_idle_name: StringName = "idle"
@@ -49,7 +49,7 @@ func look_dir() -> Vector3:
 func set_item(item: ItemResource) -> void:
 	if item == null:
 		return
-	item_mesh.mesh = item.mesh
+	item_selector.set_item(item.item)
 	_current_lib_name = item.anim_library_name
 	_current_idle_name = item.idle_anim_name
 	play_idle()

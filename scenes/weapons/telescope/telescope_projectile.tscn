@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://drw5wygq7g6ah"]
+
+[ext_resource type="Script" uid="uid://m6t1wrwxkkjq" path="res://scripts/items/projectile.gd" id="1_y13eo"]
+[ext_resource type="PackedScene" uid="uid://c7x15to744bgw" path="res://scenes/weapons/telescope/telescope_decal.tscn" id="2_viyhr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmxv7"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lsyt0"]
+material = SubResource("StandardMaterial3D_wmxv7")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_25vxo"]
+
+[node name="TelescopeProjectile" type="CharacterBody3D" unique_id=1904853426]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_y13eo")
+decal_scene = ExtResource("2_viyhr")
+speed = 60.0
+metadata/_custom_type_script = "uid://m6t1wrwxkkjq"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1324122055]
+mesh = SubResource("SphereMesh_lsyt0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=374049417]
+shape = SubResource("SphereShape3D_25vxo")

@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://c3elv0oto8fl3" path="res://resources/items/hands.tres" id="4_myrg7"]
 [ext_resource type="Resource" uid="uid://v18c24u40x8h" path="res://resources/items/ink_scythe.tres" id="5_kvlxm"]
 [ext_resource type="Script" uid="uid://bq8d58j5ubfn8" path="res://scripts/state_machine.gd" id="6_io36v"]
+[ext_resource type="Resource" uid="uid://cfjkh72uyrv2l" path="res://resources/items/telescope.tres" id="6_kvlxm"]
 [ext_resource type="Script" uid="uid://dhlddrhj6watq" path="res://scenes/player/states/moving_state.gd" id="7_bdcal"]
 [ext_resource type="Script" uid="uid://bb2ugl8k5nl6n" path="res://scenes/player/item_component.gd" id="7_gx1jg"]
 [ext_resource type="Script" uid="uid://bf5mj412yqfpl" path="res://scenes/player/states/dashing_state.gd" id="8_bdcal"]
@@ -19,7 +20,7 @@
 
 [sub_resource type="Resource" id="Resource_1y3b8"]
 script = ExtResource("2_ejlqc")
-slots = Array[ExtResource("3_ugbui")]([ExtResource("4_myrg7"), ExtResource("5_kvlxm"), ExtResource("4_myrg7"), ExtResource("5_kvlxm")])
+slots = Array[ExtResource("3_ugbui")]([ExtResource("4_myrg7"), ExtResource("5_kvlxm"), ExtResource("6_kvlxm"), ExtResource("4_myrg7")])
 metadata/_custom_type_script = "uid://b7a3bpm51wa2j"
 
 [sub_resource type="Resource" id="Resource_effects"]

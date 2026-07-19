@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c7x15to744bgw"]
+
+[ext_resource type="Script" uid="uid://dii6auh1fbb2b" path="res://scripts/items/lifetime_decal.gd" id="1_3hq6u"]
+[ext_resource type="Texture2D" uid="uid://ossdalpg5s30" path="res://assets/weapon/bullet_hole.png" id="1_spslg"]
+
+[node name="TelescopeDecal" type="Decal" unique_id=410444448]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("1_spslg")
+script = ExtResource("1_3hq6u")
+metadata/_custom_type_script = "uid://dii6auh1fbb2b"

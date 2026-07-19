@@ -3,8 +3,8 @@ extends Resource
 class_name ItemResource
 
 @export var name: StringName
+@export var item: ItemManager.Item
 @export var image_texture: Texture2D
-@export var mesh: Mesh
 @export var anim_library_name: StringName
 @export var idle_anim_name: StringName
 

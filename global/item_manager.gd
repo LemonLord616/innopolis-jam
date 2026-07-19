@@ -4,6 +4,7 @@ class_name ItemManager
 enum Item {
 	NOITEM,
 	INK_SCYTHE,
+	TELESCOPE,
 }
 
 static var item_resource: Dictionary[Item, ItemResource] = {

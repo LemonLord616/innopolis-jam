@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://diag3l8oo26vl"
-path="res://.godot/imported/ASSETS.fbx_doubleAxe.fbx-0613372941e588054f8597649d83bd53.scn"
+uid="uid://h0ycb7pnmd00"
+path="res://.godot/imported/Ink_Pen.glb-4eccfba292c1db8be24f36f78aeec53d.scn"
 
 [deps]
 
-source_file="res://assets/weapons/ASSETS.fbx_doubleAxe.fbx"
-dest_files=["res://.godot/imported/ASSETS.fbx_doubleAxe.fbx-0613372941e588054f8597649d83bd53.scn"]
+source_file="res://assets/weapon/Ink_Pen.glb"
+dest_files=["res://.godot/imported/Ink_Pen.glb-4eccfba292c1db8be24f36f78aeec53d.scn"]
 
 [params]
 
@@ -32,7 +32,7 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=true
+animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
@@ -40,7 +40,6 @@ materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
 _subresources={}
-fbx/importer=0
-fbx/allow_geometry_helper_nodes=false
-fbx/embedded_image_handling=1
-fbx/naming_version=2
+gltf/naming_version=2
+gltf/embedded_image_handling=1
+gltf/texture_map_mode=1

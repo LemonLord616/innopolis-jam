@@ -1,5 +1,5 @@
 @abstract
-extends ItemResource
+extends Weapon
 class_name Ranged
 
 @export var projectile_scene: PackedScene
