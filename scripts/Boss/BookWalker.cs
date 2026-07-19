@@ -59,6 +59,7 @@ public partial class BookWalker : CharacterBody3D
 		onLogic =>
 		{
 			Move((float)GetPhysicsProcessDeltaTime(), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE)).Speed);
+			// GD.PrintRich($"[color=yellow] melee attack aoe [/color]");
 			foreach (var body in areas[0].GetOverlappingBodies())
 			{
 				GD.PrintRich($"[color=green] b = {body.Name} [/color]");
@@ -142,7 +143,7 @@ public partial class BookWalker : CharacterBody3D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		GD.PrintRich($"[color=green]state = {_sm.ActiveStateName} [/color]");
+		// GD.PrintRich($"[color=green]state = {_sm.ActiveStateName} [/color]");
 		_sm.OnLogic();
 		if (ReferenceEquals(_target, _player))
 			agent.TargetPosition = _target.GlobalPosition;
@@ -205,7 +206,7 @@ public partial class BookWalker : CharacterBody3D
 	{
 		var nextVelocity = Velocity;
 		var direction = Stats.Speed * Stats.SpeedModifier * delta;
-		nextVelocity.Y = -Gravity * delta;
+		nextVelocity.Y += -Gravity * delta;
 		nextVelocity.X = Mathf.MoveToward(Velocity.X, 0f, direction);
 		nextVelocity.Z = Mathf.MoveToward(Velocity.Z, 0f, direction);
 		Velocity = nextVelocity;

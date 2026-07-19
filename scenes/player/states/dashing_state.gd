@@ -13,20 +13,16 @@ var _timer := 0.0
 
 func enter() -> void:
 	player.knockbacked.connect(dash)
-	var dir := Vector3.ZERO
+	var dir := head.facing_dir()
 	var speed := player.dash_speed
 	if knockback:
 		dir = knockback_dir
 		speed = knockback_speed
-	elif player.dash_direction == Player.DashDirection.FACE:
-		dir = head.facing_dir()
-		speed = player.dash_speed
-	else:
+	elif player.dash_direction == Player.DashDirection.MOVE:
 		var input_vec := player.controller.input_vector()
-		var move_dir := Vector3(input_vec.x, 0, input_vec.y)
-		dir = head.rotated_vec(move_dir)
-		speed = player.dash_speed
-	print(knockback)
+		if not input_vec.is_zero_approx():
+			var move_dir := Vector3(input_vec.x, 0, input_vec.y)
+			dir = head.rotated_vec(move_dir)
 	dash(dir, speed)
 	player.dash_active = true
 
