@@ -11,10 +11,10 @@ class_name Head
 @export var animation_player: AnimationPlayer
 @export var hitbox: Area3D
 
-
 var _current_lib_name: StringName = "hands"
 var _current_idle_name: StringName = "idle"
 const BookWalkerScript: Script = preload("res://scripts/Boss/BookWalker.cs")
+const KnockbackScript: Script = preload("res://scripts/Boss/Damage/KnockbackData.cs")
 
 func _ready() -> void:
 	if disabled:
@@ -29,7 +29,7 @@ func _on_body_entered(body: Node3D) -> void:
 		return
 	if body.get_script() == BookWalkerScript and item is Melee:
 		Logging.debug(self, "attack bookwalker: " + str(item.damage))
-		Damage.SetDamage(body, item.damage, null)
+		Damage.SetDamage(body, item.damage, KnockbackScript.new(global_transform.basis.z,50.0))
 
 func _process(delta: float) -> void:
 	if player.effects.disable_move_camera:

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StateData" format=3 uid="uid://p3e7y2das34r"]
+
+[ext_resource type="Script" uid="uid://cxjho2yemlla0" path="res://scripts/ReadOnly/StateData.cs" id="1_fekfl"]
+
+[resource]
+script = ExtResource("1_fekfl")
+SpeedAnimation = 5.0
+metadata/_custom_type_script = "uid://cxjho2yemlla0"

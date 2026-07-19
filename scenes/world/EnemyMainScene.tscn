@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://pbjkr1finl12" path="res://scripts/Spawner/Spawner.cs" id="12_fmdjg"]
 [ext_resource type="Resource" uid="uid://i3bbx68j6qio" path="res://resources/Spawner.tres" id="13_fmdjg"]
 [ext_resource type="Script" uid="uid://cct13jkoi3tof" path="res://scripts/Routes/Route.cs" id="14_jwhjk"]
-[ext_resource type="Script" uid="uid://dvaibtk17ngne" path="res://scripts/Boss/Damage.cs" id="15_qtxrr"]
+[ext_resource type="Script" uid="uid://dvaibtk17ngne" path="res://scripts/Boss/Damage/Damage.cs" id="15_qtxrr"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rd4tg"]
 vertices = PackedVector3Array(-23.504383, 0.97203827, -41.232555, -23.504383, 0.97203827, -48.232555, -48.004383, 0.97203827, -48.232555, -23.004383, 0.97203827, -40.232555, -21.754383, 0.97203827, -39.482555, -48.004383, 0.97203827, 48.017445, 47.995617, 0.97203827, -48.232555, -15.004383, 0.97203827, -48.232555, -15.004383, 0.97203827, -41.232555, -15.504383, 0.97203827, -40.232555, -16.754383, 0.97203827, -39.482555, 47.995617, 0.97203827, 48.017445)

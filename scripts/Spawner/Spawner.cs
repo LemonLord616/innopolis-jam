@@ -32,7 +32,6 @@ public partial class Spawner : Node
 		_spawnBW?.Kill();
 	}
 
-
 	private IEnumerator SpawnBW()
 	{
 		yield return Co.Wait(data.DurationFirtsSpawn);
@@ -43,9 +42,14 @@ public partial class Spawner : Node
 			health = data.BookWalkerData.CurentHealth,
 			maxHealth = data.BookWalkerData.MaxHealth,
 			speed = data.BookWalkerData.Speed,
-			speedModifier = data.BookWalkerData.SpeedModifier
+			speedModifier = data.BookWalkerData.SpeedModifier,
+			speedRotation = data.BookWalkerData.SpeedRotation
 		},
-		routes, playerNode);
+		new BookWalkerData.BWStorages()
+		{
+			attackStorage = data.BookWalkerData.AttackStorage,
+			stateStorage = data.BookWalkerData.storageState
+		},routes, playerNode);
 		GetTree().CurrentScene.AddChild(_ref);
 		_ref.GlobalPosition = spawnBWPos.GlobalPosition;
 	}

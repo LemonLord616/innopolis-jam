@@ -1,11 +1,5 @@
 using Godot;
 
-public partial class KnockbackData(Vector3 dir, float force) : RefCounted
-{
-	public Vector3 dir = dir;
-	public float force = force;
-};
-
 [GlobalClass]
 public partial class Damage : Node
 {
@@ -24,6 +18,8 @@ public partial class Damage : Node
 		else if (body is BookWalker bookWalker)
 		{
 			bookWalker.Stats.SetHealt(-damage);
+			if (knockbackDataRef != null)
+				bookWalker.Knockback(knockbackDataRef);
 		}
 	}
 }

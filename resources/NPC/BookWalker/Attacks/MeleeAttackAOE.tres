@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://cvnvrml5tswvk"]
+
+[ext_resource type="Script" uid="uid://xhjlw4dxynrp" path="res://scripts/ReadOnly/AttackData.cs" id="1_ms4fo"]
+
+[resource]
+script = ExtResource("1_ms4fo")
+Damage = 5.0
+metadata/_custom_type_script = "uid://xhjlw4dxynrp"
