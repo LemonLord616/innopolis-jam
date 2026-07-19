@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="StateStorage" format=3 uid="uid://bcxcn04as47t7"]
+
+[ext_resource type="Script" uid="uid://csxihsmag77qw" path="res://scripts/ReadOnly/StateStorage.cs" id="1_ys3ar"]
+[ext_resource type="Resource" uid="uid://y0wj2tnveqg6" path="res://resources/NPC/BookWalker/States/MeleeAttack.tres" id="2_6u16n"]
+[ext_resource type="Resource" uid="uid://cfdggl7u74nh5" path="res://resources/NPC/BookWalker/States/TurnDash.tres" id="3_6u16n"]
+[ext_resource type="Resource" uid="uid://biwx8gx5hn2eh" path="res://resources/NPC/BookWalker/States/Walk.tres" id="4_77kx3"]
+[ext_resource type="Resource" uid="uid://p3e7y2das34r" path="res://resources/NPC/BookWalker/States/Knockback.tres" id="5_6h0f1"]
+[ext_resource type="Resource" uid="uid://2usa30shdxkx" path="res://resources/NPC/BookWalker/States/MeleeAttackAOE.tres" id="6_iblgm"]
+
+[resource]
+script = ExtResource("1_ys3ar")
+states = Array[Object]([ExtResource("2_6u16n"), ExtResource("3_6u16n"), ExtResource("4_77kx3"), ExtResource("5_6h0f1"), ExtResource("6_iblgm")])
+metadata/_custom_type_script = "uid://csxihsmag77qw"

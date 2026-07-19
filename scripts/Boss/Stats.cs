@@ -10,6 +10,7 @@ public partial class Stats : Resource
         public float maxHealth;
         public float speed;
         public float speedModifier;
+        public float speedRotation;
     }
 
     public event Action OnDamageEv;
@@ -17,11 +18,12 @@ public partial class Stats : Resource
     public event Action OnDeadEv;
     public event Action OnSpeedEv;
 
-    [Export] public float CurentHealth {get; private set;}
+    [Export] public float CurentHealth { get; private set; }
     [Export] public float MaxHealth { get; private set; }
-    [Export] public float Speed { get; private set;}
-    [Export] public float SpeedModifier { get; private set;}
-    
+    [Export] public float Speed { get; private set; }
+    [Export] public float SpeedModifier { get; private set; }
+    [Export] public float SpeedRotation { get; private set; }
+
     public bool IsAlive => CurentHealth > 0f;
 
     public void Init(StatsConfig config)
@@ -30,24 +32,21 @@ public partial class Stats : Resource
         MaxHealth = config.maxHealth;
         Speed = config.speed;
         SpeedModifier = config.speedModifier;
+        SpeedRotation = config.speedRotation;
     }
 
     public void SetHealt(float addHealt)
     {
         var oldHealth = CurentHealth;
         CurentHealth += addHealt;
-        CurentHealth = Math.Clamp(CurentHealth,0f,MaxHealth);
+        CurentHealth = Math.Clamp(CurentHealth, 0f, MaxHealth);
 
         if (CurentHealth > oldHealth)
-        {
             OnHealEv?.Invoke();
-        }else if (CurentHealth < oldHealth)
-        {
+        else if (CurentHealth < oldHealth)
             OnDamageEv?.Invoke();
-        }else if (CurentHealth == 0f)
-        {
+        else if (CurentHealth == 0f)
             OnDeadEv?.Invoke();
-        }
     }
 
     public void SetSpeed(float speed)
