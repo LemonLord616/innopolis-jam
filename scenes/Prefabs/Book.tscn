@@ -10,7 +10,7 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_e7oxi")
 timeLife = 2.0
-randomDurationInRun = Vector2(0, 2)
+randomDurationInRun = Vector2(0, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=844319191]
 shape = SubResource("BoxShape3D_ejdoq")

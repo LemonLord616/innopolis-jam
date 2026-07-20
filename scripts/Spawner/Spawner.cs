@@ -50,7 +50,7 @@ public partial class Spawner : Node
 			attackStorage = data.BookWalkerData.AttackStorage,
 			stateStorage = data.BookWalkerData.storageState
 		}, routes, playerNode);
-		GetTree().CurrentScene.AddChild(_ref);
 		_ref.GlobalPosition = spawnBWPos.GlobalPosition;
+		GetTree().CurrentScene.AddChild(_ref);
 	}
 }

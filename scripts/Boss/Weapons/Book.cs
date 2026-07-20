@@ -26,21 +26,6 @@ public partial class Book : Area3D
 			Damage.SetDamage(_player, _attack.Damage, new(GlobalTransform.Basis.Z, _attack.HitForce));
 	}
 
-	private void Rotate(Vector3 target, double delta)
-	{
-		var direction = target - GlobalPosition;
-		direction.Y = 0;
-
-		if (direction != Vector3.Zero)
-		{
-			var targetAngle = Mathf.Atan2(direction.X, direction.Z);
-			var currentRotation = Rotation;
-
-			currentRotation.Y = Mathf.LerpAngle(currentRotation.Y, targetAngle, _attack.Speed * (float)delta);
-			Rotation = currentRotation;
-		}
-	}
-
 	private IEnumerator Action(Vector3 upPoint)
 	{
 		var timeElapsed = 0.0f;
@@ -65,7 +50,8 @@ public partial class Book : Area3D
 		while (toRun < toRunEnd)
 		{
 			toRun += (float)GetProcessDeltaTime();
-			Rotate(_player.GlobalPosition, GetPhysicsProcessDeltaTime());
+			LookAt(_player.GlobalPosition, Vector3.Up);
+			RotateObjectLocal(Vector3.Up, Mathf.Pi);
 			yield return null;
 		}
 

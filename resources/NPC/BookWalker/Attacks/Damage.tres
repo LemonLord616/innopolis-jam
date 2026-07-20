@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://0jf1b58h34rx"]
+
+[ext_resource type="Script" uid="uid://xhjlw4dxynrp" path="res://scripts/ReadOnly/AttackData.cs" id="2_mbngi"]
+
+[resource]
+script = ExtResource("2_mbngi")
+UseMaxAttack = 2
+metadata/_custom_type_script = "uid://xhjlw4dxynrp"

@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_0h8g4")
 Damage = 5.0
+CoolDowm = 15.0
 HitForce = 75.0
 Speed = 50.0
 UseCountVFX = 4

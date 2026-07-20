@@ -16,8 +16,20 @@ radius = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ejdoq"]
 
-[node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "bWMesh", "areas", "routes")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1000, -1000, -1000)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6y4j3"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_i1hal"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xxawq"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6gmwo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6gmwo"]
+radius = 2.5
+
+[node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "bWMesh", "areas", "paths", "detect", "routes")]
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_qbcu3")
@@ -25,6 +37,8 @@ agent = NodePath("NavigationAgent3D")
 bWMesh = NodePath("Mesh")
 Stats = SubResource("Resource_ka5ck")
 areas = [NodePath("MeleeArea3D"), NodePath("RangeArea3D")]
+paths = [NodePath("PathMeleeAttack"), NodePath("PathMeleeAttackAOE")]
+detect = NodePath("DetectShapeCast3D")
 routes = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1617009930]
@@ -54,3 +68,22 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RangeArea3D" unique_id=1172567826]
 shape = SubResource("SphereShape3D_ejdoq")
 debug_color = Color(0, 0, 1, 1)
+
+[node name="PathMeleeAttack" type="MeshInstance3D" parent="." unique_id=1229831902]
+transform = Transform3D(0.665, 0, 0, 0, -6.207017e-08, 0.01, 0, -1.4200001, -4.3711382e-10, 0, -0.5, 0.49993896)
+visible = false
+material_override = SubResource("StandardMaterial3D_6y4j3")
+lod_bias = 0.001
+mesh = SubResource("PrismMesh_i1hal")
+
+[node name="PathMeleeAttackAOE" type="MeshInstance3D" parent="." unique_id=563364180]
+transform = Transform3D(2.495, 0, 0, 0, -1.0905991e-07, 0.1, 0, -2.495, -4.371139e-09, 0, -0.5, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_xxawq")
+lod_bias = 0.001
+mesh = SubResource("SphereMesh_6gmwo")
+
+[node name="DetectShapeCast3D" type="ShapeCast3D" parent="." unique_id=200145485]
+shape = SubResource("SphereShape3D_6gmwo")
+target_position = Vector3(0, 0, 0)
+collision_mask = 8

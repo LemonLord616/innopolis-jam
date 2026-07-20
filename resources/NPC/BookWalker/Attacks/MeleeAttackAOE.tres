@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_ms4fo")
 Damage = 5.0
+CoolDowm = 7.0
 metadata/_custom_type_script = "uid://xhjlw4dxynrp"

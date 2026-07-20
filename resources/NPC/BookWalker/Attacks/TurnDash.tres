@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://cueo4mnk7m8yd"]
+
+[ext_resource type="Script" uid="uid://xhjlw4dxynrp" path="res://scripts/ReadOnly/AttackData.cs" id="2_7tkj6"]
+
+[resource]
+script = ExtResource("2_7tkj6")
+CoolDowm = 10.0
+HitForce = 75.0
+UseMaxAttack = 3
+metadata/_custom_type_script = "uid://xhjlw4dxynrp"

@@ -7,8 +7,10 @@
 [ext_resource type="Resource" uid="uid://p3e7y2das34r" path="res://resources/NPC/BookWalker/States/Knockback.tres" id="5_6h0f1"]
 [ext_resource type="Resource" uid="uid://2usa30shdxkx" path="res://resources/NPC/BookWalker/States/MeleeAttackAOE.tres" id="6_iblgm"]
 [ext_resource type="Resource" uid="uid://blufgmrg1o7yy" path="res://resources/NPC/BookWalker/States/RangeAttack.tres" id="7_t4x5u"]
+[ext_resource type="Resource" uid="uid://dnfd1ayqkuyw0" path="res://resources/NPC/BookWalker/States/PreMeleeAttack.tres" id="8_x3852"]
+[ext_resource type="Resource" uid="uid://cspe80cnlnujj" path="res://resources/NPC/BookWalker/States/PreMeleeAttackAOE.tres" id="9_b6dji"]
 
 [resource]
 script = ExtResource("1_ys3ar")
-states = Array[Object]([ExtResource("2_6u16n"), ExtResource("3_6u16n"), ExtResource("4_77kx3"), ExtResource("5_6h0f1"), ExtResource("6_iblgm"), ExtResource("7_t4x5u")])
+states = Array[Object]([ExtResource("2_6u16n"), ExtResource("3_6u16n"), ExtResource("4_77kx3"), ExtResource("5_6h0f1"), ExtResource("6_iblgm"), ExtResource("7_t4x5u"), ExtResource("8_x3852"), ExtResource("9_b6dji")])
 metadata/_custom_type_script = "uid://csxihsmag77qw"

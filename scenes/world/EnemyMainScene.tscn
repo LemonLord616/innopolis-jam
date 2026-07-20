@@ -17,8 +17,8 @@
 [ext_resource type="Script" uid="uid://dvaibtk17ngne" path="res://scripts/Boss/Damage/Damage.cs" id="15_qtxrr"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rd4tg"]
-vertices = PackedVector3Array(-23.504383, 0.97203827, -41.232555, -23.504383, 0.97203827, -48.232555, -48.004383, 0.97203827, -48.232555, -23.004383, 0.97203827, -40.232555, -21.754383, 0.97203827, -39.482555, -48.004383, 0.97203827, 48.017445, 47.995617, 0.97203827, -48.232555, -15.004383, 0.97203827, -48.232555, -15.004383, 0.97203827, -41.232555, -15.504383, 0.97203827, -40.232555, -16.754383, 0.97203827, -39.482555, 47.995617, 0.97203827, 48.017445)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 4, 2), PackedInt32Array(2, 4, 5), PackedInt32Array(8, 7, 6), PackedInt32Array(6, 9, 8), PackedInt32Array(9, 6, 10), PackedInt32Array(10, 6, 11), PackedInt32Array(10, 11, 5), PackedInt32Array(5, 4, 10)]
+vertices = PackedVector3Array(-2.254383, 0.97203827, -6.7325554, -1.5043831, 0.97203827, -5.4825554, -1.5043831, 0.97203827, -7.2325554, -3.254383, 0.97203827, -7.2325554, -0.7543831, 0.97203827, -8.482555, 47.995617, 0.97203827, -48.232555, 5.745617, 0.97203827, -3.4825554, 4.995617, 0.97203827, -2.2325554, -5.004383, 0.97203827, -7.2325554, 0.24561691, 0.97203827, -8.982555, -15.504383, 0.97203827, -40.232555, -16.754383, 0.97203827, -39.482555, -1.0043831, 0.97203827, -2.4825554, -1.5043831, 0.97203827, -3.4825554, -1.5043831, 0.97203827, 5.2674446, 0.24561691, 0.97203827, -1.7325554, 3.995617, 0.97203827, -1.7325554, -2.254383, 0.97203827, 6.5174446, 47.995617, 0.97203827, 48.017445, -23.504383, 0.97203827, -41.232555, -23.504383, 0.97203827, -48.232555, -48.004383, 0.97203827, -48.232555, -23.004383, 0.97203827, -40.232555, -21.754383, 0.97203827, -39.482555, -48.004383, 0.97203827, 48.017445, -6.754383, 0.97203827, 5.2674446, -6.754383, 0.97203827, -5.4825554, -6.254383, 0.97203827, -6.4825554, -3.254383, 0.97203827, 7.0174446, -5.004383, 0.97203827, 7.0174446, 5.745617, 0.97203827, -7.2325554, -15.004383, 0.97203827, -41.232555, 3.995617, 0.97203827, -8.982555, -6.254383, 0.97203827, 6.2674446, 4.995617, 0.97203827, -8.482555, -15.004383, 0.97203827, -48.232555)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 4), PackedInt32Array(7, 6, 5), PackedInt32Array(4, 3, 8), PackedInt32Array(4, 8, 9), PackedInt32Array(9, 8, 11), PackedInt32Array(9, 11, 10), PackedInt32Array(14, 13, 12), PackedInt32Array(14, 12, 15), PackedInt32Array(14, 15, 16), PackedInt32Array(14, 16, 7), PackedInt32Array(14, 7, 17), PackedInt32Array(17, 7, 18), PackedInt32Array(18, 7, 5), PackedInt32Array(21, 20, 19), PackedInt32Array(21, 19, 22), PackedInt32Array(22, 23, 21), PackedInt32Array(21, 23, 26), PackedInt32Array(21, 26, 25), PackedInt32Array(21, 25, 24), PackedInt32Array(27, 26, 11), PackedInt32Array(11, 26, 23), PackedInt32Array(8, 27, 11), PackedInt32Array(29, 28, 24), PackedInt32Array(6, 30, 5), PackedInt32Array(10, 31, 9), PackedInt32Array(9, 31, 32), PackedInt32Array(33, 29, 24), PackedInt32Array(28, 17, 24), PackedInt32Array(24, 17, 18), PackedInt32Array(32, 31, 34), PackedInt32Array(34, 31, 35), PackedInt32Array(25, 33, 24), PackedInt32Array(34, 35, 30), PackedInt32Array(30, 35, 5)]
 sample_partition_type = 2
 geometry_collision_mask = 4294967294
 agent_radius = 2.0
@@ -58,7 +58,7 @@ script = ExtResource("1_rduss")
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="CSG" unique_id=1076334250]
 navigation_mesh = SubResource("NavigationMesh_rd4tg")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSG/NavigationRegion3D" unique_id=1888085229]
+[node name="Ground" type="CSGBox3D" parent="CSG/NavigationRegion3D" unique_id=1888085229 groups=["Floor_area_1"]]
 transform = Transform3D(1, -0.000100756486, -8.663358e-05, 0.00010079803, 0.9999999, 0.00045843725, 8.658524e-05, -0.0004584464, 0.9999999, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_rduss")
 use_collision = true
@@ -66,35 +66,37 @@ collision_mask = 7
 size = Vector3(100, 1, 100)
 material = SubResource("StandardMaterial3D_12dqu")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSG/NavigationRegion3D" unique_id=1577180109]
+[node name="Barrier" type="CSGBox3D" parent="CSG/NavigationRegion3D" unique_id=1577180109 groups=["Floor_area_1"]]
 transform = Transform3D(-4.261699, 0, 0, 0, -2.3576195, 0, 0, 0, -8.863968, -19.276287, 1.6807766, -46.05057)
 use_collision = true
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSG" unique_id=900821589]
+[node name="Wall" type="CSGBox3D" parent="CSG/NavigationRegion3D" unique_id=900821589 groups=["Floor_area_1"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.222757, 1.4544873, 0)
 use_collision = true
 collision_mask = 7
 size = Vector3(1, 3, 10)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSG" unique_id=516117530]
+[node name="Stages" type="Node3D" parent="CSG/NavigationRegion3D" unique_id=503472658]
+
+[node name="Stage2" type="CSGBox3D" parent="CSG/NavigationRegion3D/Stages" unique_id=516117530 groups=["Floor_area_2"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1620908, 1.6410336, -5.3480377)
 use_collision = true
 collision_mask = 7
 size = Vector3(3, 1, 3)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSG" unique_id=2132922585]
+[node name="Stage3" type="CSGBox3D" parent="CSG/NavigationRegion3D/Stages" unique_id=2132922585 groups=["Floor_area_3"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1094146, 3.1028888, -1.1862316)
 use_collision = true
 collision_mask = 7
 size = Vector3(3, 1, 3)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSG" unique_id=798379553]
+[node name="Stage4" type="CSGBox3D" parent="CSG/NavigationRegion3D/Stages" unique_id=798379553 groups=["Floor_area_4"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.572279, 4.22244, 3.8564038)
 use_collision = true
 collision_mask = 7
 size = Vector3(3, 1, 3)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSG" unique_id=2084038319]
+[node name="Stage5" type="CSGBox3D" parent="CSG/NavigationRegion3D/Stages" unique_id=2084038319 groups=["Floor_area_5"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3454571, 5.1155562, 2.883778)
 use_collision = true
 collision_mask = 7

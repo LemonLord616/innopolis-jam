@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("1_va4wt")
+SpeedRotation = 1.0
 Prefab = ExtResource("1_15d50")
 storageState = ExtResource("4_b4drt")
 AttackStorage = ExtResource("1_fgj8i")
