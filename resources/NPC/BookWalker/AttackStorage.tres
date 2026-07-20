@@ -3,8 +3,9 @@
 [ext_resource type="Resource" uid="uid://whyhl2gpxbel" path="res://resources/NPC/BookWalker/Attacks/MeleeAttack.tres" id="1_nousx"]
 [ext_resource type="Resource" uid="uid://cvnvrml5tswvk" path="res://resources/NPC/BookWalker/Attacks/MeleeAttackAOE.tres" id="2_1ah3t"]
 [ext_resource type="Script" uid="uid://biep3o5h4m83u" path="res://scripts/ReadOnly/AttackStorage.cs" id="2_jl4op"]
+[ext_resource type="Resource" uid="uid://sy6jblcfi32d" path="res://resources/NPC/BookWalker/Attacks/RangeAttack.tres" id="3_1ah3t"]
 
 [resource]
 script = ExtResource("2_jl4op")
-attacks = Array[Object]([ExtResource("1_nousx"), ExtResource("2_1ah3t")])
+attacks = Array[Object]([ExtResource("1_nousx"), ExtResource("2_1ah3t"), ExtResource("3_1ah3t")])
 metadata/_custom_type_script = "uid://biep3o5h4m83u"

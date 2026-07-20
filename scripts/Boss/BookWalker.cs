@@ -34,6 +34,7 @@ public partial class BookWalker : CharacterBody3D
 			var melee = storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttack));
 			Damage.SetDamage(_player, melee.Damage, new KnockbackData(GlobalTransform.Basis.Z, melee.HitForce));
 		};
+
 		_sm = new StateMachine();
 
 		//states
@@ -46,12 +47,14 @@ public partial class BookWalker : CharacterBody3D
 		});
 		_sm.AddState(nameof(AnimationKeys.Walk), onEnter => PlayAnimation(), onLogic => Move((float)GetPhysicsProcessDeltaTime(), storages.stateStorage.GetStateToName(nameof(AnimationKeys.Walk)).SpeedAnimation));
 		_sm.AddState(nameof(AnimationKeys.Run), onEnter => PlayAnimation(), onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier));
-		_sm.AddState(nameof(AnimationKeys.MeleeAttack), onEnter =>
+		_sm.AddState(nameof(AnimationKeys.MeleeAttack),
+		onEnter =>
 		{
 			var state = storages.stateStorage.GetStateToName(nameof(AnimationKeys.MeleeAttack));
 			bWMesh.AnimationPlayer.Play(_sm.ActiveStateName, customSpeed: state.SpeedAnimation);
 		});
-		_sm.AddState(nameof(AnimationKeys.MeleeAttackAOE), onEnter =>
+		_sm.AddState(nameof(AnimationKeys.MeleeAttackAOE),
+		onEnter =>
 		{
 			var state = storages.stateStorage.GetStateToName(nameof(AnimationKeys.MeleeAttackAOE));
 			bWMesh.AnimationPlayer.Play(_sm.ActiveStateName, customSpeed: state.SpeedAnimation);
@@ -59,10 +62,8 @@ public partial class BookWalker : CharacterBody3D
 		onLogic =>
 		{
 			Move((float)GetPhysicsProcessDeltaTime(), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE)).Speed);
-			// GD.PrintRich($"[color=yellow] melee attack aoe [/color]");
 			foreach (var body in areas[0].GetOverlappingBodies())
 			{
-				GD.PrintRich($"[color=green] b = {body.Name} [/color]");
 				if (ReferenceEquals(body, _player))
 				{
 					var attack = storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE));
@@ -70,13 +71,31 @@ public partial class BookWalker : CharacterBody3D
 				}
 			}
 		});
-		_sm.AddState(nameof(AnimationKeys.RangeAttack), onEnter => PlayAnimation());
+		_sm.AddState(nameof(AnimationKeys.RangeAttack),
+		onEnter =>
+		{
+			var attack = storages.attackStorage.GetAttackToName(nameof(AnimationKeys.RangeAttack));
+			for (var i = 0; i < attack.UseCountVFX; i++)
+			{
+				var book = attack.VFX.Instantiate<Book>();
+				var scale = book.Scale;
+				var up = GlobalPosition + GlobalTransform.Basis.Y.Normalized() * (areas[0].Scale.Y / 2);
+				var down = GlobalPosition + -GlobalTransform.Basis.Y.Normalized() * (areas[0].Scale.Y / 2);
+				var spawnPos = GetRandomPositionOnCircle(down, areas[0].Scale.X);
+				book.GlobalPosition = spawnPos;
+				book.Init(attack, _player, up);
+				GetTree().CurrentScene.AddChild(book);
+				book.Scale = scale;
+			}
+			PlayAnimation();
+		});
 		_sm.AddState(nameof(AnimationKeys.Damage), onEnter => PlayAnimation());
 		_sm.AddState(nameof(AnimationKeys.Spell_Anger), onEnter => PlayAnimation());
 		_sm.AddState(nameof(AnimationKeys.Spell_FlyingProjectiles), onEnter => PlayAnimation());
 		_sm.AddState(nameof(AnimationKeys.Spell_HailBooks), onEnter => PlayAnimation());
 		_sm.AddState(nameof(AnimationKeys.Dead), onEnter => PlayAnimation());
-		_sm.AddState(nameof(StateKeys.TurnDash), onEnter =>
+		_sm.AddState(nameof(StateKeys.TurnDash),
+		onEnter =>
 		{
 			var toPlayer = (_target.GlobalPosition - GlobalPosition).Normalized();
 			_target = null;
@@ -103,7 +122,8 @@ public partial class BookWalker : CharacterBody3D
 				bWMesh.AnimationPlayer.Seek(timeCodeAnimation, true);
 			}
 			bWMesh.AnimationPlayer.Pause();
-		}, onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier * storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).SpeedAnimation), onExit =>
+		},
+		onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier * storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).SpeedAnimation), onExit =>
 		{
 			_target = _player;
 		});
@@ -111,8 +131,9 @@ public partial class BookWalker : CharacterBody3D
 		{
 			_target = null;
 			agent.TargetPosition = GlobalPosition + (-_knockbackData.dir * (_knockbackData.force / 10f));
-		}, onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier * storages.stateStorage.GetStateToName(nameof(StateKeys.Knockback)).SpeedAnimation)
-		, onExit =>
+		},
+		onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier * storages.stateStorage.GetStateToName(nameof(StateKeys.Knockback)).SpeedAnimation),
+		onExit =>
 		{
 			_knockbackData = null;
 			_target = _player;
@@ -124,6 +145,7 @@ public partial class BookWalker : CharacterBody3D
 		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.Walk), condition => !IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
 		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Run), condition => !IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z));
 		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Idle), condition => IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
+		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.RangeAttack), condition => IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z) && IsForwardTarget(_target.GlobalPosition));
 		_sm.AddTransition(nameof(AnimationKeys.Run), nameof(AnimationKeys.Walk), condition => IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z));
 		_sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(AnimationKeys.MeleeAttack), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)) && IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z) && IsForwardTarget(_target.GlobalPosition));
 		_sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(StateKeys.TurnDash), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)) && IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z) && !IsForwardTarget(_target.GlobalPosition));
@@ -135,6 +157,7 @@ public partial class BookWalker : CharacterBody3D
 		_sm.AddTriggerTransitionFromAny(nameof(StateKeys.Knockback), new Transition(nameof(AnimationKeys.Damage), nameof(StateKeys.Knockback), condition => Stats.IsAlive));
 		_sm.AddTransition(new Transition(nameof(StateKeys.Knockback), nameof(AnimationKeys.Idle), condition => agent.IsNavigationFinished()));
 		_sm.AddTransition(new TransitionAfter(nameof(AnimationKeys.MeleeAttackAOE), nameof(AnimationKeys.Idle), storages.stateStorage.GetStateToName(nameof(AnimationKeys.MeleeAttackAOE)).Duration));
+		_sm.AddTransition(new TransitionAfter(nameof(AnimationKeys.RangeAttack), nameof(AnimationKeys.Idle), storages.stateStorage.GetStateToName(nameof(AnimationKeys.RangeAttack)).Duration));
 
 		_sm.SetStartState(nameof(AnimationKeys.Idle));
 		_sm.Init();
@@ -143,9 +166,9 @@ public partial class BookWalker : CharacterBody3D
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		// GD.PrintRich($"[color=green]state = {_sm.ActiveStateName} [/color]");
+		GD.PrintRich($"[color=green]state = {_sm.ActiveStateName} [/color]");
 		_sm.OnLogic();
-		if (ReferenceEquals(_target, _player))
+		if (ReferenceEquals(_target, _player) && _target.GlobalPosition != agent.TargetPosition)
 			agent.TargetPosition = _target.GlobalPosition;
 	}
 
@@ -185,6 +208,19 @@ public partial class BookWalker : CharacterBody3D
 	private void PlayAnimation()
 	{
 		bWMesh.AnimationPlayer.Play(_sm.ActiveStateName);
+	}
+
+	public Vector3 GetRandomPositionOnCircle(Vector3 center, float radius)
+	{
+		var rng = new RandomNumberGenerator();
+		rng.Randomize();
+
+		var randomAngle = rng.RandfRange(0.0f, Mathf.Tau); // Mathf.Tau — это 2 * Pi
+
+		var offsetX = Mathf.Cos(randomAngle) * radius;
+		var offsetZ = Mathf.Sin(randomAngle) * radius;
+
+		return new Vector3(center.X + offsetX, center.Y, center.Z + offsetZ);
 	}
 
 	private void Rotate(Vector3 target, double delta)

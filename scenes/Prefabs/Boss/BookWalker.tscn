@@ -11,13 +11,13 @@ metadata/_custom_type_script = "uid://dikp65783mpd6"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6gmwo"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_ogt05"]
-radius = 5.0
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_xxawq"]
 radius = 1.0
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ejdoq"]
+
 [node name="BookWalker" type="CharacterBody3D" unique_id=346276284 node_paths=PackedStringArray("agent", "bWMesh", "areas", "routes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1000, -1000, -1000)
 collision_layer = 4
 collision_mask = 11
 script = ExtResource("1_qbcu3")
@@ -28,7 +28,7 @@ areas = [NodePath("MeleeArea3D"), NodePath("RangeArea3D")]
 routes = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1617009930]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.2, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_6gmwo")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=358847407]
@@ -39,14 +39,6 @@ debug_path_custom_color = Color(0, 1, 0, 1)
 [node name="Mesh" parent="." unique_id=1684036215 instance=ExtResource("3_xxawq")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.5, 0)
 
-[node name="RangeArea3D" type="Area3D" parent="." unique_id=754894110]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RangeArea3D" unique_id=279860985]
-shape = SubResource("SphereShape3D_ogt05")
-debug_color = Color(0, 0, 1, 0.41960785)
-
 [node name="MeleeArea3D" type="Area3D" parent="." unique_id=1932273929]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 collision_layer = 0
@@ -55,3 +47,10 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeArea3D" unique_id=522470076]
 shape = SubResource("SphereShape3D_xxawq")
 debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="RangeArea3D" type="Area3D" parent="." unique_id=593166712]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RangeArea3D" unique_id=1172567826]
+shape = SubResource("SphereShape3D_ejdoq")
+debug_color = Color(0, 0, 1, 1)

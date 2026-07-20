@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://8ga805rqmgi0"]
+
+[ext_resource type="Script" uid="uid://16prhnu3pgm8" path="res://scripts/Boss/Weapons/Book.cs" id="1_e7oxi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ejdoq"]
+
+[node name="BookArea3D" type="Area3D" unique_id=963794916]
+transform = Transform3D(0.05, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_e7oxi")
+timeLife = 2.0
+randomDurationInRun = Vector2(0, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=844319191]
+shape = SubResource("BoxShape3D_ejdoq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2026900751]

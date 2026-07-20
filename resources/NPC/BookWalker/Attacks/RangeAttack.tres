@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://sy6jblcfi32d"]
+
+[ext_resource type="Script" uid="uid://xhjlw4dxynrp" path="res://scripts/ReadOnly/AttackData.cs" id="1_0h8g4"]
+[ext_resource type="PackedScene" uid="uid://8ga805rqmgi0" path="res://scenes/Prefabs/Book.tscn" id="1_wb2fq"]
+
+[resource]
+script = ExtResource("1_0h8g4")
+Damage = 5.0
+HitForce = 75.0
+Speed = 50.0
+UseCountVFX = 4
+VFX = ExtResource("1_wb2fq")
+metadata/_custom_type_script = "uid://xhjlw4dxynrp"
