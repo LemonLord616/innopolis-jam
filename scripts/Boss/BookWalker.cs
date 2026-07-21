@@ -182,9 +182,9 @@ public partial class BookWalker : CharacterBody3D
 				var up = GlobalPosition + GlobalTransform.Basis.Y.Normalized() * (areas[0].Scale.Y / 2);
 				var down = GlobalPosition + -GlobalTransform.Basis.Y.Normalized() * (areas[0].Scale.Y / 2);
 				var spawnPos = GetRandomPositionOnCircle(down, areas[0].Scale.X);
+				GetTree().CurrentScene.AddChild(book);
 				book.GlobalPosition = spawnPos;
 				book.Init(attack, _player, up);
-				GetTree().CurrentScene.AddChild(book);
 				book.Scale = scale;
 			}
 			PlayAnimation();
