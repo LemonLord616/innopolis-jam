@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Telescope" format=3 uid="uid://cfjkh72uyrv2l"]
 
-[ext_resource type="Texture2D" uid="uid://clse8ghxmywjt" path="res://assets/weapon/placeholder_preview.png" id="1_6v3xa"]
+[ext_resource type="Texture2D" uid="uid://ossdalpg5s30" path="res://assets/weapon/bullet_hole.png" id="1_6v3xa"]
 [ext_resource type="Script" uid="uid://c11oyd4utu8he" path="res://scripts/items/weapons/telescope.gd" id="1_afj8x"]
 [ext_resource type="PackedScene" uid="uid://drw5wygq7g6ah" path="res://scenes/weapons/telescope/telescope_projectile.tscn" id="2_s38ya"]
 

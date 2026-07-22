@@ -37,6 +37,8 @@ public partial class Spawner : Node
 		yield return Co.Wait(data.DurationFirtsSpawn);
 
 		_ref = data.BookWalkerData.Prefab.Instantiate<BookWalker>();
+		_ref.GlobalPosition = spawnBWPos.GlobalPosition;
+		GetTree().CurrentScene.AddChild(_ref);
 		_ref.Init(new Stats.StatsConfig()
 		{
 			health = data.BookWalkerData.CurentHealth,

@@ -49,6 +49,10 @@ func _physics_process(delta: float) -> void:
 func _ready() -> void:
 	health.reset.call_deferred()
 
+# func disable_dash(timer: float) -> void:
+func disable_dash() -> void:
+	dash_cooldown_timer.wait_time = 10
+	dash_cooldown_timer.start()
 
 func reduce(amount: float) -> void:
 	health.hp -= amount

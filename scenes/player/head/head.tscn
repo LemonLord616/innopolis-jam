@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://r0skgrqmfy0k" path="res://scenes/player/head/item_selector.gd" id="2_gofkc"]
 [ext_resource type="PackedScene" uid="uid://h0ycb7pnmd00" path="res://assets/weapon/Ink_Pen.glb" id="2_n5w0a"]
 [ext_resource type="PackedScene" uid="uid://b5kku0drveigv" path="res://assets/weapon/Telescope.glb" id="3_gofkc"]
+[ext_resource type="PackedScene" uid="uid://cu7e27qoj6y28" path="res://assets/weapon/ubrella_sword_fix.tscn" id="6_um6c2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_yhr7m"]
 size = Vector3(0.2, 0.2, 1)
@@ -156,6 +157,30 @@ tracks/11/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-1.2140781, 1.5225209, -0.15724185)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Camera3D/Hand1/Items/UbrellaSword_FIX2:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Camera3D/Hand1/Items/UbrellaSword_FIX2:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n5w0a"]
@@ -618,6 +643,212 @@ _data = {
 &"idle": SubResource("Animation_3frkq")
 }
 
+[sub_resource type="Animation" id="Animation_um6c2"]
+resource_name = "attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Hand1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.26666668, 0.34666666, 0.3866667, 0.44666666, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.46516263, -0.3480032, -0.44830096), Vector3(0.46516263, -0.3480032, -0.44830096), Vector3(0.46516263, -0.3480032, -0.44830096), Vector3(0.46516263, -0.3480032, -0.7704036), Vector3(-0.014409989, -0.3667693, -0.7704036), Vector3(-0.09602317, -0.5078661, -0.8701462), Vector3(0.46516263, -0.3480032, -0.44830096)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Hand1:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.26666668, 0.34666666, 0.3866667, 0.44666666, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.2705025, 0.2097619, -1.0951886), Vector3(0.96449834, -0.27530757, -1.2797879), Vector3(0.96449834, -0.27530757, -1.2797879), Vector3(0.042425282, 0.28516856, -2.0232234), Vector3(-0.2503016, 0.6089605, -2.6234202), Vector3(-0.42427355, 0.6892727, -2.2714462), Vector3(0.2705025, 0.2097619, -1.0951886)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/Hand2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.26666668, 0.4, 0.44666666, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.3526029, -0.35907996, -0.4557153), Vector3(-0.5094619, -0.35907996, -0.69856524), Vector3(-0.5094619, -0.35907996, -0.69856524), Vector3(-0.5094619, -0.65312165, -0.69856524), Vector3(-0.7325643, -0.8580707, -0.69856524), Vector3(-0.3526029, -0.35907996, -0.4557153)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D/Hand2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.26666668, 0.34666666, 0.44666666, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.30052423, -0.60586596, 0.33901066), Vector3(0.30826318, -1.0299475, -0.007989376), Vector3(0.30826318, -1.0299475, -0.007989376), Vector3(-0.13854869, -0.93619347, 0.13703452), Vector3(-0.47747383, -0.84848994, -0.14638591), Vector3(0.30052423, -0.60586596, 0.33901066)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D/Area3D/CollisionShape3D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.31),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.38332713, -0.35199836, -0.25537667), Vector3(0, 0.184, -1.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D/Area3D/CollisionShape3D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.31),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.18325958, 0), Vector3(0, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Camera3D/Area3D/CollisionShape3D:shape:size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.31),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.3, 0.3, 1), Vector3(2, 1, 2)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Camera3D/Area3D:monitoring")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.31, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Camera3D/Hand1/Items/UbrellaSword_FIX2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.5965316, 0.05961266, -0.5479093)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Camera3D/Hand1/Items/UbrellaSword_FIX2:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.27521527, -0.33180183, 1.3652959)]
+}
+
+[sub_resource type="Animation" id="Animation_m1atp"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Hand1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5358868, 1.1486983, 0.6155731),
+"update": 0,
+"values": [Vector3(0.46516263, -0.3480032, -0.44830096), Vector3(0.46516263, -0.2797864, -0.44830096), Vector3(0.46516263, -0.3480032, -0.44830096)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Hand1:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.2705025, 0.2097619, -1.0951886)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3D/Hand2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5358868, 1.1486983, 0.6155731),
+"update": 0,
+"values": [Vector3(-0.3526029, -0.35907996, -0.4557153), Vector3(-0.3526029, -0.29086316, -0.4557153), Vector3(-0.3526029, -0.35907996, -0.4557153)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D/Hand2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.30052423, -0.60586596, 0.33901066)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera3D/Hand1/Items/UbrellaSword_FIX2:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.5965316, 0.05961266, -0.5479093)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D/Hand1/Items/UbrellaSword_FIX2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.27521527, -0.33180183, 1.3652959)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a5fo2"]
+_data = {
+&"attack": SubResource("Animation_um6c2"),
+&"idle": SubResource("Animation_m1atp")
+}
+
 [node name="Head" type="Node3D" unique_id=720382681 node_paths=PackedStringArray("camera", "animation_player", "hitbox", "item_selector")]
 script = ExtResource("1_p0fbf")
 disabled = true
@@ -631,19 +862,20 @@ metadata/_custom_type_script = "uid://dijd83a5v35dk"
 current = true
 
 [node name="Hand1" type="MeshInstance3D" parent="Camera3D" unique_id=407209750]
-transform = Transform3D(0.39837614, 0.89500475, 0.20065519, -0.856687, 0.44122875, -0.26721564, -0.32769418, -0.065446354, 0.9425143, 0.38936812, -0.3480032, -0.13301289)
+transform = Transform3D(0.3983761, 0.89500475, 0.2006553, -0.85668695, 0.44122875, -0.2672158, -0.32769412, -0.065446354, 0.94251484, 0.38936812, -0.3480032, -0.13301289)
 layers = 2
 mesh = SubResource("BoxMesh_yhr7m")
 
-[node name="Items" type="Node3D" parent="Camera3D/Hand1" unique_id=2138861366 node_paths=PackedStringArray("ink_pen", "telescope")]
+[node name="Items" type="Node3D" parent="Camera3D/Hand1" unique_id=2138861366 node_paths=PackedStringArray("ink_pen", "telescope", "umbrella")]
 script = ExtResource("2_gofkc")
 ink_pen = NodePath("Ink_Pen")
 telescope = NodePath("Telescope")
+umbrella = NodePath("UbrellaSword_FIX2")
 metadata/_custom_type_script = "uid://r0skgrqmfy0k"
 
 [node name="Ink_Pen" parent="Camera3D/Hand1/Items" unique_id=1202783389 instance=ExtResource("2_n5w0a")]
 process_mode = 4
-transform = Transform3D(-0.5672895, -0.57946336, -0.5851536, 0.6547763, -0.7483169, 0.10625321, -0.4994501, -0.32286838, 0.8039313, 0.16824067, 0.15423882, -0.2846952)
+transform = Transform3D(-0.56728935, -0.57946336, -0.5851536, 0.65477616, -0.7483169, 0.10625321, -0.49945, -0.32286838, 0.8039313, 0.16824067, 0.15423882, -0.2846952)
 visible = false
 
 [node name="Telescope" parent="Camera3D/Hand1/Items" unique_id=2141104892 instance=ExtResource("3_gofkc")]
@@ -651,8 +883,13 @@ process_mode = 4
 transform = Transform3D(0.19422708, -0.9168524, 0.34879413, -0.05468301, 0.34489283, 0.93704784, -0.9794313, -0.20107318, 0.016851278, -0.12698722, 0.038104087, -0.7862737)
 visible = false
 
+[node name="UbrellaSword_FIX2" parent="Camera3D/Hand1/Items" unique_id=1348914177 instance=ExtResource("6_um6c2")]
+process_mode = 4
+transform = Transform3D(0.49999997, 0, 0, 0, 0.49999997, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+
 [node name="Hand2" type="MeshInstance3D" parent="Camera3D" unique_id=1162761451]
-transform = Transform3D(0.91366327, -0.3742781, -0.1585397, 0.3176495, 0.9008162, -0.29602098, 0.2536093, 0.22010343, 0.94193244, -0.12975842, -0.31717527, -0.6028769)
+transform = Transform3D(0.91366327, -0.37427828, -0.15853965, 0.3176495, 0.9008167, -0.29602093, 0.2536093, 0.22010355, 0.9419322, -0.12975842, -0.31717527, -0.6028769)
 layers = 2
 mesh = SubResource("BoxMesh_yhr7m")
 
@@ -672,4 +909,5 @@ libraries/ = SubResource("AnimationLibrary_n5w0a")
 libraries/hands = SubResource("AnimationLibrary_xq1xr")
 libraries/ink_scythe = SubResource("AnimationLibrary_gofkc")
 libraries/telescope = SubResource("AnimationLibrary_1veag")
+libraries/umbrella = SubResource("AnimationLibrary_a5fo2")
 playback_default_blend_time = 0.1
