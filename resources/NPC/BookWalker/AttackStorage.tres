@@ -6,8 +6,9 @@
 [ext_resource type="Resource" uid="uid://sy6jblcfi32d" path="res://resources/NPC/BookWalker/Attacks/RangeAttack.tres" id="3_1ah3t"]
 [ext_resource type="Resource" uid="uid://cueo4mnk7m8yd" path="res://resources/NPC/BookWalker/Attacks/TurnDash.tres" id="4_frjcq"]
 [ext_resource type="Resource" uid="uid://0jf1b58h34rx" path="res://resources/NPC/BookWalker/Attacks/Damage.tres" id="5_241nk"]
+[ext_resource type="Resource" uid="uid://bqf77p5304u3" path="res://resources/NPC/BookWalker/Attacks/Dash.tres" id="6_ljy65"]
 
 [resource]
 script = ExtResource("2_jl4op")
-attacks = Array[Object]([ExtResource("1_nousx"), ExtResource("2_1ah3t"), ExtResource("3_1ah3t"), ExtResource("4_frjcq"), ExtResource("5_241nk")])
+attacks = Array[Object]([ExtResource("1_nousx"), ExtResource("2_1ah3t"), ExtResource("3_1ah3t"), ExtResource("4_frjcq"), ExtResource("5_241nk"), ExtResource("6_ljy65")])
 metadata/_custom_type_script = "uid://biep3o5h4m83u"

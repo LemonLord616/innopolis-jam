@@ -5,6 +5,5 @@
 [resource]
 script = ExtResource("2_7tkj6")
 CoolDowm = 10.0
-HitForce = 75.0
 UseMaxAttack = 3
 metadata/_custom_type_script = "uid://xhjlw4dxynrp"

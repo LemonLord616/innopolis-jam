@@ -40,7 +40,7 @@ public partial class BookWalker : CharacterBody3D
 			Damage.SetDamage(_player, melee.Damage, new KnockbackData(GlobalTransform.Basis.Z, melee.HitForce));
 		};
 
-		_sm = new StateMachine();
+		_sm = new ();
 
 		//states
 		_sm.AddState(nameof(AnimationKeys.Idle),
@@ -72,7 +72,20 @@ public partial class BookWalker : CharacterBody3D
 		 {
 			 _target = null;
 			 PlayAnimation();
+			 foreach (var path in paths)
+				 path.Visible = false;
 		 });
+		_sm.AddState(nameof(StateKeys.Dash),
+	   onEnter =>
+	   {
+		   var dash = storages.attackStorage.GetAttackToName(nameof(StateKeys.Dash));
+		   _coolDown.Start(nameof(StateKeys.Dash), dash.UseMaxAttack, dash.CoolDowm);
+	   },
+	   onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier * storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).SpeedAnimation),
+	   onExit =>
+	   {
+		   _target = _player;
+	   });
 		_sm.AddState(nameof(StateKeys.TurnDash),
 		onEnter =>
 		{
@@ -198,10 +211,11 @@ public partial class BookWalker : CharacterBody3D
 		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.Walk), condition => !IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
 		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Run), condition => !IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z));
 		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Idle), condition => IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
+		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(StateKeys.Dash), condition => !_attackFlag && IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z) && !_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.Dash)).UseMaxAttack));
 		_sm.AddTransition(nameof(AnimationKeys.Run), nameof(AnimationKeys.Walk), condition => IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.TurnDash), nameof(AnimationKeys.Idle), storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).Duration));
 		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.TurnDash), condition => _target != null && !_attackFlag && detect.GetCollisionCount() > 0 &&
-		!_coolDown.IsCoolDown(nameof(StateKeys.TurnDash), storages.attackStorage.GetAttackToName(nameof(StateKeys.TurnDash)).UseMaxAttack)));
+		!_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.TurnDash)).UseMaxAttack)));
 
 		_sm.AddTriggerTransitionFromAny(nameof(AnimationKeys.Damage), new Transition(null, nameof(AnimationKeys.Damage), condition => !_coolDown.IsCoolDown(nameof(AnimationKeys.Damage), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.Damage)).UseMaxAttack) && Stats.IsAlive));
 		_sm.AddTransition(new TransitionAfter(nameof(AnimationKeys.Damage), nameof(AnimationKeys.Idle), (float)bWMesh.AnimationPlayer.GetAnimation(nameof(AnimationKeys.Damage)).Length));

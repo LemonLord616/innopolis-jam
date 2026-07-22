@@ -58,7 +58,7 @@ public partial class Book : Area3D
 		while (life < timeLife)
 		{
 			life += (float)GetProcessDeltaTime();
-			GlobalPosition += GlobalTransform.Basis.Z * _attack.Speed * (float)GetPhysicsProcessDeltaTime();
+			GlobalPosition += GlobalTransform.Basis.Z.Normalized() * _attack.Speed * (float)GetPhysicsProcessDeltaTime();
 			yield return null;
 		}
 
