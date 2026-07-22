@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MeleeHands" format=3 uid="uid://bhcuvu713i3sk"]
+
+[ext_resource type="Script" uid="uid://b15lfi5lmjpxd" path="res://scripts/items/weapons/hands.gd" id="1_af4ic"]
+[ext_resource type="Texture2D" uid="uid://clse8ghxmywjt" path="res://assets/weapon/placeholder_preview.png" id="1_py0o7"]
+
+[resource]
+script = ExtResource("1_af4ic")
+damage = 30.0
+attack_anim_name = &"attack"
+name = &"umbrella"
+item = 3
+image_texture = ExtResource("1_py0o7")
+anim_library_name = &"umbrella"
+idle_anim_name = &"idle"
+metadata/_custom_type_script = "uid://b15lfi5lmjpxd"

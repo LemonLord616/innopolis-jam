@@ -4,12 +4,14 @@ class_name HeadItemSelector
 
 @export var ink_pen: Node3D
 @export var telescope: Node3D
+@export var umbrella: Node3D
 
 var _current_item: ItemManager.Item = ItemManager.Item.NOITEM
 
 @onready var items: Dictionary[ItemManager.Item, Node3D] = {
 	ItemManager.Item.INK_SCYTHE: ink_pen,
 	ItemManager.Item.TELESCOPE: telescope,
+	ItemManager.Item.UMBRELLA: umbrella,
 }
 
 func set_item(item: ItemManager.Item) -> void:

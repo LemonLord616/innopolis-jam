@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="InkScythe" format=3 uid="uid://v18c24u40x8h"]
 
-[ext_resource type="Texture2D" uid="uid://clse8ghxmywjt" path="res://assets/weapon/placeholder_preview.png" id="1_a2rmo"]
+[ext_resource type="Texture2D" uid="uid://pmilmkhxqv5a" path="res://assets/weapon/ink_blot.png" id="1_qd5m0"]
 [ext_resource type="PackedScene" uid="uid://784m8rosibg" path="res://scenes/weapons/ink_scythe/ink_projectile.tscn" id="2_vr6vs"]
 [ext_resource type="Script" uid="uid://dp871q01rp8yw" path="res://scripts/items/weapons/ink_scythe.gd" id="4_sehxk"]
 
@@ -11,7 +11,7 @@ damage = null
 attack_anim_name = &"attack"
 name = &"ink_scythe"
 item = 1
-image_texture = ExtResource("1_a2rmo")
+image_texture = ExtResource("1_qd5m0")
 anim_library_name = &"ink_scythe"
 idle_anim_name = &"idle"
 metadata/_custom_type_script = "uid://dp871q01rp8yw"
