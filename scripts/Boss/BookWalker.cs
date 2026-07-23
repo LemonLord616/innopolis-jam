@@ -40,7 +40,7 @@ public partial class BookWalker : CharacterBody3D
 			Damage.SetDamage(_player, melee.Damage, new KnockbackData(GlobalTransform.Basis.Z, melee.HitForce));
 		};
 
-		_sm = new ();
+		_sm = new();
 
 		//states
 		_sm.AddState(nameof(AnimationKeys.Idle),
@@ -208,11 +208,11 @@ public partial class BookWalker : CharacterBody3D
 
 		//transitions
 		_sm.AddTransitionFromAny(new Transition(null, nameof(AnimationKeys.Dead), condition => !Stats.IsAlive));
-		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.Walk), condition => !IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
-		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Run), condition => !IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z));
-		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Idle), condition => IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
-		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(StateKeys.Dash), condition => !_attackFlag && IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z) && !_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.Dash)).UseMaxAttack));
-		_sm.AddTransition(nameof(AnimationKeys.Run), nameof(AnimationKeys.Walk), condition => IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z));
+		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.Walk), condition => !PlayerInArea(areas[0]));
+		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Run), condition => !PlayerInArea(areas[1]));
+		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Idle), condition => PlayerInArea(areas[0]));
+		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(StateKeys.Dash), condition => !_attackFlag && PlayerInArea(areas[1]) && !_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.Dash)).UseMaxAttack));
+		_sm.AddTransition(nameof(AnimationKeys.Run), nameof(AnimationKeys.Walk), condition => PlayerInArea(areas[1]));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.TurnDash), nameof(AnimationKeys.Idle), storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).Duration));
 		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.TurnDash), condition => _target != null && !_attackFlag && detect.GetCollisionCount() > 0 &&
 		!_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.TurnDash)).UseMaxAttack)));
@@ -224,16 +224,16 @@ public partial class BookWalker : CharacterBody3D
 
 		//Combat
 		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.PreMeleeAttack), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.MeleeAttack), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttack)).UseMaxAttack) &&
-		 IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z) && IsForwardTarget(_target.GlobalPosition)));
+		 PlayerInArea(areas[0]) && IsForwardTarget(_target.GlobalPosition)));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.PreMeleeAttack), nameof(AnimationKeys.MeleeAttack), delay: storages.stateStorage.GetStateToName(nameof(StateKeys.PreMeleeAttack)).Duration));
 		_sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(AnimationKeys.Idle), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)));
 
-		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.MeleeAttackAOE), condition => IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z));
-		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.PreMeleeAttackAOE), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.MeleeAttackAOE), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE)).UseMaxAttack) && IsWithinDistance(_target.GlobalPosition, areas[0].Scale.Z)));
+		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.MeleeAttackAOE), condition => PlayerInArea(areas[0]));
+		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.PreMeleeAttackAOE), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.MeleeAttackAOE), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE)).UseMaxAttack) && PlayerInArea(areas[0])));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.PreMeleeAttackAOE), nameof(AnimationKeys.MeleeAttackAOE), storages.stateStorage.GetStateToName(nameof(StateKeys.PreMeleeAttackAOE)).Duration));
 		_sm.AddTransition(new TransitionAfter(nameof(AnimationKeys.MeleeAttackAOE), nameof(AnimationKeys.Idle), delay: storages.stateStorage.GetStateToName(nameof(AnimationKeys.MeleeAttackAOE)).Duration));
 
-		_sm.AddTransitionFromAny(new Transition(null, nameof(AnimationKeys.RangeAttack), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.RangeAttack), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.RangeAttack)).UseMaxAttack) && IsWithinDistance(_target.GlobalPosition, areas[1].Scale.Z)));
+		_sm.AddTransitionFromAny(new Transition(null, nameof(AnimationKeys.RangeAttack), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.RangeAttack), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.RangeAttack)).UseMaxAttack) && PlayerInArea(areas[1])));
 		_sm.AddTransition(nameof(AnimationKeys.RangeAttack), nameof(AnimationKeys.Idle), condition => IsFinishAnimation(nameof(AnimationKeys.RangeAttack)));
 
 		_sm.SetStartState(nameof(AnimationKeys.Idle));
@@ -268,9 +268,9 @@ public partial class BookWalker : CharacterBody3D
 		return GlobalTransform.Basis.Z.Dot(toTarget) > DOT;
 	}
 
-	private bool IsWithinDistance(Vector3 target, float distance)
+	private bool PlayerInArea(Area3D area)
 	{
-		return GlobalPosition.DistanceTo(target) < distance;
+		return area.HasOverlappingBodies();
 	}
 
 	private bool IsFinishAnimation(string name)

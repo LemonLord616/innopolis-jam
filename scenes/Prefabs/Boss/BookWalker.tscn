@@ -12,10 +12,10 @@ metadata/_custom_type_script = "uid://dikp65783mpd6"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6gmwo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xxawq"]
-radius = 1.0
+radius = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ejdoq"]
-radius = 2.5
+radius = 5.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6y4j3"]
 albedo_color = Color(1, 0, 0, 1)
@@ -55,7 +55,6 @@ debug_path_custom_color = Color(0, 1, 0, 1)
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, -0.5, 0)
 
 [node name="MeleeArea3D" type="Area3D" parent="." unique_id=1932273929]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
 collision_layer = 0
 collision_mask = 2
 
@@ -64,6 +63,8 @@ shape = SubResource("SphereShape3D_xxawq")
 debug_color = Color(1, 0, 0, 0.41960785)
 
 [node name="RangeArea3D" type="Area3D" parent="." unique_id=593166712]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RangeArea3D" unique_id=1172567826]
 shape = SubResource("SphereShape3D_ejdoq")
