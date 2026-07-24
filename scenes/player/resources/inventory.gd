@@ -32,3 +32,8 @@ func has_item(item: ItemResource) -> bool:
 
 func is_occupied(slot: int) -> bool:
 	return slots.get(slot) != null
+
+func add_item(item: ItemResource) -> void:
+	slots.append(item)
+	inventory_change.emit(self)
+	selected_slot = slots.size() - 1

@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dm4vdqb0mkpsd" path="res://scenes/player/resources/effects.gd" id="10_oaya2"]
 [ext_resource type="PackedScene" uid="uid://b82o044wvjc7d" path="res://scenes/player/player.tscn" id="11_85j56"]
 
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12dqu"]
 albedo_texture = ExtResource("2_j0vxu")
 metallic = 1.0
