@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="BossProgress" format=3 uid="uid://b7tnggjifptev"]
+
+[ext_resource type="Script" uid="uid://clm5c17omw4ej" path="res://scripts/ReadOnly/BossProgress.cs" id="1_fee17"]
+[ext_resource type="Resource" uid="uid://y0wj2tnveqg6" path="res://resources/NPC/BookWalker/States/MeleeAttack.tres" id="1_hupkn"]
+[ext_resource type="Resource" uid="uid://mw438kylsjej" path="res://resources/NPC/BookWalker/Spells/SpellBerserk.tres" id="1_kf2pd"]
+[ext_resource type="Script" uid="uid://d4h2rsm8y525d" path="res://scripts/ReadOnly/Level.cs" id="2_4j1aq"]
+[ext_resource type="Resource" uid="uid://cfdggl7u74nh5" path="res://resources/NPC/BookWalker/States/TurnDash.tres" id="3_lf5rl"]
+[ext_resource type="Resource" uid="uid://bqf77p5304u3" path="res://resources/NPC/BookWalker/Attacks/Dash.tres" id="4_kf2pd"]
+[ext_resource type="Resource" uid="uid://2usa30shdxkx" path="res://resources/NPC/BookWalker/States/MeleeAttackAOE.tres" id="5_ruitc"]
+[ext_resource type="Resource" uid="uid://blufgmrg1o7yy" path="res://resources/NPC/BookWalker/States/RangeAttack.tres" id="6_lf5rl"]
+[ext_resource type="Resource" uid="uid://cws582dmioa4f" path="res://resources/NPC/BookWalker/Spells/AntiKaiShield.tres" id="7_kf2pd"]
+[ext_resource type="Resource" uid="uid://bjym1cg5sso37" path="res://resources/NPC/BookWalker/Spells/SpellHailBooks.tres" id="9_ruitc"]
+
+[sub_resource type="Resource" id="Resource_doww6"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[sub_resource type="Resource" id="Resource_5h4gw"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn"), ExtResource("3_lf5rl")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[sub_resource type="Resource" id="Resource_mvxs5"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn"), ExtResource("3_lf5rl"), ExtResource("4_kf2pd")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[sub_resource type="Resource" id="Resource_1wxqv"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn"), ExtResource("3_lf5rl"), ExtResource("4_kf2pd"), ExtResource("5_ruitc")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[sub_resource type="Resource" id="Resource_dtsc6"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn"), ExtResource("3_lf5rl"), ExtResource("4_kf2pd"), ExtResource("5_ruitc"), ExtResource("6_lf5rl")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[sub_resource type="Resource" id="Resource_yhy47"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn"), ExtResource("3_lf5rl"), ExtResource("4_kf2pd"), ExtResource("5_ruitc"), ExtResource("6_lf5rl"), ExtResource("7_kf2pd")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[sub_resource type="Resource" id="Resource_qqaq4"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn"), ExtResource("3_lf5rl"), ExtResource("4_kf2pd"), ExtResource("5_ruitc"), ExtResource("6_lf5rl"), ExtResource("7_kf2pd"), ExtResource("1_kf2pd")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[sub_resource type="Resource" id="Resource_k5nwt"]
+script = ExtResource("2_4j1aq")
+opened = Array[Resource]([ExtResource("1_hupkn"), ExtResource("3_lf5rl"), ExtResource("4_kf2pd"), ExtResource("5_ruitc"), ExtResource("6_lf5rl"), ExtResource("7_kf2pd"), ExtResource("1_kf2pd"), ExtResource("9_ruitc")])
+metadata/_custom_type_script = "uid://d4h2rsm8y525d"
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_fee17")
+levels = Array[Object]([SubResource("Resource_doww6"), SubResource("Resource_5h4gw"), SubResource("Resource_mvxs5"), SubResource("Resource_1wxqv"), SubResource("Resource_dtsc6"), SubResource("Resource_yhy47"), SubResource("Resource_qqaq4"), SubResource("Resource_k5nwt")])
+metadata/_custom_type_script = "uid://clm5c17omw4ej"

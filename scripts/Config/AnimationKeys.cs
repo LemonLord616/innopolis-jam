@@ -9,7 +9,4 @@ public partial class AnimationKeys
     public readonly bool MeleeAttack;
     public readonly bool MeleeAttackAOE;
     public readonly bool RangeAttack;
-    public readonly bool Spell_Anger;
-    public readonly bool Spell_FlyingProjectiles;
-    public readonly bool Spell_HailBooks;
 }

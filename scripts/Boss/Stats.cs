@@ -45,7 +45,7 @@ public partial class Stats : Resource
             OnHealEv?.Invoke();
         else if (CurentHealth < oldHealth)
             OnDamageEv?.Invoke();
-        else if (CurentHealth == 0f)
+        else if (!IsAlive)
             OnDeadEv?.Invoke();
     }
 

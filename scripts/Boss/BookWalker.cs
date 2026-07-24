@@ -1,24 +1,30 @@
 using System.Collections;
 using HCoroutines;
 using UnityHFSM;
+using System;
 using Godot;
 
 [GlobalClass]
 public partial class BookWalker : CharacterBody3D
 {
+	public event Action OnInitEv;
+
 	[Export] private NavigationAgent3D agent;
 	[Export] private BWMesh bWMesh;
-	[Export] public Stats Stats { get; private set; }
+	[Export, ExportCategory("Params")] public Stats Stats { get; private set; }
 	[Export] private Area3D[] areas; // 0 - melle, 1 - range
 	[Export] private MeshInstance3D[] paths; // 0 - melee, 1 - meleeAoe
 	[Export] private ShapeCast3D detect;
-	[Export] private Route[] routes;
+	[ExportCategory("Spells")]
+	[Export] private AntiKaiShield shield;
 
+	[Export] public BossProgress BossProgress { get; private set; }
+
+	public int CountRespawn { get; private set; }
 	public float Gravity => (float)ProjectSettings.GetSetting("physics/3d/default_gravity");
 
-	private CharacterBody3D _player;
+	public CharacterBody3D Player { get; private set;}
 	private Node3D _target;
-	private Coroutine _readRoute;
 
 	private StateMachine _sm;
 	private CoolDown _coolDown;
@@ -26,18 +32,18 @@ public partial class BookWalker : CharacterBody3D
 	private const float DOT = .7f;//45 Degrees
 	private bool _attackFlag;
 
-	public void Init(Stats.StatsConfig config, BookWalkerData.BWStorages storages, Route[] routes, CharacterBody3D player)
+	public void Init(Stats.StatsConfig config, BookWalkerData.BWStorages storages, CharacterBody3D player, int countRespawn)
 	{
 		Stats.Init(config);
-		this.routes = routes;
-		_player = player;
-		_target = _player;
+		Player = player;
+		_target = Player;
+		CountRespawn = countRespawn;
 		_coolDown = new();
 		Stats.OnDamageEv += () => _sm.Trigger(nameof(AnimationKeys.Damage));
 		bWMesh.OnHitEv += () =>
 		{
 			var melee = storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttack));
-			Damage.SetDamage(_player, melee.Damage, new KnockbackData(GlobalTransform.Basis.Z, melee.HitForce));
+			Damage.SetDamage(Player, melee.Damage, new KnockbackData(GlobalTransform.Basis.Z, melee.HitForce));
 		};
 
 		_sm = new();
@@ -54,8 +60,8 @@ public partial class BookWalker : CharacterBody3D
 		onLogic =>
 	   {
 		   var fdelta = (float)GetPhysicsProcessDeltaTime();
-		   if (_player != null)
-			   Rotate(_player.GlobalPosition, fdelta);
+		   if (Player != null)
+			   Rotate(Player.GlobalPosition, fdelta);
 		   UseGravity(fdelta);
 	   });
 		_sm.AddState(nameof(AnimationKeys.Walk), onEnter => PlayAnimation(), onLogic => Move((float)GetPhysicsProcessDeltaTime(), storages.stateStorage.GetStateToName(nameof(AnimationKeys.Walk)).SpeedAnimation));
@@ -84,7 +90,7 @@ public partial class BookWalker : CharacterBody3D
 	   onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier * storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).SpeedAnimation),
 	   onExit =>
 	   {
-		   _target = _player;
+		   _target = Player;
 	   });
 		_sm.AddState(nameof(StateKeys.TurnDash),
 		onEnter =>
@@ -93,27 +99,16 @@ public partial class BookWalker : CharacterBody3D
 			var toProjectile = ((projectile as Node3D).GlobalPosition - GlobalPosition).Normalized();
 			_target = null;
 			var myRight = GlobalTransform.Basis.X.Normalized();
-			var myBackward = GlobalTransform.Basis.Z.Normalized();
 			var fleeDirection = Vector3.Zero;
 			var distanceMultiplier = 2f;
 			var timeCodeAnimation = .4f;
 
 			fleeDirection += myRight.Dot(toProjectile) > 0f ? -myRight : myRight;
-			fleeDirection += myBackward.Dot(toProjectile) > 0f ? -myBackward : myBackward;
 			fleeDirection = fleeDirection.Normalized();
 
 			agent.TargetPosition = GlobalPosition + (fleeDirection * distanceMultiplier);
-			if (myBackward.Dot(toProjectile) > 0f)
-			{
-				bWMesh.AnimationPlayer.Play(nameof(AnimationKeys.Run));
-				timeCodeAnimation = 0f;
-				bWMesh.AnimationPlayer.Seek(timeCodeAnimation, true);
-			}
-			else
-			{
-				bWMesh.AnimationPlayer.Play(nameof(AnimationKeys.RunBackwards));
-				bWMesh.AnimationPlayer.Seek(timeCodeAnimation, true);
-			}
+			bWMesh.AnimationPlayer.Play(nameof(AnimationKeys.RunBackwards));
+			bWMesh.AnimationPlayer.Seek(timeCodeAnimation, true);
 			bWMesh.AnimationPlayer.Pause();
 			var attack = storages.attackStorage.GetAttackToName(nameof(StateKeys.TurnDash));
 			_coolDown.Start(nameof(StateKeys.TurnDash), attack.UseMaxAttack, attack.CoolDowm);
@@ -121,7 +116,7 @@ public partial class BookWalker : CharacterBody3D
 		onLogic => Move((float)GetPhysicsProcessDeltaTime(), Stats.SpeedModifier * storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).SpeedAnimation),
 		onExit =>
 		{
-			_target = _player;
+			_target = Player;
 		});
 		_sm.AddState(nameof(StateKeys.Knockback),
 		onEnter =>
@@ -133,7 +128,7 @@ public partial class BookWalker : CharacterBody3D
 		onExit =>
 		{
 			_knockbackData = null;
-			_target = _player;
+			_target = Player;
 		});
 
 		//combat state
@@ -175,10 +170,10 @@ public partial class BookWalker : CharacterBody3D
 			Move((float)GetPhysicsProcessDeltaTime(), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE)).Speed);
 			foreach (var body in areas[0].GetOverlappingBodies())
 			{
-				if (ReferenceEquals(body, _player))
+				if (ReferenceEquals(body, Player))
 				{
 					var attack = storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE));
-					Damage.SetDamage(_player, attack.Damage, new(GlobalTransform.Basis.Z, attack.HitForce));
+					Damage.SetDamage(Player, attack.Damage, new(GlobalTransform.Basis.Z, attack.HitForce));
 				}
 			}
 		},
@@ -197,24 +192,22 @@ public partial class BookWalker : CharacterBody3D
 				var spawnPos = GetRandomPositionOnCircle(down, areas[0].Scale.X);
 				GetTree().CurrentScene.AddChild(book);
 				book.GlobalPosition = spawnPos;
-				book.Init(attack, _player, up);
+				book.Init(attack, Player, up);
 				book.Scale = scale;
 			}
 			PlayAnimation();
 			_coolDown.Start(nameof(AnimationKeys.RangeAttack), attack.UseMaxAttack, attack.CoolDowm);
 		});
-		_sm.AddState(nameof(AnimationKeys.Spell_Anger), onEnter => PlayAnimation());
-		_sm.AddState(nameof(AnimationKeys.Spell_HailBooks), onEnter => PlayAnimation());
 
 		//transitions
 		_sm.AddTransitionFromAny(new Transition(null, nameof(AnimationKeys.Dead), condition => !Stats.IsAlive));
 		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.Walk), condition => !PlayerInArea(areas[0]));
 		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Run), condition => !PlayerInArea(areas[1]));
 		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(AnimationKeys.Idle), condition => PlayerInArea(areas[0]));
-		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(StateKeys.Dash), condition => !_attackFlag && PlayerInArea(areas[1]) && !_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.Dash)).UseMaxAttack));
+		_sm.AddTransition(nameof(AnimationKeys.Walk), nameof(StateKeys.Dash), condition => BossProgress.HasOpened(CountRespawn, nameof(StateKeys.Dash)) && !_attackFlag && PlayerInArea(areas[1]) && !_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.Dash)).UseMaxAttack));
 		_sm.AddTransition(nameof(AnimationKeys.Run), nameof(AnimationKeys.Walk), condition => PlayerInArea(areas[1]));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.TurnDash), nameof(AnimationKeys.Idle), storages.stateStorage.GetStateToName(nameof(StateKeys.TurnDash)).Duration));
-		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.TurnDash), condition => _target != null && !_attackFlag && detect.GetCollisionCount() > 0 &&
+		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.TurnDash), condition => BossProgress.HasOpened(CountRespawn, nameof(StateKeys.TurnDash)) && !shield.IsActive && _target != null && !_attackFlag && detect.GetCollisionCount() > 0 &&
 		!_coolDown.IsCoolDown(nameof(StateKeys.Dash), storages.attackStorage.GetAttackToName(nameof(StateKeys.TurnDash)).UseMaxAttack)));
 
 		_sm.AddTriggerTransitionFromAny(nameof(AnimationKeys.Damage), new Transition(null, nameof(AnimationKeys.Damage), condition => !_coolDown.IsCoolDown(nameof(AnimationKeys.Damage), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.Damage)).UseMaxAttack) && Stats.IsAlive));
@@ -223,21 +216,21 @@ public partial class BookWalker : CharacterBody3D
 		_sm.AddTransition(new Transition(nameof(StateKeys.Knockback), nameof(AnimationKeys.Idle), condition => agent.IsNavigationFinished()));
 
 		//Combat
-		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.PreMeleeAttack), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.MeleeAttack), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttack)).UseMaxAttack) &&
+		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.PreMeleeAttack), condition => BossProgress.HasOpened(CountRespawn, nameof(StateKeys.PreMeleeAttack)) && _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.MeleeAttack), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttack)).UseMaxAttack) &&
 		 PlayerInArea(areas[0]) && IsForwardTarget(_target.GlobalPosition)));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.PreMeleeAttack), nameof(AnimationKeys.MeleeAttack), delay: storages.stateStorage.GetStateToName(nameof(StateKeys.PreMeleeAttack)).Duration));
 		_sm.AddTransition(nameof(AnimationKeys.MeleeAttack), nameof(AnimationKeys.Idle), condition => IsFinishAnimation(nameof(AnimationKeys.MeleeAttack)));
 
-		_sm.AddTransition(nameof(AnimationKeys.Idle), nameof(AnimationKeys.MeleeAttackAOE), condition => PlayerInArea(areas[0]));
-		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.PreMeleeAttackAOE), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.MeleeAttackAOE), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE)).UseMaxAttack) && PlayerInArea(areas[0])));
+		_sm.AddTransitionFromAny(new Transition(null, nameof(StateKeys.PreMeleeAttackAOE), condition => BossProgress.HasOpened(CountRespawn, nameof(StateKeys.PreMeleeAttackAOE)) && _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.MeleeAttackAOE), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.MeleeAttackAOE)).UseMaxAttack) && PlayerInArea(areas[0])));
 		_sm.AddTransition(new TransitionAfter(nameof(StateKeys.PreMeleeAttackAOE), nameof(AnimationKeys.MeleeAttackAOE), storages.stateStorage.GetStateToName(nameof(StateKeys.PreMeleeAttackAOE)).Duration));
 		_sm.AddTransition(new TransitionAfter(nameof(AnimationKeys.MeleeAttackAOE), nameof(AnimationKeys.Idle), delay: storages.stateStorage.GetStateToName(nameof(AnimationKeys.MeleeAttackAOE)).Duration));
 
-		_sm.AddTransitionFromAny(new Transition(null, nameof(AnimationKeys.RangeAttack), condition => _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.RangeAttack), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.RangeAttack)).UseMaxAttack) && PlayerInArea(areas[1])));
+		_sm.AddTransitionFromAny(new Transition(null, nameof(AnimationKeys.RangeAttack), condition => BossProgress.HasOpened(CountRespawn, nameof(AnimationKeys.RangeAttack)) && _target != null && !_attackFlag && !_coolDown.IsCoolDown(nameof(AnimationKeys.RangeAttack), storages.attackStorage.GetAttackToName(nameof(AnimationKeys.RangeAttack)).UseMaxAttack) && PlayerInArea(areas[1])));
 		_sm.AddTransition(nameof(AnimationKeys.RangeAttack), nameof(AnimationKeys.Idle), condition => IsFinishAnimation(nameof(AnimationKeys.RangeAttack)));
 
 		_sm.SetStartState(nameof(AnimationKeys.Idle));
 		_sm.Init();
+		OnInitEv?.Invoke();
 	}
 
 	public override void _Process(double delta)
@@ -246,14 +239,8 @@ public partial class BookWalker : CharacterBody3D
 		GD.PrintRich($"[color=green]state = {_sm.ActiveStateName} [/color]");
 		_sm.OnLogic();
 		detect.ForceShapecastUpdate();
-		if (ReferenceEquals(_target, _player) && _target.GlobalPosition != agent.TargetPosition)
+		if (ReferenceEquals(_target, Player) && _target.GlobalPosition != agent.TargetPosition)
 			agent.TargetPosition = _target.GlobalPosition;
-	}
-
-	public override void _ExitTree()
-	{
-		base._ExitTree();
-		_readRoute?.Kill();
 	}
 
 	public void Knockback(KnockbackData data)

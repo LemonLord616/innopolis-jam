@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SpellPacifier" format=3 uid="uid://cws582dmioa4f"]
+
+[ext_resource type="Script" uid="uid://pawdfxvqq4tj" path="res://scripts/ReadOnly/SpellPacifier.cs" id="1_4p0qe"]
+
+[resource]
+script = ExtResource("1_4p0qe")
+metadata/_custom_type_script = "uid://pawdfxvqq4tj"
